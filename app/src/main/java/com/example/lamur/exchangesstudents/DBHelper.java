@@ -28,6 +28,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 " TEXT," + COLUMN_MDP + " INTEGER" + ")";
 
         db.execSQL(CREATE_PRODUCTS_TABLE);
+        init_admin();
     }
 
 
@@ -44,6 +45,12 @@ public class DBHelper extends SQLiteOpenHelper {
 
         db.insert(TABLE_USERS, null, values);
         db.close();
+    }
+
+    public void init_admin()
+    {
+        User admin = new User("admin","admin");
+        addUser(admin);
     }
 
     public User findUser(String username, String mdp){
