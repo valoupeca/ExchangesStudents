@@ -28,7 +28,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 " TEXT," + COLUMN_MDP + " INTEGER" + ")";
 
         db.execSQL(CREATE_PRODUCTS_TABLE);
-        init_admin();
+
     }
 
 
@@ -37,21 +37,25 @@ public class DBHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
     public void addUser(User user){
-        SQLiteDatabase db = this.getWritableDatabase();
 
-        ContentValues values = new ContentValues();
-        values.put(COLUMN_USERNAME, user.get_username());
-        values.put(COLUMN_MDP, user.getMdp());
+        if(isAdmin(user))
+        {
 
-        db.insert(TABLE_USERS, null, values);
-        db.close();
+        }
+        else
+            {
+            SQLiteDatabase db = this.getWritableDatabase();
+
+            ContentValues values = new ContentValues();
+            values.put(COLUMN_USERNAME, user.get_username());
+            values.put(COLUMN_MDP, user.getMdp());
+
+            db.insert(TABLE_USERS, null, values);
+            db.close();
+        }
     }
 
-    public void init_admin()
-    {
-        User admin = new User("admin","admin");
-        addUser(admin);
-    }
+
 
     public User findUser(String username, String mdp){
         SQLiteDatabase db = this.getReadableDatabase();
@@ -108,5 +112,16 @@ public class DBHelper extends SQLiteOpenHelper {
         return result;
     }
 
+    public  boolean isAdmin(User user)
+    {
+        if(user.get_username().equals("admin") && user.getMdp().equals("admin"))
+        {
+            return true;
+
+        }else
+        {
+            return false;
+        }
+    }
 
 }
