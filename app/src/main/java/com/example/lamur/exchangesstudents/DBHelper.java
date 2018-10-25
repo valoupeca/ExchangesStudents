@@ -17,6 +17,11 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String COLUMN_USERNAME = "name";
     public static final String COLUMN_MDP = "mdp";
 
+    public static final String TABLE_SERVICES= "services";
+    public static final String SERVICE_ID = "_id";
+    public static final String SERVICE_USERNAME = "type_service";
+    public static final String TAUX_HORAIRE = "taux_horaires";
+
     public DBHelper(Context context){
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
@@ -29,7 +34,14 @@ public class DBHelper extends SQLiteOpenHelper {
                 COLUMN_USERNAME +
                 " TEXT," + COLUMN_MDP + " INTEGER" + ")";
 
+        String CREATE_SERVICES_TABLE =  "CREATE TABLE " +
+                TABLE_SERVICES + "("
+                + SERVICE_ID + " INTEGER PRIMARY KEY," +
+                SERVICE_USERNAME +
+                " TEXT," + TAUX_HORAIRE + " DOUBLE" + ")";
+
         db.execSQL(CREATE_PRODUCTS_TABLE);
+        db.execSQL(CREATE_SERVICES_TABLE);
 
     }
 
