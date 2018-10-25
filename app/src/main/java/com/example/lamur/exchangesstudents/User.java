@@ -1,6 +1,6 @@
 package com.example.lamur.exchangesstudents;
 
-public class User {
+public abstract class User {
     private int _id;
     private String _username;
     private String mdp;

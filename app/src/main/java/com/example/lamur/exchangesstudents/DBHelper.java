@@ -6,6 +6,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import java.util.ArrayList;
+
 public class DBHelper extends SQLiteOpenHelper {
 
     private static final int DATABASE_VERSION = 1;
@@ -57,8 +59,8 @@ public class DBHelper extends SQLiteOpenHelper {
 
 
 
-    public User findUser(String username, String mdp){
-        SQLiteDatabase db = this.getReadableDatabase();
+    public void findUser(String username, String mdp){
+      /*  SQLiteDatabase db = this.getReadableDatabase();
 
         String query = "Select * FROM "
                 + TABLE_USERS
@@ -87,6 +89,7 @@ public class DBHelper extends SQLiteOpenHelper {
         }
         db.close();
         return user;
+        */
     }
 
     public boolean deleteUser(String UserName){
@@ -112,7 +115,7 @@ public class DBHelper extends SQLiteOpenHelper {
         return result;
     }
 
-    public  boolean isAdmin(User user)
+    public boolean isAdmin(User user)
     {
         if(user.get_username().equals("admin") && user.getMdp().equals("admin"))
         {
@@ -124,4 +127,30 @@ public class DBHelper extends SQLiteOpenHelper {
         }
     }
 
+    public void listUser()
+    {
+       /*
+        ArrayList<User> list = new ArrayList<>();
+
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String query = "Select * FROM "
+                + TABLE_USERS;
+
+        Cursor cursor = db.rawQuery(query, null);
+        User user = new User();
+
+        while(cursor.moveToFirst()){
+            user.set_id(Integer.parseInt(cursor.getString(0)));
+            user.set_username(cursor.getString(1));
+            user.setMdp(cursor.getString(2));
+            cursor.close();
+            list.add(user)     ;
+        }
+        db.close();
+
+        return list;
+        */
+
+    }
 }

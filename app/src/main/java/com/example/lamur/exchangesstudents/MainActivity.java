@@ -5,9 +5,14 @@ import android.os.Bundle;
 
 public class MainActivity extends AppCompatActivity {
 
+
+    DBHelper dbhelper;
+    Boolean isAdmin;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        dbhelper = new DBHelper(this);
     }
 }
