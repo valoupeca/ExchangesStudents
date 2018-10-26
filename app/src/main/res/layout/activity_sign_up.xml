@@ -18,12 +18,59 @@
 
     <TextView
         android:id="@+id/username"
-        android:layout_width="wrap_content"
+        android:layout_width="111dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="16dp"
-        android:text="TextView"
         app:layout_constraintStart_toEndOf="@+id/messgage_pseudo"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/message_mdp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="11dp"
+        android:text="Votre mpd :"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/messgage_pseudo" />
+
+    <TextView
+        android:id="@+id/message_role"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="51dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:text="Votre rôle :"
+        app:layout_constraintEnd_toStartOf="@+id/role"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/role" />
+
+    <EditText
+        android:id="@+id/mdp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPassword"
+        app:layout_constraintBottom_toBottomOf="@+id/message_mdp"
+        app:layout_constraintStart_toEndOf="@+id/messgage_pseudo"
+        app:layout_constraintTop_toBottomOf="@+id/message_mdp" />
+
+    <ListView
+        android:id="@+id/role"
+        android:layout_width="0dp"
+        android:layout_height="410dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/message_role"
+        app:layout_constraintTop_toBottomOf="@+id/mdp" />
 </android.support.constraint.ConstraintLayout>
