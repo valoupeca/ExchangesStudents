@@ -4,50 +4,50 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Sign_up">
+    tools:context=".Sign_up"
+    tools:layout_editor_absoluteY="81dp">
 
     <TextView
         android:id="@+id/messgage_pseudo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:text="Votre pseudo :"
-        app:layout_constraintBaseline_toBaselineOf="@+id/username"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/username"
-        android:layout_width="111dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginLeft="10dp"
         android:layout_marginTop="16dp"
-        app:layout_constraintStart_toEndOf="@+id/messgage_pseudo"
+        android:layout_marginEnd="4dp"
+        android:layout_marginRight="4dp"
+        android:text="Votre pseudo :"
+        app:layout_constraintEnd_toStartOf="@+id/username"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Name"
+        app:layout_constraintBaseline_toBaselineOf="@+id/messgage_pseudo"
+        app:layout_constraintEnd_toEndOf="@+id/mdp"
+        app:layout_constraintStart_toStartOf="@+id/mdp" />
 
     <TextView
         android:id="@+id/message_mdp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="11dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="79dp"
         android:text="Votre mpd :"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/messgage_pseudo" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/message_role"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
+        android:layout_marginStart="27dp"
+        android:layout_marginLeft="27dp"
         android:layout_marginTop="51dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
         android:text="Votre rôle :"
-        app:layout_constraintEnd_toStartOf="@+id/role"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/role" />
 
@@ -55,22 +55,40 @@
         android:id="@+id/mdp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="6dp"
+        android:layout_marginLeft="6dp"
         android:ems="10"
         android:inputType="textPassword"
         app:layout_constraintBottom_toBottomOf="@+id/message_mdp"
-        app:layout_constraintStart_toEndOf="@+id/messgage_pseudo"
+        app:layout_constraintStart_toEndOf="@+id/message_mdp"
         app:layout_constraintTop_toBottomOf="@+id/message_mdp" />
 
     <ListView
         android:id="@+id/role"
         android:layout_width="0dp"
-        android:layout_height="410dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginBottom="8dp"
+        android:layout_height="177dp"
+        android:layout_marginStart="18dp"
+        android:layout_marginLeft="18dp"
+        android:layout_marginEnd="18dp"
+        android:layout_marginRight="18dp"
+        android:layout_marginBottom="151dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/message_role"
-        app:layout_constraintTop_toBottomOf="@+id/mdp" />
+        app:layout_constraintStart_toEndOf="@+id/message_role">
+
+    </ListView>
+
+    <Button
+        android:id="@+id/submit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_marginStart="19dp"
+        android:layout_marginLeft="19dp"
+        android:layout_marginBottom="51dp"
+        android:onClick="submit"
+        android:text="Submit"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/role" />
+
 </android.support.constraint.ConstraintLayout>

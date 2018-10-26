@@ -2,7 +2,9 @@ package com.example.lamur.exchangesstudents;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.EditText;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 public class Sign_up extends AppCompatActivity {
@@ -22,9 +24,16 @@ public class Sign_up extends AppCompatActivity {
         ListView listview = (ListView) findViewById(R.id.role);
         String[] values = new String[] { "Fournisseur","Propriétaire" };
 
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_list_item_1, values);
+
+
+        // Assign adapter to ListView
+        listview.setAdapter(adapter);
     }
 
-     protected void submit(){
+     public void submit(View view){
          username = (EditText) findViewById(R.id.username);
          password = (EditText) findViewById(R.id.mdp);
          role = (ListView) findViewById(R.id.role);
