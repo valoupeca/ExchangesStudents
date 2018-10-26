@@ -41,16 +41,17 @@ public class MainActivity extends AppCompatActivity {
             if(dbhelper.isAdmin(username.getText().toString(),password.getText().toString()))
             {
                 Intent admin_page_intent = new Intent(this, Admin_page.class);
-                admin_page_intent.putExtra("name",username.getText().toString());
-                admin_page_intent.putExtra("role",dbhelper.infoUser(username.getText().toString(),password.getText().toString()));
-                startActivity(admin_page_intent);
+               startActivity(admin_page_intent);
 
             }
             else
             {
+                String role = dbhelper.infoUser(username.getText().toString(),password.getText().toString());
                 Intent welcome_page = new Intent(this, Sign_in.class);
-                welcome_page.putExtra("DbHelper",dbhelper);
+                welcome_page.putExtra("name",username.getText().toString());
+                welcome_page.putExtra("role",role);
                 startActivity(welcome_page);
+
             }
         }
         else
