@@ -55,7 +55,7 @@ public class DBHelper extends SQLiteOpenHelper implements Serializable {
     }
     public void addUser(User user){
 
-        if(isAdmin(user))
+        if(user.getClass().equals("admin"))
         {
 
         }
@@ -130,9 +130,10 @@ public class DBHelper extends SQLiteOpenHelper implements Serializable {
         return result;
     }
 
-    public boolean isAdmin(User user)
+    public boolean isAdmin(String username, String mdp)
     {
-        if(user.get_username().equals("admin") && user.getMdp().equals("admin"))
+
+        if(username.equals("admin") && mdp.equals("admin"))
         {
             return true;
 

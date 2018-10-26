@@ -32,17 +32,18 @@ public class MainActivity extends AppCompatActivity {
 
         if(dbhelper.isReal(username.getText().toString(),password.getText().toString()))
         {
-            if(true)
+            if(dbhelper.isAdmin(username.getText().toString(),password.getText().toString()))
             {
                 Intent admin_page_intent = new Intent(this, Admin_page.class);
                 admin_page_intent.putExtra("DbHelper",dbhelper);
-                startActivityForResult(admin_page_intent,0);
+                startActivity(admin_page_intent);
 
             }
             else
             {
-                Intent aboutIntent = new Intent(this, Sign_in.class);
-                startActivity(aboutIntent);
+                Intent welcome_page = new Intent(this, Sign_in.class);
+                welcome_page.putExtra("DbHelper",dbhelper);
+                startActivity(welcome_page);
             }
         }
         else
