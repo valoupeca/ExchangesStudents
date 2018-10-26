@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
     public void sign_up(View view)
     {
         Intent inscription_page = new Intent(this, Sign_up.class);
-        inscription_page.putExtra("DbHelper",dbhelper);
+
         startActivity(inscription_page);
     }
     public void sign_in(View view) {
@@ -41,7 +41,9 @@ public class MainActivity extends AppCompatActivity {
             if(dbhelper.isAdmin(username.getText().toString(),password.getText().toString()))
             {
                 Intent admin_page_intent = new Intent(this, Admin_page.class);
-                admin_page_intent.putExtra("DbHelper",dbhelper);
+                admin_page_intent.putExtra("name",username.getText().toString());
+                admin_page_intent.putExtra("role",username.getText().toString());
+
                 startActivity(admin_page_intent);
 
             }

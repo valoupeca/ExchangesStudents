@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import java.io.Serializable;
 import java.io.SerializablePermission;
@@ -26,7 +27,9 @@ public class DBHelper extends SQLiteOpenHelper implements Serializable {
 
 
     public DBHelper(Context context){
+
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
+
     }
 
     public void onCreate(SQLiteDatabase db){
@@ -53,23 +56,18 @@ public class DBHelper extends SQLiteOpenHelper implements Serializable {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_USERS);
         onCreate(db);
     }
-    public void addUser(User user){
+    public void addUser(String username, String mdp){
 
-        if(user.getClass().equals("admin"))
-        {
 
-        }
-        else
-            {
             SQLiteDatabase db = this.getWritableDatabase();
 
             ContentValues values = new ContentValues();
-            values.put(COLUMN_USERNAME, user.get_username());
-            values.put(COLUMN_MDP, user.getMdp());
+            values.put(COLUMN_USERNAME, username);
+            values.put(COLUMN_MDP, mdp);
 
             db.insert(TABLE_USERS, null, values);
             db.close();
-        }
+
     }
 
 
@@ -104,6 +102,11 @@ public class DBHelper extends SQLiteOpenHelper implements Serializable {
             return false;
         }
 
+
+    }
+
+    public void infoUser()
+    {
 
     }
 

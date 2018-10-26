@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Spinner;
 
 public class Sign_up extends AppCompatActivity {
 
@@ -19,9 +20,9 @@ public class Sign_up extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
-        dbhelper = (DBHelper)this.getIntent().getSerializableExtra("DbHelper");
 
-        ListView listview = (ListView) findViewById(R.id.role);
+
+        Spinner listview = (Spinner) findViewById(R.id.role);
         String[] values = new String[] { "Fournisseur","Propriétaire" };
 
 
@@ -36,11 +37,14 @@ public class Sign_up extends AppCompatActivity {
      public void submit(View view){
          username = (EditText) findViewById(R.id.username);
          password = (EditText) findViewById(R.id.mdp);
-         role = (ListView) findViewById(R.id.role);
 
 
         /*  "role.setList"*/
          Proprietaire user = new Proprietaire(username.getText().toString(),password.getText().toString());
+
+         BackgroundTask bg = new BackgroundTask(this);
+         bg.execute("addUser",username.getText().toString(),password.getText().toString());
+        finish();
      }
 
 
