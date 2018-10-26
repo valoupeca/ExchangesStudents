@@ -8,11 +8,11 @@ public abstract class User {
     public User() {
     }
 
-    public User(int _id, String _username, String mdp) {
-        this._id = _id;
-        this._username = _username;
-        this.mdp = mdp;
-    }
+        public User(int _id, String _username, String mdp) {
+            this._id = _id;
+            this._username = _username;
+            this.mdp = mdp;
+        }
 
     public User(String _username, String mdp) {
         this._username = _username;
