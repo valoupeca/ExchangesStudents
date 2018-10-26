@@ -42,8 +42,7 @@ public class MainActivity extends AppCompatActivity {
             {
                 Intent admin_page_intent = new Intent(this, Admin_page.class);
                 admin_page_intent.putExtra("name",username.getText().toString());
-                admin_page_intent.putExtra("role",username.getText().toString());
-
+                admin_page_intent.putExtra("role",dbhelper.infoUser(username.getText().toString(),password.getText().toString()));
                 startActivity(admin_page_intent);
 
             }

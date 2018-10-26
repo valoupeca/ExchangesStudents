@@ -19,6 +19,7 @@ public class DBHelper extends SQLiteOpenHelper implements Serializable {
     public static final String COLUMN_ID = "_id";
     public static final String COLUMN_USERNAME = "name";
     public static final String COLUMN_MDP = "mdp";
+    public static final String COLUMN_ROLE = "role";
 
     public static final String TABLE_SERVICES= "services";
     public static final String SERVICE_ID = "_id";
@@ -38,7 +39,8 @@ public class DBHelper extends SQLiteOpenHelper implements Serializable {
                 TABLE_USERS + "("
                 + COLUMN_ID + " INTEGER PRIMARY KEY," +
                 COLUMN_USERNAME +
-                " TEXT," + COLUMN_MDP + " INTEGER" + ")";
+                " TEXT," + COLUMN_MDP + " INTEGER," +
+                COLUMN_ROLE + " TEXT"+ ")";
 
         String CREATE_SERVICES_TABLE =  "CREATE TABLE " +
                 TABLE_SERVICES + "("
@@ -92,6 +94,7 @@ public class DBHelper extends SQLiteOpenHelper implements Serializable {
         Cursor cursor = db.rawQuery(query, null);
 
         if(cursor.moveToFirst()){
+
             cursor.close();
             db.close();
             return true;
@@ -105,10 +108,11 @@ public class DBHelper extends SQLiteOpenHelper implements Serializable {
 
     }
 
-    public User infoUser(String username, String mdp) {
+    public String infoUser(String username, String mdp) {
         SQLiteDatabase db = this.getReadableDatabase();
 
-        String query = "Select * FROM "
+        String role = "";
+        String query = "Select role FROM "
                 + TABLE_USERS
                 + " WHERE "
                 + COLUMN_USERNAME
@@ -124,14 +128,15 @@ public class DBHelper extends SQLiteOpenHelper implements Serializable {
         Cursor cursor = db.rawQuery(query, null);
 
         if (cursor.moveToFirst()) {
+            role = cursor.getString(0);
             cursor.close();
             db.close();
-            return true;
+            return role;
 
         } else {
             cursor.close();
             db.close();
-            return false;
+            return "";
         }
     }
 
