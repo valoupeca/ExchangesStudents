@@ -6,9 +6,11 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import java.io.Serializable;
+import java.io.SerializablePermission;
 import java.util.ArrayList;
 
-public class DBHelper extends SQLiteOpenHelper {
+public class DBHelper extends SQLiteOpenHelper implements Serializable {
 
     private static final int DATABASE_VERSION = 1;
     private static final String DATABASE_NAME = "Services.db";
@@ -21,6 +23,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String SERVICE_ID = "_id";
     public static final String SERVICE_USERNAME = "type_service";
     public static final String TAUX_HORAIRE = "taux_horaires";
+
 
     public DBHelper(Context context){
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -71,8 +74,8 @@ public class DBHelper extends SQLiteOpenHelper {
 
 
 
-    public void findUser(String username, String mdp){
-      /*  SQLiteDatabase db = this.getReadableDatabase();
+    public boolean isReal(String username, String mdp){
+       SQLiteDatabase db = this.getReadableDatabase();
 
         String query = "Select * FROM "
                 + TABLE_USERS
@@ -89,19 +92,19 @@ public class DBHelper extends SQLiteOpenHelper {
                 ;
 
         Cursor cursor = db.rawQuery(query, null);
-        User user = new User();
 
         if(cursor.moveToFirst()){
-            user.set_id(Integer.parseInt(cursor.getString(0)));
-            user.set_username(cursor.getString(1));
-            user.setMdp(cursor.getString(2));
             cursor.close();
+            db.close();
+            return true;
+
         } else {
-            user = null;
+            cursor.close();
+            db.close();
+            return false;
         }
-        db.close();
-        return user;
-        */
+
+
     }
 
     public boolean deleteUser(String UserName){
