@@ -12,6 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
+        android:onClick="sign_in"
         android:text="Sign in"
         app:layout_constraintBaseline_toBaselineOf="@+id/signup"
         app:layout_constraintStart_toStartOf="parent"

@@ -28,6 +28,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    public void sign_up(View view)
+    {
+        Intent inscription_page = new Intent(this, Sign_up.class);
+        inscription_page.putExtra("DbHelper",dbhelper);
+        startActivity(inscription_page);
+    }
     public void sign_in(View view) {
 
         if(dbhelper.isReal(username.getText().toString(),password.getText().toString()))
