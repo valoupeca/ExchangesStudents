@@ -105,9 +105,34 @@ public class DBHelper extends SQLiteOpenHelper implements Serializable {
 
     }
 
-    public void infoUser()
-    {
+    public User infoUser(String username, String mdp) {
+        SQLiteDatabase db = this.getReadableDatabase();
 
+        String query = "Select * FROM "
+                + TABLE_USERS
+                + " WHERE "
+                + COLUMN_USERNAME
+                + " = \""
+                + username
+                + "\""
+                + " AND "
+                + COLUMN_MDP
+                + " = \""
+                + mdp
+                + "\"";
+
+        Cursor cursor = db.rawQuery(query, null);
+
+        if (cursor.moveToFirst()) {
+            cursor.close();
+            db.close();
+            return true;
+
+        } else {
+            cursor.close();
+            db.close();
+            return false;
+        }
     }
 
     public boolean deleteUser(String UserName){

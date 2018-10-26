@@ -11,7 +11,7 @@ import android.widget.Spinner;
 public class Sign_up extends AppCompatActivity {
 
     DBHelper dbhelper;
-    ListView role;
+    Spinner role;
     EditText username;
     EditText password;
 
@@ -37,6 +37,7 @@ public class Sign_up extends AppCompatActivity {
      public void submit(View view){
          username = (EditText) findViewById(R.id.username);
          password = (EditText) findViewById(R.id.mdp);
+         role = (Spinner) findViewById(R.id.role);
 
 
         /*  "role.setList"*/
