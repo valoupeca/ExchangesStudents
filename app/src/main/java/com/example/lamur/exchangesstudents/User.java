@@ -4,22 +4,19 @@ public abstract class User {
     private int _id;
     private String _username;
     private String mdp;
-    private String role;
 
     public User() {
     }
 
-        public User(int _id, String _username, String mdp, String role) {
+        public User(int _id, String _username, String mdp) {
             this._id = _id;
             this._username = _username;
             this.mdp = mdp;
-            this.role = role;
         }
 
-    public User(String _username, String mdp, String role) {
+    public User(String _username, String mdp) {
         this._username = _username;
         this.mdp = mdp;
-        this.role = role;
     }
 
     public int get_id() {
@@ -44,15 +41,5 @@ public abstract class User {
 
     public void setMdp(String mdp) {
         this.mdp = mdp;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
-    }
-
-    public String getRole() {
-        return role;
-
-
     }
 }
