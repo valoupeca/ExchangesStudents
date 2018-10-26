@@ -1,4 +1,4 @@
 package com.example.lamur.exchangesstudents;
 
-public class proprietaire {
+public class Proprietaire extends User{
 }
