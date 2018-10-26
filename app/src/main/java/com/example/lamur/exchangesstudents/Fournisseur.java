@@ -8,6 +8,10 @@ public class Fournisseur extends User{
     private Date disponibilité;
     private ArrayList<Services> _services;
 
+    public Fournisseur(String _username, String mdp) {
+        super(_username, mdp);
+    }
+
     public Fournisseur(Date disponibilité, ArrayList<Services> _services) {
         this.disponibilité = disponibilité;
         this._services = _services;

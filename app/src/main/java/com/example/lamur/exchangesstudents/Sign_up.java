@@ -7,6 +7,7 @@ import android.widget.EditText;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 public class Sign_up extends AppCompatActivity {
 
@@ -40,13 +41,25 @@ public class Sign_up extends AppCompatActivity {
          role = (Spinner) findViewById(R.id.role);
 
 
-        /*  "role.setList"*/
-         Proprietaire user = new Proprietaire(username.getText().toString(),password.getText().toString());
+         if(role.getSelectedItem().toString().equals("Propriétaire"))
+         {
+             Proprietaire user = new Proprietaire(username.getText().toString(),password.getText().toString());
+             Toast.makeText(this,"Proprietaire ajouté",Toast.LENGTH_LONG).show();
+             BackgroundTask bg = new BackgroundTask(this);
+             bg.execute("addUser",username.getText().toString(),password.getText().toString(),role.getSelectedItem().toString());
+             finish();
+         }
+         else{
+             Fournisseur user = new Fournisseur(username.getText().toString(),password.getText().toString());
+             BackgroundTask bg = new BackgroundTask(this);
+             Toast.makeText(this,"fournisseur ajouté",Toast.LENGTH_LONG).show();
+             bg.execute("addUser",username.getText().toString(),password.getText().toString(),role.getSelectedItem().toString());
+             finish();
+         }
 
-         BackgroundTask bg = new BackgroundTask(this);
-         bg.execute("addUser",username.getText().toString(),password.getText().toString());
-        finish();
-     }
+
+
+    }
 
 
 }

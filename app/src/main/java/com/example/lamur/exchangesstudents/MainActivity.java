@@ -34,6 +34,8 @@ public class MainActivity extends AppCompatActivity {
 
         startActivity(inscription_page);
     }
+
+
     public void sign_in(View view) {
 
         if(dbhelper.isReal(username.getText().toString(),password.getText().toString()))

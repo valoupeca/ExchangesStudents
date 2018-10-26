@@ -25,8 +25,9 @@ public class BackgroundTask extends AsyncTask<String,Void,String> {
             String username = params[1];
             String mdp = params[2];
             SQLiteDatabase db = dbhelper.getWritableDatabase();
+            String role = params[3];
 
-            dbhelper.addUser(username,mdp);
+            dbhelper.addUser(username,mdp,role);
             return "User ajouté";
 
         }
@@ -40,7 +41,7 @@ public class BackgroundTask extends AsyncTask<String,Void,String> {
 
     @Override
     protected void onPostExecute(String result) {
-        Toast.makeText(ctx,result,Toast.LENGTH_LONG).show();
+       /* Toast.makeText(ctx,result,Toast.LENGTH_LONG).show();*/
     }
 
     @Override

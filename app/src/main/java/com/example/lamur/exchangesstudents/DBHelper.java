@@ -58,7 +58,7 @@ public class DBHelper extends SQLiteOpenHelper implements Serializable {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_USERS);
         onCreate(db);
     }
-    public void addUser(String username, String mdp){
+    public void addUser(String username, String mdp, String role){
 
 
             SQLiteDatabase db = this.getWritableDatabase();
@@ -66,6 +66,7 @@ public class DBHelper extends SQLiteOpenHelper implements Serializable {
             ContentValues values = new ContentValues();
             values.put(COLUMN_USERNAME, username);
             values.put(COLUMN_MDP, mdp);
+            values.put(COLUMN_ROLE,role);
 
             db.insert(TABLE_USERS, null, values);
             db.close();
