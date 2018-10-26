@@ -2,14 +2,14 @@ package com.example.lamur.exchangesstudents;
 
 import java.util.ArrayList;
 
-public class services {
+public class Services {
 
 private String nom;
 private float taux_horraire;
-private ArrayList<services> Categorie;
+private ArrayList<Services> Categorie;
 
 
-    public services(String nom, float taux_horraire, ArrayList<services> categorie) {
+    public Services(String nom, float taux_horraire, ArrayList<Services> categorie) {
         this.nom = nom;
         this.taux_horraire = taux_horraire;
         Categorie = categorie;
