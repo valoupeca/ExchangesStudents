@@ -1,5 +1,6 @@
 package com.example.lamur.exchangesstudents;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.EditText;
@@ -10,18 +11,21 @@ public class Sign_in extends AppCompatActivity {
 
     String nom,role;
 
-    EditText name;
+    TextView name;
     TextView user_role;
+    DBHelper dbhelper = DBHelper.getInstance(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
-        nom = this.getIntent().getStringExtra("name");
-        role = this.getIntent().getStringExtra("role");
+        Intent intent = getIntent();
+        Bundle extras = intent.getExtras();
+        nom = extras.getString("name");
+        role = extras.getString("role");
 
 
-        name = (EditText) findViewById(R.id.username);
+        name = (TextView) findViewById(R.id.nom_user);
         user_role = (TextView) findViewById(R.id.role_user);
 
         name.setText(nom);
