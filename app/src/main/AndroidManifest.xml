@@ -21,7 +21,8 @@
         <activity android:name=".Sign_in" />
         <activity android:name=".Admin_page" />
         <activity android:name=".Sign_up" />
-        <activity android:name=".Ajout_service"></activity>
+        <activity android:name=".Ajout_service" />
+        <activity android:name=".Liste_user"></activity>
     </application>
 
 </manifest>

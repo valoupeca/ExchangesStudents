@@ -307,6 +307,44 @@ public class DBHelper extends SQLiteOpenHelper{
     }
 
 
+    public ArrayList listService()
+    {
+        ArrayList<Services> list_serv = new ArrayList<>();
+
+        // SELECT * FROM POSTS
+        // LEFT OUTER JOIN USERS
+        // ON POSTS.KEY_POST_USER_ID_FK = USERS.KEY_USER_ID
+        String FOURNISSEUR_SELECT_QUERY =
+                String.format("SELECT * FROM %s ",
+                        TABLE_SERVICES);
+
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.rawQuery(FOURNISSEUR_SELECT_QUERY, null);
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Services newService = new Services();
+                    newService.setNom(cursor.getString(cursor.getColumnIndex(SERVICE_USERNAME)));
+                    newService.setTaux_horraire(Double.parseDouble(cursor.getString(cursor.getColumnIndex(TAUX_HORAIRE))));
+
+                    list_serv.add(newService);
+
+                } while(cursor.moveToNext());
+            }
+        } catch (Exception e) {
+            Log.d(TAG, "Error while trying to get posts from database");
+        } finally {
+            if (cursor != null && !cursor.isClosed()) {
+                cursor.close();
+            }
+        }
+
+
+
+        return list_serv;
+    }
+
+
 
 
 

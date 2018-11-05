@@ -1,9 +1,10 @@
 package com.example.lamur.exchangesstudents;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class Fournisseur extends User{
+public class Fournisseur extends User implements Serializable {
 
     private Date disponibilité;
     private ArrayList<Services> _services;
