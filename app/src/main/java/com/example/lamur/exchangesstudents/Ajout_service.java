@@ -27,8 +27,12 @@ public class Ajout_service extends AppCompatActivity {
         String _name = nom.getText().toString();
 
         double _th = Double.parseDouble(taux_horaire.getText().toString());
-        dbhelper.addOrUpdateService(nom.toString(),_th, categorie.getSelectedItem().toString());
-        Toast.makeText(this,"Service ajouté",Toast.LENGTH_LONG).show();
-        finish();
+        if (nom.getText().length() == 0 || taux_horaire.getText().length() == 0) {
+            Toast.makeText(this, "Veuillez remplir tout les champs", Toast.LENGTH_LONG).show();
+        } else {
+            dbhelper.addOrUpdateService(nom.toString(), _th, categorie.getSelectedItem().toString());
+            Toast.makeText(this, "Service ajouté", Toast.LENGTH_LONG).show();
+            finish();
+        }
     }
 }

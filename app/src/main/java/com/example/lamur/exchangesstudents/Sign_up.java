@@ -44,7 +44,7 @@ public class Sign_up extends AppCompatActivity {
 
          if(role.getSelectedItem().toString().equals("Propriétaire"))
          {
-             if(username.getText().length()==0 && password.getText().length()==0) {
+             if(username.getText().length()==0 || password.getText().length()==0) {
                  Toast.makeText(this, "Veuillez remplir tout les champs", Toast.LENGTH_LONG).show();
              }
              else {
@@ -55,7 +55,7 @@ public class Sign_up extends AppCompatActivity {
              }
          }
          else{
-             if(username.getText().length()==0 && password.getText().length()==0) {
+             if(username.getText().length()==0 || password.getText().length()==0) {
                  Toast.makeText(this, "Veuillez remplir tout les champs", Toast.LENGTH_LONG).show();
              }
              else {
