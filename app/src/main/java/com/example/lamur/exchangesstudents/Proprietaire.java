@@ -3,6 +3,10 @@ package com.example.lamur.exchangesstudents;
 public class Proprietaire extends User{
 
 
+    public Proprietaire()
+    {
+
+    }
     public Proprietaire(int _id, String _username, String mdp) {
         super(_id, _username, mdp);
     }

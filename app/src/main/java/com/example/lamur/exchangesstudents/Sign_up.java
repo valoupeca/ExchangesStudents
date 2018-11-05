@@ -45,16 +45,15 @@ public class Sign_up extends AppCompatActivity {
          if(role.getSelectedItem().toString().equals("Propriétaire"))
          {
              Proprietaire user = new Proprietaire(username.getText().toString(),password.getText().toString());
-             Toast.makeText(this,"Proprietaire ajouté",Toast.LENGTH_LONG).show();
-             dbhelper.addOrUpdateUser(username.getText().toString(),password.getText().toString(),"Fournisseur");
-             Toast.makeText(this,"fournisseur ajouté",Toast.LENGTH_LONG).show();
+             dbhelper.addOrUpdateUser(username.getText().toString(),password.getText().toString(),"Propriétaire");
+             Toast.makeText(this,"Propriétaire ajouté",Toast.LENGTH_LONG).show();
                 finish();
          }
          else{
              Fournisseur user = new Fournisseur(username.getText().toString(),password.getText().toString());
               String test1 = role.getSelectedItem().toString();
              dbhelper.addOrUpdateUser(username.getText().toString(),password.getText().toString(),"Fournisseur");
-             Toast.makeText(this,"Propriétaire ajouté",Toast.LENGTH_LONG).show();
+             Toast.makeText(this,"Fournisseur ajouté",Toast.LENGTH_LONG).show();
              finish();
 
          }

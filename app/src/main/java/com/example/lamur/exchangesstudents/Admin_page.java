@@ -22,7 +22,10 @@ public class Admin_page extends AppCompatActivity {
 
         List<User> list_user = new ArrayList<User>();
 
-        dbhelper.listUser();
+
+
+        ArrayList<Proprietaire> _lprio = dbhelper.listProprio();
+
 
 
     }
