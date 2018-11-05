@@ -7,88 +7,80 @@
     tools:context=".Sign_up"
     tools:layout_editor_absoluteY="81dp">
 
-    <TextView
-        android:id="@+id/messgage_pseudo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="4dp"
-        android:layout_marginRight="4dp"
-        android:text="Votre pseudo :"
-        app:layout_constraintEnd_toStartOf="@+id/username"
-        app:layout_constraintTop_toTopOf="parent" />
+    <RelativeLayout
+        android:id="@+id/page"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <EditText
-        android:id="@+id/username"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Name"
-        app:layout_constraintBaseline_toBaselineOf="@+id/messgage_pseudo"
-        app:layout_constraintEnd_toEndOf="@+id/mdp"
-        app:layout_constraintStart_toStartOf="@+id/mdp" />
+        <TextView
+            android:id="@+id/User"
+            android:layout_width="115dp"
+            android:layout_height="42dp"
+            android:text="Username" />
 
-    <TextView
-        android:id="@+id/message_mdp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginLeft="32dp"
-        android:layout_marginTop="79dp"
-        android:text="Votre mpd :"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <EditText
+            android:id="@+id/username"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginEnd="55dp"
+            android:layout_marginRight="55dp"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text="Name" />
 
-    <TextView
-        android:id="@+id/message_role"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="27dp"
-        android:layout_marginLeft="27dp"
-        android:layout_marginTop="51dp"
-        android:text="Votre rôle :"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/role" />
+        <TextView
+            android:id="@+id/textView8"
+            android:layout_width="103dp"
+            android:layout_height="31dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="71dp"
+            android:text="Mot de passe :"
+            android:layout_alignParentLeft="true" />
 
-    <EditText
-        android:id="@+id/mdp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="6dp"
-        android:layout_marginLeft="6dp"
-        android:ems="10"
-        android:inputType="textPassword"
-        app:layout_constraintBottom_toBottomOf="@+id/message_mdp"
-        app:layout_constraintStart_toEndOf="@+id/message_mdp"
-        app:layout_constraintTop_toBottomOf="@+id/message_mdp" />
+        <EditText
+            android:id="@+id/mdp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="69dp"
+            android:layout_marginEnd="52dp"
+            android:layout_marginRight="52dp"
+            android:ems="10"
+            android:inputType="textPassword" />
 
-    <ListView
-        android:id="@+id/role"
-        android:layout_width="0dp"
-        android:layout_height="177dp"
-        android:layout_marginStart="18dp"
-        android:layout_marginLeft="18dp"
-        android:layout_marginEnd="18dp"
-        android:layout_marginRight="18dp"
-        android:layout_marginBottom="151dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/message_role">
+        <TextView
+            android:id="@+id/textView9"
+            android:layout_width="108dp"
+            android:layout_height="34dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="156dp"
+            android:text="Votre role :"
+            android:layout_alignParentLeft="true" />
 
-    </ListView>
+        <Button
+            android:id="@+id/submit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="115dp"
+            android:layout_marginLeft="115dp"
+            android:layout_marginBottom="64dp"
+            android:onClick="submit"
+            android:text="Submit" />
 
-    <Button
-        android:id="@+id/submit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-
-        android:layout_marginStart="19dp"
-        android:layout_marginLeft="19dp"
-        android:layout_marginBottom="51dp"
-        android:onClick="submit"
-        android:text="Submit"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/role" />
-
+        <Spinner
+            android:id="@+id/role"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="195dp" />
+    </RelativeLayout>
 </android.support.constraint.ConstraintLayout>

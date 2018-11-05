@@ -4,8 +4,9 @@ Projet 2505
 https://github.com/valoupeca/ExchangesStudents.git
 
 
-LAMURE Valentin
+LAMURE Valentin 300097957
 MURRUNI Rémi  300094191
-EVEN Tanguy
+EVEN Tanguy  300096344
 CIOARA Crina 300096341
+Gil Cerryle Fonkwo 8887001
 

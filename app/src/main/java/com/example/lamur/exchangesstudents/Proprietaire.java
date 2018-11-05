@@ -1,8 +1,14 @@
 package com.example.lamur.exchangesstudents;
 
-public class Proprietaire extends User{
+import java.io.Serializable;
+
+public class Proprietaire extends User implements Serializable {
 
 
+    public Proprietaire()
+    {
+
+    }
     public Proprietaire(int _id, String _username, String mdp) {
         super(_id, _username, mdp);
     }

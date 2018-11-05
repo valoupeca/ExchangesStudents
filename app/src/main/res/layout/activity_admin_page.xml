@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Admin_page">
+    tools:context=".Admin_page"
+    tools:layout_editor_absoluteY="81dp">
 
     <TextView
         android:id="@+id/message_welcome"
@@ -13,9 +14,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="16dp"
-        android:layout_marginBottom="8dp"
         android:text="Bienvenue ADMIN, bienvenue dans votre page"
-        app:layout_constraintBottom_toTopOf="@+id/list_user"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints" />
@@ -23,15 +22,32 @@
     <ListView
         android:id="@+id/list_user"
         android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_height="146dp"
+        android:layout_marginTop="51dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/message_welcome"
+        app:layout_constraintTop_toBottomOf="@+id/liste_fournisseur"
         tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/liste_proprio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="72dp"
+        android:text="Liste Proprietaire"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/liste_fournisseur"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="4dp"
+        android:layout_marginRight="4dp"
+        android:text="Liste Fournisseur"
+        app:layout_constraintBottom_toBottomOf="@+id/liste_proprio"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/liste_proprio" />
 </android.support.constraint.ConstraintLayout>
