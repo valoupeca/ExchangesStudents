@@ -44,18 +44,27 @@ public class Sign_up extends AppCompatActivity {
 
          if(role.getSelectedItem().toString().equals("Propriétaire"))
          {
-             Proprietaire user = new Proprietaire(username.getText().toString(),password.getText().toString());
-             dbhelper.addOrUpdateUser(username.getText().toString(),password.getText().toString(),"Propriétaire");
-             Toast.makeText(this,"Propriétaire ajouté",Toast.LENGTH_LONG).show();
-                finish();
+             if(username.getText().length()==0 && password.getText().length()==0) {
+                 Toast.makeText(this, "Veuillez remplir tout les champs", Toast.LENGTH_LONG).show();
+             }
+             else {
+                 Proprietaire user = new Proprietaire(username.getText().toString(), password.getText().toString());
+                 dbhelper.addOrUpdateUser(username.getText().toString(), password.getText().toString(), "Propriétaire");
+                 Toast.makeText(this, "Propriétaire ajouté", Toast.LENGTH_LONG).show();
+                 finish();
+             }
          }
          else{
-             Fournisseur user = new Fournisseur(username.getText().toString(),password.getText().toString());
-              String test1 = role.getSelectedItem().toString();
-             dbhelper.addOrUpdateUser(username.getText().toString(),password.getText().toString(),"Fournisseur");
-             Toast.makeText(this,"Fournisseur ajouté",Toast.LENGTH_LONG).show();
-             finish();
-
+             if(username.getText().length()==0 && password.getText().length()==0) {
+                 Toast.makeText(this, "Veuillez remplir tout les champs", Toast.LENGTH_LONG).show();
+             }
+             else {
+                 Fournisseur user = new Fournisseur(username.getText().toString(), password.getText().toString());
+                 String test1 = role.getSelectedItem().toString();
+                 dbhelper.addOrUpdateUser(username.getText().toString(), password.getText().toString(), "Fournisseur");
+                 Toast.makeText(this, "Fournisseur ajouté", Toast.LENGTH_LONG).show();
+                 finish();
+             }
          }
 
 

@@ -195,7 +195,7 @@ public class DBHelper extends SQLiteOpenHelper{
     public boolean deleteUser(String UserName){
         SQLiteDatabase db = getWritableDatabase();
         boolean result = false;
-        String query = "SELECT * FROM "
+        String query = "SELECT role FROM "
                 + TABLE_USERS
                 + " WHERE "
                 + COLUMN_USERNAME
@@ -203,7 +203,7 @@ public class DBHelper extends SQLiteOpenHelper{
                 + UserName
                 + "\""
                 ;
-        Cursor cursor = db.rawQuery(query, null);
+        Cursor cursor = db.rawQuery(query,null);
 
         if(cursor.moveToFirst()){
             String idStr = cursor.getString(0);
