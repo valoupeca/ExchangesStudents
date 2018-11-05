@@ -7,6 +7,8 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 public class Ajout_service extends AppCompatActivity {
 
     EditText nom;
@@ -24,15 +26,24 @@ public class Ajout_service extends AppCompatActivity {
         taux_horaire = (EditText) findViewById(R.id.taux_horaire);
         categorie = (Spinner) findViewById(R.id.categorie);
 
-        String _name = nom.getText().toString();
+        ArrayList<String> cat = new ArrayList<>();
+
+        cat.add(categorie.getSelectedItem().toString());
 
         double _th = Double.parseDouble(taux_horaire.getText().toString());
+
+
+
+
         if (nom.getText().length() == 0 || taux_horaire.getText().length() == 0) {
             Toast.makeText(this, "Veuillez remplir tout les champs", Toast.LENGTH_LONG).show();
         } else {
-            dbhelper.addOrUpdateService(nom.toString(), _th, categorie.getSelectedItem().toString());
+            Services serv = new Services(nom.toString(), _th, cat);
+            dbhelper.addOrUpdateService(serv);
             Toast.makeText(this, "Service ajouté", Toast.LENGTH_LONG).show();
             finish();
         }
+
+
     }
 }

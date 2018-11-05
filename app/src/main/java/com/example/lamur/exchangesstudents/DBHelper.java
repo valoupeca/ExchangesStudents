@@ -19,7 +19,7 @@ public class DBHelper extends SQLiteOpenHelper{
 
     private static DBHelper sInstance;
 
-    private static final int DATABASE_VERSION = 2;
+    private static final int DATABASE_VERSION = 3;
     private static final String DATABASE_NAME = "Services.db";
     public static final String TABLE_USERS= "user";
     public static final String COLUMN_ID = "_id";
@@ -73,6 +73,15 @@ public class DBHelper extends SQLiteOpenHelper{
 
         db.execSQL(CREATE_USERS_TABLE);
         db.execSQL(CREATE_SERVICES_TABLE);
+
+        ContentValues values = new ContentValues();
+
+        values.put(COLUMN_USERNAME, "admin");
+        values.put(COLUMN_MDP, "admin");
+        values.put(COLUMN_ROLE,"admin");
+        db.insertOrThrow(TABLE_USERS, null, values);
+
+        
 
     }
 
@@ -288,6 +297,7 @@ public class DBHelper extends SQLiteOpenHelper{
                     Fournisseur newUser = new Fournisseur();
                     newUser.set_username(cursor.getString(cursor.getColumnIndex(COLUMN_USERNAME)));
                     newUser.set_id(Integer.parseInt(cursor.getString(cursor.getColumnIndex(COLUMN_ID))));
+
                     list_fournisseur.add(newUser);
 
                 } while(cursor.moveToNext());
@@ -327,6 +337,7 @@ public class DBHelper extends SQLiteOpenHelper{
                     newService.setNom(cursor.getString(cursor.getColumnIndex(SERVICE_USERNAME)));
                     newService.setTaux_horraire(Double.parseDouble(cursor.getString(cursor.getColumnIndex(TAUX_HORAIRE))));
                     newService.setId(Integer.parseInt(cursor.getString(cursor.getColumnIndex(SERVICE_ID))));
+
                     list_serv.add(newService);
 
                 } while(cursor.moveToNext());
@@ -348,22 +359,22 @@ public class DBHelper extends SQLiteOpenHelper{
 
 
 
-    public void addOrUpdateService(String nom, double taux_horaire, String categorie){
+    public void addOrUpdateService(Services service){
 
 
         SQLiteDatabase db = getWritableDatabase();
         db.beginTransaction();
         try {
             ContentValues values = new ContentValues();
-            values.put(SERVICE_USERNAME, nom);
-            values.put(TAUX_HORAIRE, taux_horaire);
-            int rows = db.update(TABLE_SERVICES, values, SERVICE_USERNAME + "= ?", new String[]{nom});
+            values.put(SERVICE_USERNAME, service.getNom());
+            values.put(TAUX_HORAIRE, service.getTaux_horraire());
+            int rows = db.update(TABLE_SERVICES, values, SERVICE_USERNAME + "= ?", new String[]{service.getNom()});
 
             if (rows == 1) {
                 // Get the primary key of the user we just updated
                 String usersSelectQuery = String.format("SELECT %s FROM %s WHERE %s = ?",
                         SERVICE_USERNAME, TABLE_SERVICES, SERVICE_ID);
-                Cursor cursor = db.rawQuery(usersSelectQuery, new String[]{String.valueOf(nom)});
+                Cursor cursor = db.rawQuery(usersSelectQuery, new String[]{String.valueOf(service.getNom())});
                 try {
                     if (cursor.moveToFirst()) {
                         db.setTransactionSuccessful();

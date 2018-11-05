@@ -7,7 +7,10 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.google.gson.Gson;
+
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 
 public class Liste_user extends AppCompatActivity {
@@ -22,10 +25,16 @@ public class Liste_user extends AppCompatActivity {
         String role = getIntent().getStringExtra("ROLE_ID");
 
 
+        Bundle objetbundle = this.getIntent().getExtras();
+        User[] liste_user;
 
-            ArrayList<User> liste_fournisseur = new ArrayList<>();
-            liste_fournisseur.addAll((Collection<? extends User>) getIntent().getSerializableExtra("DATA"));
-            CustomAdapter myCustomAdapter = new CustomAdapter(Liste_user.this, liste_fournisseur);
+        String listSerializedToJson = getIntent().getExtras().getString("LIST_OF_OBJECTS");
+        liste_user = new Gson().fromJson(listSerializedToJson, User[].class);
+
+        ArrayList<User> l_user = (ArrayList<User>) Arrays.asList(liste_user);
+
+           // liste_user.addAll((Collection<? extends User>) getIntent().getSerializableExtra("DATA"));
+            CustomAdapter myCustomAdapter = new CustomAdapter(Liste_user.this, l_user);
 
             liste.setAdapter(myCustomAdapter);
         liste.setOnItemClickListener(new AdapterView.OnItemClickListener() {

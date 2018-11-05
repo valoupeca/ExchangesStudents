@@ -7,35 +7,39 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.google.gson.Gson;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class Admin_page extends AppCompatActivity {
 
     ListView list;
-    DBHelper dbhelper;
+    DBHelper dbhelper = DBHelper.getInstance(this);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_page);
-        dbhelper = (DBHelper)this.getIntent().getSerializableExtra("DbHelper");
 
         list = (ListView) findViewById(R.id.list_user);
 
-        List<Services> list_service = new ArrayList<Services>();
 
-        list_service = dbhelper.listService();
+        ArrayList<Services> ls = dbhelper.listService();
 
-        ServiceCustomAdapter myCustomAdapter = new ServiceCustomAdapter(Admin_page.this, list_service);
+
+
+        ServiceCustomAdapter myCustomAdapter = new ServiceCustomAdapter(Admin_page.this, ls);
 
         list.setAdapter(myCustomAdapter);
+
+
 
 
     }
 
     public void listProprio(View view)
     {
-        ArrayList<Proprietaire> _lprio = dbhelper.listProprio();
+        ArrayList<User> _lprio = dbhelper.listProprio();
         Intent intent = new Intent(this, Liste_user.class);
         intent.putExtra("DATA", _lprio);
         intent.putExtra("ROLE_ID", "Proprietaire") ;
@@ -44,9 +48,12 @@ public class Admin_page extends AppCompatActivity {
 
     public void listFournisseur(View view)
     {
-        ArrayList<Fournisseur> _lfour = dbhelper.listFournisseur();
+        ArrayList<User> _lfour = dbhelper.listFournisseur();
 
         Intent intent = new Intent(this, Liste_user.class);
+        String listSerializedToJson = new Gson().toJson(_lfour);
+        intent.putExtra("LIST_OF_OBJECTS", listSerializedToJson);
+
         intent.putExtra("DATA", _lfour);
         intent.putExtra("ROLE_ID", "Fournisseur") ;
         startActivity(intent);

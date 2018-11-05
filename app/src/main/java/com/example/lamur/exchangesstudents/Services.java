@@ -7,12 +7,20 @@ public class Services {
     int id;
     private String nom;
     private double taux_horraire;
-    private ArrayList<Services> Categorie;
+    private ArrayList<String> Categorie;
 
 
 
-    public Services(int id, String nom, float taux_horraire, ArrayList<Services> categorie) {
+    public Services(int id, String nom, double taux_horraire, ArrayList<String> categorie) {
+
         this.id = id;
+        this.nom = nom;
+        this.taux_horraire = taux_horraire;
+
+        Categorie = categorie;
+    }
+
+    public Services(String nom, double taux_horraire, ArrayList<String> categorie) {
         this.nom = nom;
         this.taux_horraire = taux_horraire;
 
@@ -38,11 +46,11 @@ public class Services {
         this.taux_horraire = taux_horraire;
     }
 
-    public ArrayList<Services> getCategorie() {
+    public ArrayList<String> getCategorie() {
         return Categorie;
     }
 
-    public void setCategorie(ArrayList<Services> categorie) {
+    public void setCategorie(ArrayList<String> categorie) {
         Categorie = categorie;
     }
     public int getId() {
