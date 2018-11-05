@@ -26,6 +26,10 @@ public class Admin_page extends AppCompatActivity {
 
         list_service = dbhelper.listService();
 
+        ServiceCustomAdapter myCustomAdapter = new ServiceCustomAdapter(Admin_page.this, list_service);
+
+        list.setAdapter(myCustomAdapter);
+
 
     }
 
