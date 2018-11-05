@@ -50,8 +50,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
         android:layout_marginLeft="5dp"
-        android:layout_marginTop="110dp"
-        android:layout_marginBottom="111dp"
+        android:layout_marginTop="111dp"
+        android:layout_marginBottom="110dp"
         android:text="Taux Horaire ($/heure)"
         app:layout_constraintBottom_toTopOf="@+id/categorie"
         app:layout_constraintStart_toStartOf="parent"
@@ -74,15 +74,15 @@
         android:layout_height="32dp"
         android:layout_marginStart="5dp"
         android:layout_marginLeft="5dp"
-        android:layout_marginTop="44dp"
+        android:layout_marginTop="154dp"
         android:layout_marginEnd="3dp"
         android:layout_marginRight="3dp"
-        android:layout_marginBottom="32dp"
+        android:layout_marginBottom="154dp"
         android:text="Catégorie :"
-        app:layout_constraintBottom_toBottomOf="@+id/categorie"
+        app:layout_constraintBottom_toBottomOf="@+id/submit"
         app:layout_constraintEnd_toEndOf="@+id/message_taux"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/taux_horaire" />
+        app:layout_constraintTop_toBottomOf="@+id/nom_service" />
 
     <Button
         android:id="@+id/submit"
@@ -102,10 +102,10 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginBottom="176dp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nom_cat" />
 </android.support.constraint.ConstraintLayout>

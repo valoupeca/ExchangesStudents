@@ -4,14 +4,18 @@ import java.util.ArrayList;
 
 public class Services {
 
+    int id;
     private String nom;
     private double taux_horraire;
     private ArrayList<Services> Categorie;
 
 
-    public Services(String nom, float taux_horraire, ArrayList<Services> categorie) {
+
+    public Services(int id, String nom, float taux_horraire, ArrayList<Services> categorie) {
+        this.id = id;
         this.nom = nom;
         this.taux_horraire = taux_horraire;
+
         Categorie = categorie;
     }
 
@@ -41,4 +45,13 @@ public class Services {
     public void setCategorie(ArrayList<Services> categorie) {
         Categorie = categorie;
     }
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+
 }

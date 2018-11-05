@@ -9,8 +9,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+
 
 import java.util.ArrayList;
 
@@ -52,7 +51,7 @@ public class DBHelper extends SQLiteOpenHelper{
     @Override
     public void onConfigure(SQLiteDatabase db) {
         super.onConfigure(db);
-       // db.setForeignKeyConstraintsEnabled(true);
+        // db.setForeignKeyConstraintsEnabled(true);
     }
 
     public void onCreate(SQLiteDatabase db){
@@ -91,39 +90,39 @@ public class DBHelper extends SQLiteOpenHelper{
     public void addOrUpdateUser(String username, String mdp, String role){
 
 
-            SQLiteDatabase db = getWritableDatabase();
-          db.beginTransaction();
-          try {
+        SQLiteDatabase db = getWritableDatabase();
+        db.beginTransaction();
+        try {
             ContentValues values = new ContentValues();
             values.put(COLUMN_USERNAME, username);
             values.put(COLUMN_MDP, mdp);
             values.put(COLUMN_ROLE,role);
-              int rows = db.update(TABLE_USERS, values, COLUMN_USERNAME + "= ?", new String[]{username});
+            int rows = db.update(TABLE_USERS, values, COLUMN_USERNAME + "= ?", new String[]{username});
 
-              if (rows == 1) {
-                  // Get the primary key of the user we just updated
-                  String usersSelectQuery = String.format("SELECT %s FROM %s WHERE %s = ?",
-                          COLUMN_USERNAME, TABLE_USERS, COLUMN_ID);
-                  Cursor cursor = db.rawQuery(usersSelectQuery, new String[]{String.valueOf(username)});
-                  try {
-                      if (cursor.moveToFirst()) {
-                          db.setTransactionSuccessful();
-                      }
-                  } finally {
-                      if (cursor != null && !cursor.isClosed()) {
-                          cursor.close();
-                      }
-                  }
-              } else {
-                  // user with this userName did not already exist, so insert new user
-                  db.insertOrThrow(TABLE_USERS, null, values);
-                  db.setTransactionSuccessful();
-              }
-          } catch (Exception e) {
-              Log.d(TAG, "Error while trying to add or update user");
-          } finally {
-              db.endTransaction();
-          }
+            if (rows == 1) {
+                // Get the primary key of the user we just updated
+                String usersSelectQuery = String.format("SELECT %s FROM %s WHERE %s = ?",
+                        COLUMN_USERNAME, TABLE_USERS, COLUMN_ID);
+                Cursor cursor = db.rawQuery(usersSelectQuery, new String[]{String.valueOf(username)});
+                try {
+                    if (cursor.moveToFirst()) {
+                        db.setTransactionSuccessful();
+                    }
+                } finally {
+                    if (cursor != null && !cursor.isClosed()) {
+                        cursor.close();
+                    }
+                }
+            } else {
+                // user with this userName did not already exist, so insert new user
+                db.insertOrThrow(TABLE_USERS, null, values);
+                db.setTransactionSuccessful();
+            }
+        } catch (Exception e) {
+            Log.d(TAG, "Error while trying to add or update user");
+        } finally {
+            db.endTransaction();
+        }
 
     }
 
@@ -250,7 +249,7 @@ public class DBHelper extends SQLiteOpenHelper{
                 do {
                     Proprietaire newUser = new Proprietaire();
                     newUser.set_username(cursor.getString(cursor.getColumnIndex(COLUMN_USERNAME)));
-
+                    newUser.set_id(Integer.parseInt(cursor.getString(cursor.getColumnIndex(COLUMN_ID))));
                     list_proprio.add(newUser);
 
                 } while(cursor.moveToNext());
@@ -288,7 +287,7 @@ public class DBHelper extends SQLiteOpenHelper{
                 do {
                     Fournisseur newUser = new Fournisseur();
                     newUser.set_username(cursor.getString(cursor.getColumnIndex(COLUMN_USERNAME)));
-
+                    newUser.set_id(Integer.parseInt(cursor.getString(cursor.getColumnIndex(COLUMN_ID))));
                     list_fournisseur.add(newUser);
 
                 } while(cursor.moveToNext());
@@ -324,9 +323,10 @@ public class DBHelper extends SQLiteOpenHelper{
             if (cursor.moveToFirst()) {
                 do {
                     Services newService = new Services();
+
                     newService.setNom(cursor.getString(cursor.getColumnIndex(SERVICE_USERNAME)));
                     newService.setTaux_horraire(Double.parseDouble(cursor.getString(cursor.getColumnIndex(TAUX_HORAIRE))));
-
+                    newService.setId(Integer.parseInt(cursor.getString(cursor.getColumnIndex(SERVICE_ID))));
                     list_serv.add(newService);
 
                 } while(cursor.moveToNext());
