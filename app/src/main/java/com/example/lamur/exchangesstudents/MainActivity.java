@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
                     finish();
                 } else {
 
-                    String role = dbhelper.infoUser(username.getText().toString(), password.getText().toString());
+                    String role = dbhelper.infoRole(username.getText().toString(), password.getText().toString());
                     Intent welcome_page = new Intent(this, Sign_in.class);
                     Bundle extras = new Bundle();
                     extras.putString("name", username.getText().toString());
