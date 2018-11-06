@@ -3,8 +3,6 @@ package com.example.lamur.exchangesstudents;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
-import android.database.MatrixCursor;
-import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
@@ -96,23 +94,23 @@ public class DBHelper extends SQLiteOpenHelper{
 
     }
 
-    public void addOrUpdateUser(String username, String mdp, String role){
+    public void addOrUpdateUser(User user){
 
 
         SQLiteDatabase db = getWritableDatabase();
         db.beginTransaction();
         try {
             ContentValues values = new ContentValues();
-            values.put(COLUMN_USERNAME, username);
-            values.put(COLUMN_MDP, mdp);
-            values.put(COLUMN_ROLE,role);
-            int rows = db.update(TABLE_USERS, values, COLUMN_USERNAME + "= ?", new String[]{username});
+            values.put(COLUMN_USERNAME, user.get_username());
+            values.put(COLUMN_MDP, user.getMdp());
+            values.put(COLUMN_ROLE, String.valueOf(user.getClass()));
+            int rows = db.update(TABLE_USERS, values, COLUMN_USERNAME + "= ?", new String[]{user.get_username()});
 
             if (rows == 1) {
                 // Get the primary key of the user we just updated
                 String usersSelectQuery = String.format("SELECT %s FROM %s WHERE %s = ?",
                         COLUMN_USERNAME, TABLE_USERS, COLUMN_ID);
-                Cursor cursor = db.rawQuery(usersSelectQuery, new String[]{String.valueOf(username)});
+                Cursor cursor = db.rawQuery(usersSelectQuery, new String[]{String.valueOf(user.get_username())});
                 try {
                     if (cursor.moveToFirst()) {
                         db.setTransactionSuccessful();
@@ -137,13 +135,13 @@ public class DBHelper extends SQLiteOpenHelper{
 
 
 
-    public boolean isReal(String username, String mdp){
+    public boolean isReal(String name,String mdp){
 
         String IsReel =
                 String.format("SELECT * FROM %s WHERE %s = '%s' AND %s = '%s'",
                         TABLE_USERS,
                         COLUMN_USERNAME,
-                        username,
+                        name,
                         COLUMN_MDP,
                         mdp);
         SQLiteDatabase db = getReadableDatabase();
@@ -164,7 +162,7 @@ public class DBHelper extends SQLiteOpenHelper{
 
     }
 
-    public String infoUser(String username, String mdp) {
+    public String infoRole(String name, String mdp) {
         SQLiteDatabase db = getReadableDatabase();
 
         String role = "";
@@ -174,7 +172,7 @@ public class DBHelper extends SQLiteOpenHelper{
                 String.format("SELECT * FROM %s WHERE %s = '%s' AND %s = '%s'",
                         TABLE_USERS,
                         COLUMN_USERNAME,
-                        username,
+                        name,
                         COLUMN_MDP,
                         mdp);
 
@@ -201,7 +199,7 @@ public class DBHelper extends SQLiteOpenHelper{
     }
 
 
-    public boolean deleteUser(String UserName){
+    public boolean deleteUser(User user){
         SQLiteDatabase db = getWritableDatabase();
         boolean result = false;
         String query = "SELECT role FROM "
@@ -209,7 +207,7 @@ public class DBHelper extends SQLiteOpenHelper{
                 + " WHERE "
                 + COLUMN_USERNAME
                 + " = \""
-                + UserName
+                + user.get_username()
                 + "\""
                 ;
         Cursor cursor = db.rawQuery(query,null);
@@ -224,10 +222,10 @@ public class DBHelper extends SQLiteOpenHelper{
         return result;
     }
 
-    public boolean isAdmin(String username, String mdp)
+    public boolean isAdmin(String name, String mdp)
     {
 
-        if(username.equals("admin") && mdp.equals("admin"))
+        if(name.equals("admin") && mdp.equals("admin"))
         {
             return true;
 
