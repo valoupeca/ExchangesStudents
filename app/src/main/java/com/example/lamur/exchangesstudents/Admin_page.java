@@ -58,4 +58,18 @@ public class Admin_page extends AppCompatActivity {
         intent.putExtra("ROLE_ID", "Fournisseur") ;
         startActivity(intent);
     }
+
+    public void Ajout_Service(View view)
+    {
+        Intent intent = new Intent(this, Ajout_service.class);
+
+        startActivity(intent);
+    }
+
+    public void Ajout_Categorie(View view)
+    {
+        Intent intent = new Intent(this, Ajout_service.class);
+
+        startActivity(intent);
+    }
 }

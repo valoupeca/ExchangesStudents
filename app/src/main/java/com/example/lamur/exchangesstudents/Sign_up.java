@@ -25,6 +25,7 @@ public class Sign_up extends AppCompatActivity {
 
 
         Spinner listview = (Spinner) findViewById(R.id.role);
+
         String[] values = new String[] { "Fournisseur","Propriétaire" };
 
 
