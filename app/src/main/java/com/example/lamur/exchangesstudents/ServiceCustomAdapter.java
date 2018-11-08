@@ -56,12 +56,19 @@ public class ServiceCustomAdapter extends BaseAdapter {
                 convertView.findViewById(R.id.taux_horaire);
 
         //sets the text for item name and item description from the current item object
-        textviewtauxhoraire.setText((int) currentItem.getTaux_horraire());
+        textViewIdservice.setText(String.valueOf(currentItem.getId()));
+        textviewtauxhoraire.setText(String.valueOf(currentItem.getTaux_horraire()));
         textviewnomservice.setText(currentItem.getNom());
 
         // returns the view for the current row
         return convertView;
 
+    }
+
+    public void updateReceiptsList(ArrayList<Services> newlist) {
+        services.clear();
+        services.addAll(newlist);
+        this.notifyDataSetChanged();
     }
 
 }

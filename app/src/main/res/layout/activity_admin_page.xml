@@ -25,11 +25,14 @@
         android:layout_height="146dp"
         android:layout_marginTop="99dp"
         android:layout_marginBottom="97dp"
-        app:layout_constraintBottom_toBottomOf="@+id/ajout_categorie"
+        app:layout_constraintBottom_toBottomOf="@+id/modifier_service"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/liste_fournisseur"
-        tools:ignore="MissingConstraints" />
+        tools:ignore="MissingConstraints"
+        android:choiceMode="singleChoice"
+        android:listSelector="@android:color/darker_gray"
+        />
 
     <Button
         android:id="@+id/liste_proprio"
@@ -68,14 +71,15 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/ajout_categorie"
+        android:id="@+id/modifier_service"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
         android:layout_marginLeft="25dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:text="Ajouter Catégorie"
+        android:onClick="modifier_Service"
+        android:text="Modifier/Supprimer Service"
         app:layout_constraintBaseline_toBaselineOf="@+id/ajout_service"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/ajout_service" />

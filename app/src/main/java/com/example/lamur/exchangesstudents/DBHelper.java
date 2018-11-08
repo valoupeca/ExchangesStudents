@@ -17,7 +17,7 @@ public class DBHelper extends SQLiteOpenHelper{
 
     private static DBHelper sInstance;
 
-    private static final int DATABASE_VERSION = 3;
+    private static final int DATABASE_VERSION = 5;
     private static final String DATABASE_NAME = "Services.db";
     public static final String TABLE_USERS= "user";
     public static final String COLUMN_ID = "_id";
@@ -94,7 +94,7 @@ public class DBHelper extends SQLiteOpenHelper{
 
     }
 
-    public void addOrUpdateUser(User user){
+    public void addOrUpdateUser(User user, String role){
 
 
         SQLiteDatabase db = getWritableDatabase();
@@ -103,7 +103,7 @@ public class DBHelper extends SQLiteOpenHelper{
             ContentValues values = new ContentValues();
             values.put(COLUMN_USERNAME, user.get_username());
             values.put(COLUMN_MDP, user.getMdp());
-            values.put(COLUMN_ROLE, String.valueOf(user.getClass()));
+            values.put(COLUMN_ROLE, role);
             int rows = db.update(TABLE_USERS, values, COLUMN_USERNAME + "= ?", new String[]{user.get_username()});
 
             if (rows == 1) {
@@ -239,9 +239,6 @@ public class DBHelper extends SQLiteOpenHelper{
     {
         ArrayList<Proprietaire> list_proprio = new ArrayList<>();
 
-        // SELECT * FROM POSTS
-        // LEFT OUTER JOIN USERS
-        // ON POSTS.KEY_POST_USER_ID_FK = USERS.KEY_USER_ID
         String PROPRIO_SELECT_QUERY =
                 String.format("SELECT * FROM %s WHERE %s = '%s' ",
                         TABLE_USERS,
@@ -366,13 +363,15 @@ public class DBHelper extends SQLiteOpenHelper{
             ContentValues values = new ContentValues();
             values.put(SERVICE_USERNAME, service.getNom());
             values.put(TAUX_HORAIRE, service.getTaux_horraire());
-            int rows = db.update(TABLE_SERVICES, values, SERVICE_USERNAME + "= ?", new String[]{service.getNom()});
+
+
+            int rows = db.update(TABLE_SERVICES, values, SERVICE_ID + "= ?", new String[]{String.valueOf(service.getId())});
 
             if (rows == 1) {
                 // Get the primary key of the user we just updated
                 String usersSelectQuery = String.format("SELECT %s FROM %s WHERE %s = ?",
                         SERVICE_USERNAME, TABLE_SERVICES, SERVICE_ID);
-                Cursor cursor = db.rawQuery(usersSelectQuery, new String[]{String.valueOf(service.getNom())});
+                Cursor cursor = db.rawQuery(usersSelectQuery, new String[]{String.valueOf(service.getId())});
                 try {
                     if (cursor.moveToFirst()) {
                         db.setTransactionSuccessful();
@@ -395,15 +394,15 @@ public class DBHelper extends SQLiteOpenHelper{
 
     }
 
-    public boolean deleteService(String nom_service){
+    public boolean deleteService(int id_service){
         SQLiteDatabase db = getWritableDatabase();
         boolean result = false;
-        String query = "SELECT type_service FROM "
+        String query = "SELECT * FROM "
                 + TABLE_SERVICES
                 + " WHERE "
-                + SERVICE_USERNAME
+                + SERVICE_ID
                 + " = \""
-                + nom_service
+                + id_service
                 + "\""
                 ;
         Cursor cursor = db.rawQuery(query,null);

@@ -50,7 +50,7 @@ public class Sign_up extends AppCompatActivity {
              }
              else {
                  Proprietaire user = new Proprietaire(username.getText().toString(), password.getText().toString());
-                 dbhelper.addOrUpdateUser(user);
+                 dbhelper.addOrUpdateUser(user,role.getSelectedItem().toString());
                  Toast.makeText(this, "Propriétaire ajouté", Toast.LENGTH_LONG).show();
                  finish();
              }
@@ -62,7 +62,7 @@ public class Sign_up extends AppCompatActivity {
              else {
                  Fournisseur user = new Fournisseur(username.getText().toString(), password.getText().toString());
                  String test1 = role.getSelectedItem().toString();
-                 dbhelper.addOrUpdateUser(user);
+                 dbhelper.addOrUpdateUser(user,role.getSelectedItem().toString());
                  Toast.makeText(this, "Fournisseur ajouté", Toast.LENGTH_LONG).show();
                  finish();
              }

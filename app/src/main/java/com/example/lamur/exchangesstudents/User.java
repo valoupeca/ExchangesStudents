@@ -1,6 +1,8 @@
 package com.example.lamur.exchangesstudents;
 
-public abstract class User {
+import java.io.Serializable;
+
+public abstract class User implements Serializable {
     private int _id;
     private String _username;
     private String mdp;

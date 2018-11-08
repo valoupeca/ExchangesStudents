@@ -1,8 +1,9 @@
 package com.example.lamur.exchangesstudents;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Services {
+public class Services  implements Serializable {
 
     int id;
     private String nom;

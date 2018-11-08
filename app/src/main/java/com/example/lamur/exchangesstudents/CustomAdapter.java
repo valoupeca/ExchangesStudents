@@ -54,7 +54,7 @@ public class CustomAdapter extends BaseAdapter {
                 convertView.findViewById(R.id.nom);
 
         //sets the text for item name and item description from the current item object
-        textViewIduser.setText(currentItem.get_id());
+        textViewIduser.setText(String.valueOf(currentItem.get_id()));
         textviewnomuser.setText(currentItem.get_username());
 
         // returns the view for the current row
