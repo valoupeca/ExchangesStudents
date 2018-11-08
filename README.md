@@ -3,6 +3,23 @@ Projet 2505
 
 https://github.com/valoupeca/ExchangesStudents.git
 
+APPLICATION DE GESTIONS DE SERVICES :
+
+Pour le moment  :
+
+User :
+Peut créer un compte et se connecter
+
+Admin :
+Peut se connectec
+Peut ajouter un service
+Peut Modifier/Supprimer un service
+Peut avoir accès à la liste de tous les utilisateurs
+
+
+Lien du Cirlce CI associé au repertoire :
+https://circleci.com/gh/valoupeca/ExchangesStudents
+
 
 LAMURE Valentin 300097957
 MURRUNI Rémi  300094191
