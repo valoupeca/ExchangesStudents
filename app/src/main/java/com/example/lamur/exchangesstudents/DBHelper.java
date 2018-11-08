@@ -397,6 +397,29 @@ public class DBHelper extends SQLiteOpenHelper{
 
     }
 
+    public boolean deleteService(String nom_service){
+        SQLiteDatabase db = getWritableDatabase();
+        boolean result = false;
+        String query = "SELECT type_service FROM "
+                + TABLE_SERVICES
+                + " WHERE "
+                + SERVICE_USERNAME
+                + " = \""
+                + nom_service
+                + "\""
+                ;
+        Cursor cursor = db.rawQuery(query,null);
+
+        if(cursor.moveToFirst()){
+            String idStr = cursor.getString(0);
+            db.delete(TABLE_SERVICES, SERVICE_ID + " = " + idStr, null);
+            cursor.close();
+            result = true;
+        }
+        db.close();
+        return result;
+    }
+
 
 
 

@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Modifier_service"
+    tools:layout_editor_absoluteY="25dp">
+
+    <TextView
+        android:id="@+id/message_annonce_modif"
+        android:layout_width="341dp"
+        android:layout_height="38dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="17dp"
+        android:text="Bienvenue Admin, vous pouvez modifier ou supprimer ce service ici"
+        app:layout_constraintBottom_toTopOf="@+id/message_nom_modif"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/message_nom_modif"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="71dp"
+        android:text="Nom de service"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/nom_service_modif"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="14dp"
+        android:layout_marginLeft="14dp"
+        android:ems="10"
+        android:hint="Service"
+        android:inputType="textPersonName"
+        android:text="Name"
+        app:layout_constraintStart_toEndOf="@+id/message_nom_modif"
+        app:layout_constraintTop_toTopOf="@+id/message_nom_modif" />
+
+    <TextView
+        android:id="@+id/message_taux_modif"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="125dp"
+        android:layout_marginBottom="124dp"
+        android:text="Taux Horaire ($/heure)"
+        app:layout_constraintBottom_toTopOf="@+id/categorie_modif"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/nom_service_modif" />
+
+    <EditText
+        android:id="@+id/taux_horaire_modif"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="number"
+        app:layout_constraintEnd_toEndOf="@+id/nom_service_modif"
+        app:layout_constraintStart_toEndOf="@+id/submit_modif"
+        app:layout_constraintTop_toTopOf="@+id/message_taux_modif" />
+
+    <TextView
+        android:id="@+id/nom_cat_modif"
+        android:layout_width="0dp"
+        android:layout_height="32dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="182dp"
+        android:layout_marginEnd="3dp"
+        android:layout_marginRight="3dp"
+        android:layout_marginBottom="182dp"
+        android:text="Catégorie :"
+        app:layout_constraintBottom_toBottomOf="@+id/submit_modif"
+        app:layout_constraintEnd_toEndOf="@+id/message_taux_modif"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nom_service_modif" />
+
+    <Button
+        android:id="@+id/submit_modif"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="69dp"
+        android:layout_marginLeft="69dp"
+        android:onClick="modifierService"
+        android:text="modifier"
+        app:layout_constraintBaseline_toBaselineOf="@+id/submit_suppr"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/submit_suppr"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="49dp"
+        android:layout_marginLeft="49dp"
+        android:layout_marginEnd="49dp"
+        android:layout_marginRight="49dp"
+        android:layout_marginBottom="54dp"
+        android:onClick="supprimerService"
+        android:text="supprimer"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/message_annonce_modif"
+        app:layout_constraintStart_toEndOf="@+id/message_taux_modif" />
+
+    <Spinner
+        android:id="@+id/categorie_modif"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nom_cat_modif" />
+</android.support.constraint.ConstraintLayout>

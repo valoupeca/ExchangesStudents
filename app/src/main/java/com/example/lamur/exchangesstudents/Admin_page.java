@@ -16,6 +16,7 @@ public class Admin_page extends AppCompatActivity {
 
     ListView list;
     DBHelper dbhelper = DBHelper.getInstance(this);
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,6 +63,18 @@ public class Admin_page extends AppCompatActivity {
     public void Ajout_Service(View view)
     {
         Intent intent = new Intent(this, Ajout_service.class);
+
+        startActivity(intent);
+    }
+
+    public void modifier_Service(View view){
+
+        Services serv  = (Services) list.getSelectedItem();
+
+        Intent intent = new Intent(this, Modifier_service.class);
+        intent.putExtra("NOM", serv.getNom());
+        intent.putExtra("CATEGORIE", serv.getCategorie());
+        intent.putExtra("TAUX_HORAIRE",serv.getTaux_horraire());
 
         startActivity(intent);
     }
