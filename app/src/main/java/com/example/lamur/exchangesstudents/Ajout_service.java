@@ -14,7 +14,7 @@ public class Ajout_service extends AppCompatActivity {
     EditText nom;
     EditText taux_horaire;
     Spinner categorie;
-    DBHelper dbhelper = DBHelper.getInstance(this);
+    DBHelper dbhelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +26,7 @@ public class Ajout_service extends AppCompatActivity {
         nom = (EditText) findViewById(R.id.nom_service);
         taux_horaire = (EditText) findViewById(R.id.taux_horaire);
         categorie = (Spinner) findViewById(R.id.categorie);
-
+        dbhelper =  dbhelper = DBHelper.getInstance(this);
         ArrayList<String> cat = new ArrayList<>();
 
         cat.add(categorie.getSelectedItem().toString());

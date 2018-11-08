@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "524959539457",
+    "firebase_url": "https://exchangesstudents-fea22.firebaseio.com",
+    "project_id": "exchangesstudents-fea22",
+    "storage_bucket": "exchangesstudents-fea22.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:524959539457:android:242aa695d122e1fe",
+        "android_client_info": {
+          "package_name": "com.example.lamur.exchangesstudents"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "524959539457-umkmsmfkfc6jts7d6kcsqobcjf3ufdsa.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.lamur.exchangesstudents",
+            "certificate_hash": "c6fbd6f6efb427018306889ea5d61714935e0678"
+          }
+        },
+        {
+          "client_id": "524959539457-aecrpbk1qbjqpfnud07r0r0b32e36gra.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCary5cxV7qDhV1_PHxy8V8sUXNsnR4rvM"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "524959539457-aecrpbk1qbjqpfnud07r0r0b32e36gra.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
