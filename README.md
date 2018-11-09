@@ -11,7 +11,7 @@ User :
 Peut créer un compte et se connecter
 
 Admin :
-Peut se connectec
+Peut se connecter (username : admin && mpd : admin)
 Peut ajouter un service
 Peut Modifier/Supprimer un service
 Peut avoir accès à la liste de tous les utilisateurs
