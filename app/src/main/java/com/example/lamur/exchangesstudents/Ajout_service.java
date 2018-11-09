@@ -49,7 +49,7 @@ public class Ajout_service extends AppCompatActivity {
 
 
         if (nom.getText().length() == 0 || taux_horaire.getText().length() == 0) {
-            Toast.makeText(this, "Veuillez remplir tout les champs", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Veuillez remplir tous les champs", Toast.LENGTH_LONG).show();
         } else {
             Services serv = new Services(nom.getText().toString(), _th, cat);
             dbhelper.addOrUpdateService(serv);
