@@ -43,7 +43,6 @@ public class Ajout_service extends AppCompatActivity {
 
         cat.add(categorie.getSelectedItem().toString());
 
-        double _th = Double.parseDouble(taux_horaire.getText().toString());
 
 
 
@@ -51,6 +50,7 @@ public class Ajout_service extends AppCompatActivity {
         if (nom.getText().length() == 0 || taux_horaire.getText().length() == 0) {
             Toast.makeText(this, "Veuillez remplir tous les champs", Toast.LENGTH_LONG).show();
         } else {
+            double _th = Double.parseDouble(taux_horaire.getText().toString());
             Services serv = new Services(nom.getText().toString(), _th, cat);
             dbhelper.addOrUpdateService(serv);
             Toast.makeText(this, "Service ajouté", Toast.LENGTH_LONG).show();
