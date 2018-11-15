@@ -17,13 +17,19 @@ public class DBHelper extends SQLiteOpenHelper{
 
     private static DBHelper sInstance;
 
-    private static final int DATABASE_VERSION = 5;
+    private static final int DATABASE_VERSION = 6;
     private static final String DATABASE_NAME = "Services.db";
     public static final String TABLE_USERS= "user";
     public static final String COLUMN_ID = "_id";
     public static final String COLUMN_USERNAME = "name";
     public static final String COLUMN_MDP = "mdp";
     public static final String COLUMN_ROLE = "role";
+    public static final String COLUMN_ADDRESSE = "adresse";
+    public static final String COLUMN_CP = "cp";
+    public static final String COLUMN_PHONE = "phone";
+    public static final String COLUMN_COMPANY_NAME = "company";
+    public static final String COLUMN_DESCRIPTION = "description";
+    public static final String COLUMN_LICENSE = "license";
 
     public static final String TABLE_SERVICES= "services";
     public static final String SERVICE_ID = "_id";
@@ -59,7 +65,13 @@ public class DBHelper extends SQLiteOpenHelper{
                 COLUMN_ID + " INTEGER PRIMARY KEY," + // Define a primary key
                 COLUMN_USERNAME + " TEXT," +
                 COLUMN_MDP +  " TEXT," +
-                COLUMN_ROLE + " TEXT"+
+                COLUMN_ROLE + " TEXT,"+
+                COLUMN_DESCRIPTION + " TEXT,"+
+                COLUMN_ADDRESSE + " TEXT,"+
+                COLUMN_CP + " INTEGER,"+
+                COLUMN_LICENSE + " BOOLEAN,"+
+                COLUMN_COMPANY_NAME + " TEXT,"+
+                COLUMN_PHONE + " TEXT"+
                 ")";
 
 
@@ -162,6 +174,7 @@ public class DBHelper extends SQLiteOpenHelper{
 
     }
 
+
     public String infoRole(String name, String mdp) {
         SQLiteDatabase db = getReadableDatabase();
 
@@ -196,6 +209,46 @@ public class DBHelper extends SQLiteOpenHelper{
         }
 
         return  role;
+    }
+
+    public Fournisseur getFournisseur(String name, String mdp) {
+        SQLiteDatabase db = getReadableDatabase();
+
+        String role = "";
+
+        Fournisseur user = new Fournisseur();
+
+
+        String infoUser =
+                String.format("SELECT * FROM %s WHERE %s = '%s' AND %s = '%s'",
+                        TABLE_USERS,
+                        COLUMN_USERNAME,
+                        name,
+                        COLUMN_MDP,
+                        mdp);
+
+
+        Cursor cursor = db.rawQuery(infoUser, null);
+        try {
+            if (cursor.moveToFirst()) {
+                if (cursor.getString(cursor.getColumnIndex(COLUMN_ROLE)) != null) {
+                    user.set_id(Integer.parseInt(cursor.getString(cursor.getColumnIndex(COLUMN_ID))));
+                    user.set_username((cursor.getString(cursor.getColumnIndex(COLUMN_USERNAME))));
+
+                } else {
+                    role = "Unknown";
+                }
+            }
+
+        } catch (Exception e) {
+            Log.d(TAG, "Error while trying to get posts from database");
+        } finally {
+            if (cursor != null && !cursor.isClosed()) {
+                cursor.close();
+            }
+        }
+
+        return  user;
     }
 
 

@@ -50,13 +50,28 @@ public class MainActivity extends AppCompatActivity {
                 } else {
 
                     String role = dbhelper.infoRole(username.getText().toString(), password.getText().toString());
-                    Intent welcome_page = new Intent(this, Sign_in.class);
-                    Bundle extras = new Bundle();
-                    extras.putString("name", username.getText().toString());
-                    extras.putString("role", role);
-                    welcome_page.putExtras(extras);
-                    startActivity(welcome_page);
-                    finish();
+                    if(role.equals("Fournisseur"))
+                    {
+                        Intent welcome_page = new Intent(this, Sign_in.class);
+                        Bundle extras = new Bundle();
+                        Fournisseur fournis = dbhelper.getFournisseur(username.getText().toString(), password.getText().toString());
+                        extras.putSerializable("info_user",fournis );
+                        extras.putString("role", role);
+                        welcome_page.putExtras(extras);
+                        startActivity(welcome_page);
+                    }
+                    else
+                    {
+                        Intent welcome_page = new Intent(this, Sign_in.class);
+                        Bundle extras = new Bundle();
+
+                        extras.putString("name", username.getText().toString());
+                        extras.putString("role", role);
+                        welcome_page.putExtras(extras);
+                        startActivity(welcome_page);
+                        finish();
+                    }
+
 
                 }
             } else {

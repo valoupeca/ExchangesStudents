@@ -30,7 +30,6 @@ public class Liste_user extends AppCompatActivity {
 
         Bundle objetbundle = this.getIntent().getExtras();
 
-        System.out.println(objetbundle);
 
 
         ArrayList<User> l_user = (ArrayList<User>) this.getIntent().getSerializableExtra("LIST_OF_OBJECTS");
