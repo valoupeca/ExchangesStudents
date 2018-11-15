@@ -14,25 +14,18 @@
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="27dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginRight="24dp"
-        android:layout_marginBottom="61dp"
         android:text="Bienvenue :"
-        app:layout_constraintBottom_toTopOf="@+id/message_role"
-        app:layout_constraintEnd_toStartOf="@+id/nom_user"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/nom_user"
-        android:layout_width="0dp"
+        android:layout_width="164dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="27dp"
-        android:layout_marginEnd="110dp"
-        android:layout_marginRight="110dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/message_bienvenue"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints" />
 
@@ -42,54 +35,53 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
-        android:layout_marginBottom="13dp"
+        android:layout_marginTop="107dp"
+        android:layout_marginBottom="100dp"
         android:text="Vous avez une session en tant que "
-        app:layout_constraintBottom_toTopOf="@+id/role_user"
+        app:layout_constraintBottom_toBottomOf="@+id/completer"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/message_bienvenue"
+        app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/role_user"
         android:layout_width="160dp"
-        android:layout_height="0dp"
+        android:layout_height="17dp"
+        android:layout_marginTop="31dp"
         android:layout_marginBottom="23dp"
         android:text="TextView"
         app:layout_constraintBottom_toTopOf="@+id/completer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/message_role"
+        app:layout_constraintTop_toTopOf="@+id/message_role"
         tools:ignore="MissingConstraints" />
 
     <Button
         android:id="@+id/completer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="285dp"
+        android:layout_marginTop="178dp"
         android:onClick="complete_profil"
         android:text="Completez Votre Profil"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/role_user" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/Ajouter_Service"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="199dp"
         android:text="Ajouter un service"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintBaseline_toBaselineOf="@+id/Modif_Service"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/Modif_Service"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
         android:layout_marginEnd="7dp"
         android:layout_marginRight="7dp"
         android:text="Modifier un Service"
-        app:layout_constraintBaseline_toBaselineOf="@+id/Ajouter_Service"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/completer" />
 </android.support.constraint.ConstraintLayout>
