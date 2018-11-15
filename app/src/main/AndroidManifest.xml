@@ -26,7 +26,8 @@
         <activity
             android:name=".Modifier_service"
             android:label="@string/title_activity_modifier_service"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".Complete_Profil"></activity>
     </application>
 
 </manifest>

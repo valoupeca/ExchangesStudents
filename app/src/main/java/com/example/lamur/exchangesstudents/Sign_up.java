@@ -18,6 +18,7 @@ public class Sign_up extends AppCompatActivity {
     DBHelper dbhelper = DBHelper.getInstance(this);
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
