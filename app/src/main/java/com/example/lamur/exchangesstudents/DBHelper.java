@@ -17,7 +17,7 @@ public class DBHelper extends SQLiteOpenHelper{
 
     private static DBHelper sInstance;
 
-    private static final int DATABASE_VERSION = 6;
+    private static final int DATABASE_VERSION = 7;
     private static final String DATABASE_NAME = "Services.db";
     public static final String TABLE_USERS= "user";
     public static final String COLUMN_ID = "_id";
@@ -35,6 +35,14 @@ public class DBHelper extends SQLiteOpenHelper{
     public static final String SERVICE_ID = "_id";
     public static final String SERVICE_USERNAME = "type_service";
     public static final String TAUX_HORAIRE = "taux_horaires";
+
+    public static final String TABLE_SERVICE_HORAIRE= "service_horaire";
+    public static final String COLUMN_JOUR = "jour";
+    public static final String COLUMN_HEURE = "heure";
+    public static final String COLUMN_SERVICES_HORAIRES_ID = "id";
+    public static final String SERVICE_CHOSE_ID = "id_service";
+    public static final String COLUMN_FOURNISSEUR_ID = "id_fournisseur";
+
 
     public static synchronized DBHelper getInstance(Context context) {
         // Use the application context, which will ensure that you
@@ -81,8 +89,20 @@ public class DBHelper extends SQLiteOpenHelper{
                 SERVICE_USERNAME +
                 " TEXT," + TAUX_HORAIRE + " DOUBLE" + ")";
 
+        String CREATE_SERVICE_HORAIRE_TABLE =  "CREATE TABLE " +
+                TABLE_SERVICE_HORAIRE + "("
+                + COLUMN_SERVICES_HORAIRES_ID + " INTEGER PRIMARY KEY,"
+                +  COLUMN_JOUR + " TEXT,"
+                +  SERVICE_CHOSE_ID + " INTEGER,"
+                + COLUMN_FOURNISSEUR_ID + " INTEGER," +
+                COLUMN_HEURE + " TEXT,"
+                + " FOREIGN KEY ("+SERVICE_CHOSE_ID+") REFERENCES "+TABLE_SERVICES+"("+SERVICE_ID+")," +
+                 " FOREIGN KEY ("+COLUMN_FOURNISSEUR_ID+") REFERENCES "+TABLE_USERS+"("+COLUMN_ID+")" +
+                ")";
+
         db.execSQL(CREATE_USERS_TABLE);
         db.execSQL(CREATE_SERVICES_TABLE);
+        db.execSQL(CREATE_SERVICE_HORAIRE_TABLE);
 
         ContentValues values = new ContentValues();
 
@@ -116,6 +136,7 @@ public class DBHelper extends SQLiteOpenHelper{
             values.put(COLUMN_USERNAME, user.get_username());
             values.put(COLUMN_MDP, user.getMdp());
             values.put(COLUMN_ROLE, role);
+            values.put(COLUMN_ADDRESSE, user.getAdresse());
             int rows = db.update(TABLE_USERS, values, COLUMN_USERNAME + "= ?", new String[]{user.get_username()});
 
             if (rows == 1) {

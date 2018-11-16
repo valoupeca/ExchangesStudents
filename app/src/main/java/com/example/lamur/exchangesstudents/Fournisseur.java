@@ -9,6 +9,7 @@ public class Fournisseur extends User implements Serializable {
     private Date disponibilité;
     private ArrayList<Services> _services;
 
+
     public Fournisseur()
     {
 

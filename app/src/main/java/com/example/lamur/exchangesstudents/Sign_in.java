@@ -25,8 +25,9 @@ public class Sign_in extends AppCompatActivity {
         Bundle extras = intent.getExtras();
 
         role = extras.getString("role");
-        if(role == "Fournisseur")
-            four = (Fournisseur)this.getIntent().getSerializableExtra("info_user");
+        if(role.equals("Fournisseur")) {
+            four = (Fournisseur) this.getIntent().getSerializableExtra("info_user");
+        }
 
         name = (TextView) findViewById(R.id.nom_user);
         user_role = (TextView) findViewById(R.id.role_user);
@@ -37,7 +38,7 @@ public class Sign_in extends AppCompatActivity {
 
     public void complete_profil(View view) {
 
-        if (role == "Fournisseur")
+        if (role.equals("Fournisseur"))
         {
             Intent add_info = new Intent(this, Complete_Profil.class);
             Bundle extras = new Bundle();

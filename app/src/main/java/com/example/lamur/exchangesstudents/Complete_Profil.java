@@ -20,12 +20,14 @@ public class Complete_Profil extends AppCompatActivity {
     CheckBox non;
     DBHelper dbhelper = DBHelper.getInstance(this);
     Fournisseur user;
+    String role;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_complete__profil);
         user =  (Fournisseur)this.getIntent().getSerializableExtra("info_user");
+        role  = this.getIntent().getStringExtra("role");
     }
 
     public void submit(View view) {
@@ -45,7 +47,10 @@ public class Complete_Profil extends AppCompatActivity {
         }
         else
         {
+            if(role == "Fournisseur")
+            {
 
+            }
         }
 
     }
