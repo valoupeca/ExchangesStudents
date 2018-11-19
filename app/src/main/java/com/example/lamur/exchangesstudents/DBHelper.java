@@ -17,7 +17,7 @@ public class DBHelper extends SQLiteOpenHelper{
 
     private static DBHelper sInstance;
 
-    private static final int DATABASE_VERSION = 7;
+    private static final int DATABASE_VERSION = 10;
     private static final String DATABASE_NAME = "Services.db";
     public static final String TABLE_USERS= "user";
     public static final String COLUMN_ID = "_id";
@@ -26,6 +26,7 @@ public class DBHelper extends SQLiteOpenHelper{
     public static final String COLUMN_ROLE = "role";
     public static final String COLUMN_ADDRESSE = "adresse";
     public static final String COLUMN_CP = "cp";
+    public static final String COLUMN_VILLE = "ville";
     public static final String COLUMN_PHONE = "phone";
     public static final String COLUMN_COMPANY_NAME = "company";
     public static final String COLUMN_DESCRIPTION = "description";
@@ -76,6 +77,7 @@ public class DBHelper extends SQLiteOpenHelper{
                 COLUMN_ROLE + " TEXT,"+
                 COLUMN_DESCRIPTION + " TEXT,"+
                 COLUMN_ADDRESSE + " TEXT,"+
+                COLUMN_VILLE + " TEXT,"+
                 COLUMN_CP + " INTEGER,"+
                 COLUMN_LICENSE + " BOOLEAN,"+
                 COLUMN_COMPANY_NAME + " TEXT,"+
@@ -121,6 +123,7 @@ public class DBHelper extends SQLiteOpenHelper{
             // Simplest implementation is to drop all old tables and recreate them
             db.execSQL("DROP TABLE IF EXISTS " + TABLE_USERS);
             db.execSQL("DROP TABLE IF EXISTS " + TABLE_SERVICES);
+            db.execSQL("DROP TABLE IF EXISTS " + TABLE_SERVICE_HORAIRE);
             onCreate(db);
         }
 
@@ -137,13 +140,21 @@ public class DBHelper extends SQLiteOpenHelper{
             values.put(COLUMN_MDP, user.getMdp());
             values.put(COLUMN_ROLE, role);
             values.put(COLUMN_ADDRESSE, user.getAdresse());
-            int rows = db.update(TABLE_USERS, values, COLUMN_USERNAME + "= ?", new String[]{user.get_username()});
+            values.put(COLUMN_CP,user.getCode_postal());
+            values.put(COLUMN_VILLE,user.getVille());
+            values.put(COLUMN_DESCRIPTION,user.getDescription());
+            values.put(COLUMN_LICENSE,user.isLicense());
+            values.put(COLUMN_PHONE,user.getPhone());
+            values.put(COLUMN_COMPANY_NAME,user.getCompany());
+
+
+            int rows = db.update(TABLE_USERS, values, COLUMN_ID + "= ?", new String[]{String.valueOf(user.get_id())});
 
             if (rows == 1) {
                 // Get the primary key of the user we just updated
                 String usersSelectQuery = String.format("SELECT %s FROM %s WHERE %s = ?",
                         COLUMN_USERNAME, TABLE_USERS, COLUMN_ID);
-                Cursor cursor = db.rawQuery(usersSelectQuery, new String[]{String.valueOf(user.get_username())});
+                Cursor cursor = db.rawQuery(usersSelectQuery, new String[]{String.valueOf(user.get_id())});
                 try {
                     if (cursor.moveToFirst()) {
                         db.setTransactionSuccessful();
@@ -255,6 +266,15 @@ public class DBHelper extends SQLiteOpenHelper{
                 if (cursor.getString(cursor.getColumnIndex(COLUMN_ROLE)) != null) {
                     user.set_id(Integer.parseInt(cursor.getString(cursor.getColumnIndex(COLUMN_ID))));
                     user.set_username((cursor.getString(cursor.getColumnIndex(COLUMN_USERNAME))));
+                    user.setMdp((cursor.getString(cursor.getColumnIndex(COLUMN_MDP))));
+                    user.setVille((cursor.getString(cursor.getColumnIndex(COLUMN_VILLE))));
+                    user.setAdresse((cursor.getString(cursor.getColumnIndex(COLUMN_ADDRESSE))));
+                    user.setCode_postal((cursor.getString(cursor.getColumnIndex(COLUMN_CP))));
+                    user.setCompany((cursor.getString(cursor.getColumnIndex(COLUMN_COMPANY_NAME))));
+                    user.setDescription((cursor.getString(cursor.getColumnIndex(COLUMN_DESCRIPTION))));
+                    user.setPhone((cursor.getString(cursor.getColumnIndex(COLUMN_PHONE))));
+                    user.setLicense(Boolean.getBoolean(cursor.getString(cursor.getColumnIndex(COLUMN_LICENSE))));
+
 
                 } else {
                     role = "Unknown";
@@ -423,9 +443,6 @@ public class DBHelper extends SQLiteOpenHelper{
 
         return list_serv;
     }
-
-
-
 
 
     public void addOrUpdateService(Services service){

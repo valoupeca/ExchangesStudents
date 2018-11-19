@@ -7,7 +7,8 @@ public abstract class User implements Serializable {
     private String _username;
     private String mdp;
     private String adresse;
-    private int code_postal;
+    private String ville;
+    private String code_postal;
     private String description;
     private boolean license;
     private String company;
@@ -18,7 +19,28 @@ public abstract class User implements Serializable {
     public User() {
     }
 
-    public User(int _id, String _username, String mdp, String adresse, int code_postal, String description, boolean license, String company, String phone) {
+    public User(int _id, String _username, String mdp, String adresse, String ville, String code_postal, String description, boolean license, String company, String phone) {
+        this._id = _id;
+        this._username = _username;
+        this.mdp = mdp;
+        this.adresse = adresse;
+        this.ville = ville;
+        this.code_postal = code_postal;
+        this.description = description;
+        this.license = license;
+        this.company = company;
+        this.phone = phone;
+    }
+
+    public String getVille() {
+        return ville;
+    }
+
+    public void setVille(String ville) {
+        this.ville = ville;
+    }
+
+    public User(int _id, String _username, String mdp, String adresse, String code_postal, String description, boolean license, String company, String phone) {
         this._id = _id;
         this._username = _username;
         this.mdp = mdp;
@@ -73,11 +95,11 @@ public abstract class User implements Serializable {
         this.adresse = adresse;
     }
 
-    public int getCode_postal() {
+    public String getCode_postal() {
         return code_postal;
     }
 
-    public void setCode_postal(int code_postal) {
+    public void setCode_postal(String code_postal) {
         this.code_postal = code_postal;
     }
 

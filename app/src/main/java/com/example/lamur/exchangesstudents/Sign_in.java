@@ -40,10 +40,12 @@ public class Sign_in extends AppCompatActivity {
 
         if (role.equals("Fournisseur"))
         {
+            Fournisseur new_four =  new Fournisseur();
             Intent add_info = new Intent(this, Complete_Profil.class);
             Bundle extras = new Bundle();
-
-            extras.putSerializable("info_user",four);
+            new_four = dbhelper.getFournisseur(four.get_username(),four.getMdp());
+            extras.putSerializable("info_user",new_four);
+            add_info.putExtra("role",role);
             add_info.putExtras(extras);
             startActivity(add_info);
         }
