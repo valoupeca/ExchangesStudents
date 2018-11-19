@@ -12,14 +12,25 @@ public class Ajout_disponibilite extends AppCompatActivity {
     ArrayList<String> List_dispo;
     ArrayList<String> jours;
     ArrayList<String> heures;
-    CustomAdapter  myCustomAdapter;
-
+    ListView list;
+    DBHelper dbhelper = DBHelper.getInstance(this);
+    ServiceCustomAdapter myCustomAdapter;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ajout_modif_services);
+
+
+        list = (ListView) findViewById(R.id.List_service);
+
+
+        ArrayList<Services> ls = dbhelper.listService();
+        myCustomAdapter = new ServiceCustomAdapter(Ajout_disponibilite.this, ls);
+        list.setAdapter(myCustomAdapter);
+        myCustomAdapter.updateReceiptsList(ls);
+
 
 
 

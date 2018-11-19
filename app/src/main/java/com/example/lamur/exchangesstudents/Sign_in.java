@@ -34,6 +34,11 @@ public class Sign_in extends AppCompatActivity {
 
         name.setText(four.get_username());
         user_role.setText(role);
+
+
+
+
+
     }
 
     public void complete_profil(View view) {

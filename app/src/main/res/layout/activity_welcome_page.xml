@@ -23,10 +23,9 @@
         android:id="@+id/nom_user"
         android:layout_width="164dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="27dp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/message_bienvenue"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints" />
 
     <TextView
@@ -35,10 +34,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
-        android:layout_marginTop="107dp"
-        android:layout_marginBottom="100dp"
+        android:layout_marginTop="108dp"
         android:text="Vous avez une session en tant que "
-        app:layout_constraintBottom_toBottomOf="@+id/completer"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints" />
@@ -47,7 +44,7 @@
         android:id="@+id/role_user"
         android:layout_width="160dp"
         android:layout_height="17dp"
-        android:layout_marginTop="31dp"
+        android:layout_marginTop="30dp"
         android:layout_marginBottom="23dp"
         android:text="TextView"
         app:layout_constraintBottom_toTopOf="@+id/completer"
@@ -60,28 +57,44 @@
         android:id="@+id/completer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="178dp"
+        android:layout_marginTop="51dp"
         android:onClick="complete_profil"
         android:text="Completez Votre Profil"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/message_role" />
 
     <Button
         android:id="@+id/Ajouter_Service"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
         android:text="Ajouter un service"
-        app:layout_constraintBaseline_toBaselineOf="@+id/Modif_Service"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/completer" />
 
     <Button
         android:id="@+id/Modif_Service"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
         android:layout_marginEnd="7dp"
         android:layout_marginRight="7dp"
+        android:layout_marginBottom="8dp"
         android:text="Modifier un Service"
+        app:layout_constraintBottom_toTopOf="@+id/Liste_dispo"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <ListView
+        android:id="@+id/Liste_dispo"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/completer" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Ajouter_Service" />
 </android.support.constraint.ConstraintLayout>
