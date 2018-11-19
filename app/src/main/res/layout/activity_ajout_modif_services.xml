@@ -17,7 +17,8 @@
         app:layout_constraintTop_toBottomOf="@+id/listse_service"
         android:numColumns="7"
         android:horizontalSpacing="50dp"
-        android:listSelector="#0f0"/>
+        android:listSelector="#0f0"
+        android:clickable="true" />
 
     <Button
         android:id="@+id/Valid_modif"
