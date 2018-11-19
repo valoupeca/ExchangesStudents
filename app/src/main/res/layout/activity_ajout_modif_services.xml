@@ -6,43 +6,53 @@
     android:layout_height="match_parent"
     tools:layout_editor_absoluteY="81dp">
 
-    <android.support.v7.widget.RecyclerView
+    <ListView
         android:id="@+id/agenda"
+        android:layout_width="395dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="59dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/search_id"
+        app:layout_constraintTop_toBottomOf="@+id/search_id"
+        android:choiceMode="multipleChoice"
+        android:listSelector="@android:color/darker_gray"
+        />
+
+    <ListView
+        android:id="@+id/liste_service"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginBottom="17dp"
-        android:clickable="true"
-        android:horizontalSpacing="50dp"
-        android:listSelector="#0f0"
-        android:numColumns="7"
-        app:layout_constraintBottom_toTopOf="@+id/Valid_modif"
+        android:layout_marginBottom="33dp"
+        app:layout_constraintBottom_toTopOf="@+id/search_id"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/List_service" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:choiceMode="singleChoice"
+        android:listSelector="@android:color/darker_gray"
+        />
 
     <Button
         android:id="@+id/Valid_modif"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="125dp"
-        android:layout_marginLeft="125dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginStart="140dp"
+        android:layout_marginLeft="140dp"
         android:text="Validation"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/agenda" />
+        app:layout_constraintStart_toStartOf="parent" />
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/List_service"
-        android:layout_width="364dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="14dp"
+    <EditText
+        android:id="@+id/search_id"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="1dp"
+        android:ems="10"
+        android:hint="Recherche"
+        android:inputType="textPersonName"
         app:layout_constraintBottom_toTopOf="@+id/agenda"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-    </android.support.v7.widget.RecyclerView>
+        app:layout_constraintTop_toBottomOf="@+id/liste_service" />
 
 
 </android.support.constraint.ConstraintLayout>

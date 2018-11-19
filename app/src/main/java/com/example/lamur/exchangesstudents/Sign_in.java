@@ -56,4 +56,19 @@ public class Sign_in extends AppCompatActivity {
         }
 
     }
+    public void ajout_service(View view) {
+
+        if (role.equals("Fournisseur"))
+        {
+            Fournisseur new_four =  new Fournisseur();
+            Intent add_service = new Intent(this, Ajout_disponibilite.class);
+            Bundle extras = new Bundle();
+            new_four = dbhelper.getFournisseur(four.get_username(),four.getMdp());
+            extras.putSerializable("info_user",new_four);
+            add_service.putExtras(extras);
+            startActivity(add_service);
+        }
+
+    }
+
 }
