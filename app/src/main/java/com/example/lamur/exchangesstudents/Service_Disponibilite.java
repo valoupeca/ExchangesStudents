@@ -1,6 +1,8 @@
 package com.example.lamur.exchangesstudents;
 
-public class Service_Disponibilite {
+import java.io.Serializable;
+
+public class Service_Disponibilite implements Serializable {
     private int _id;
     private String heure;
     private String jour;
@@ -64,7 +66,7 @@ public class Service_Disponibilite {
         this.jour = jour;
     }
 
-    public int getId_service(int columnIndex) {
+    public int getId_service() {
         return id_service;
     }
 
@@ -84,6 +86,6 @@ public class Service_Disponibilite {
     public String toString() {
         return "Nom du service='" + nom_service + '\'' +
                 ", jour='" + jour + '\'' +
-                "heure='" + heure + '\'' ;
+                "heure='" + heure + '\''  ;
     }
 }

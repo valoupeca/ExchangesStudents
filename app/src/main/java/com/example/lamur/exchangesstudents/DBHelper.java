@@ -559,7 +559,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     }
 
-    public void addOrUpdateDisponibilite(Services service, String heure, String jour, Fournisseur four, int id_dispo) {
+    public void addOrUpdateDisponibilite(int service_id, String heure, String jour, int four_id, int id_dispo) {
 
         SQLiteDatabase db = getWritableDatabase();
         db.beginTransaction();
@@ -567,8 +567,8 @@ public class DBHelper extends SQLiteOpenHelper {
             ContentValues values = new ContentValues();
             values.put(COLUMN_JOUR, jour);
             values.put(COLUMN_HEURE, heure);
-            values.put(COLUMN_FOURNISSEUR_ID, four.get_id());
-            values.put(SERVICE_CHOSE_ID, service.getId());
+            values.put(COLUMN_FOURNISSEUR_ID, four_id);
+            values.put(SERVICE_CHOSE_ID, service_id);
 
             int rows = db.update(TABLE_SERVICE_HORAIRE, values, COLUMN_SERVICES_HORAIRES_ID + "= ?", new String[]{String.valueOf(id_dispo)});
 
