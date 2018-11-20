@@ -96,7 +96,7 @@ public class Complete_Profil extends AppCompatActivity {
                     }
 
                     dbhelper.addOrUpdateUser(user,role);
-                Toast.makeText(this, "Profil Completez", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "Profil Completé", Toast.LENGTH_LONG).show();
                 finish();
             }
         }

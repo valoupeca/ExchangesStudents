@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 
 public class Sign_in extends AppCompatActivity {
@@ -22,6 +23,7 @@ public class Sign_in extends AppCompatActivity {
     DBHelper dbhelper = DBHelper.getInstance(this);
     ListView list;
     ServiceCustomAdapter myCustomAdapter;
+    ArrayAdapter arrayAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,27 +47,64 @@ public class Sign_in extends AppCompatActivity {
 
 
 
-        HashMap<Integer,String>  Listhash = new HashMap<>();
+        HashMap<Integer,Service_Disponibilite>  Listhash = new HashMap<>();
         Listhash = dbhelper.servicesByUser(four.get_id());
 
-        ArrayList<String> ListArray = new ArrayList<>();
-        for(int i=0;i<=Listhash.size();i++) {
-            ListArray.add(Listhash.get(i));
+        if(Listhash.isEmpty()) {
+        }
+        else
+        {
+
+            Collection<Service_Disponibilite> values = Listhash.values();
+
+            //Creating an ArrayList of values
+
+            ArrayList<Service_Disponibilite> listOfValues = new ArrayList<Service_Disponibilite>(values);
+
+
+
+            arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, listOfValues);
+
+
+            list = (ListView) findViewById(R.id.Liste_activite);
+            list.setAdapter(arrayAdapter);
         }
 
 
 
 
-        ArrayAdapter arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, ListArray);
-
-
-        list = (ListView) findViewById(R.id.Liste_activite);
-        list.setAdapter(arrayAdapter);
-
-
-
 
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        HashMap<Integer,Service_Disponibilite>  Listhash = new HashMap<>();
+        Listhash = dbhelper.servicesByUser(four.get_id());
+
+        if(Listhash.isEmpty()) {
+        }
+        else
+        {
+
+
+            Collection<Service_Disponibilite> values = Listhash.values();
+
+            //Creating an ArrayList of values
+
+            ArrayList<Service_Disponibilite> listOfValues = new ArrayList<Service_Disponibilite>(values);
+
+
+
+            arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, listOfValues);
+
+
+            list = (ListView) findViewById(R.id.Liste_activite);
+            list.setAdapter(arrayAdapter);
+
+        }
+    }
+
 
     public void complete_profil(View view) {
 

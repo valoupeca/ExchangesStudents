@@ -496,46 +496,51 @@ public class DBHelper extends SQLiteOpenHelper {
         return result;
     }
 
-    public HashMap<Integer, String> servicesByUser(int id_user) {
+    public HashMap<Integer, Service_Disponibilite> servicesByUser(int id_user) {
 
-        HashMap<Integer, String> service_horaire = new HashMap<>();
-        String dispo = new String();
+        HashMap<Integer, Service_Disponibilite> service_horaire = new HashMap<>();
+
 
         SQLiteDatabase db = getWritableDatabase();
         String query = "SELECT "
-                + SERVICE_USERNAME
-                + COLUMN_JOUR
-                + COLUMN_HEURE
+                + SERVICE_USERNAME +","
+                + COLUMN_JOUR +","
+                + COLUMN_HEURE +","
                 + SERVICE_ID
                 + " FROM "
                 + TABLE_SERVICE_HORAIRE
-                + " WHERE "
-                + COLUMN_FOURNISSEUR_ID
-                + " = \""
-                + id_user
-                + "\""
                 + " INNER JOIN "
                 + TABLE_SERVICES
                 + " ON "
                 + SERVICE_ID
                 + " = "
-                + SERVICE_CHOSE_ID;
+                + SERVICE_CHOSE_ID
+                + " WHERE "
+                + COLUMN_FOURNISSEUR_ID
+                + " = \""
+                + id_user
+                + "\"";
+
+        int cmpt = 0;
 
 
         Cursor cursor = db.rawQuery(query, null);
         try {
             if (cursor.moveToFirst()) {
                 do {
-                    dispo = cursor.getString(cursor.getColumnIndex(SERVICE_USERNAME)) + " " + cursor.getColumnIndex(COLUMN_JOUR) + " " + cursor.getColumnIndex(COLUMN_HEURE);
+                    Service_Disponibilite _ns = new Service_Disponibilite();
 
-                    dispo =
-                            service_horaire.put(cursor.getColumnIndex(SERVICE_ID), dispo);
+                    _ns.setHeure(cursor.getString(cursor.getColumnIndex(COLUMN_HEURE)));
+                    _ns.setJour(cursor.getString(cursor.getColumnIndex(COLUMN_JOUR)));
+                    _ns.setNom_service(cursor.getString(cursor.getColumnIndex(SERVICE_USERNAME)));
+                    _ns.getId_service(Integer.parseInt(cursor.getString(cursor.getColumnIndex(SERVICE_ID))));
 
-                    if (cursor != null && !cursor.isClosed()) {
-                        cursor.close();
-                    }
+
+                    service_horaire.put(cmpt, _ns);
+                    cmpt++;
 
                 } while (cursor.moveToNext());
+                cursor.close();
 
             }
 
@@ -581,7 +586,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 }
             } else {
                 // user with this userName did not already exist, so insert new user
-                db.insertOrThrow(TABLE_SERVICES, null, values);
+                db.insertOrThrow(TABLE_SERVICE_HORAIRE, null, values);
                 db.setTransactionSuccessful();
             }
         } catch (Exception e) {
