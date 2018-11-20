@@ -552,6 +552,45 @@ public class DBHelper extends SQLiteOpenHelper {
 
     }
 
+    public void addOrUpdateDisponibilite(Services service, String heure, String jour, Fournisseur four, int id_dispo) {
+
+        SQLiteDatabase db = getWritableDatabase();
+        db.beginTransaction();
+        try {
+            ContentValues values = new ContentValues();
+            values.put(COLUMN_JOUR, jour);
+            values.put(COLUMN_HEURE, heure);
+            values.put(COLUMN_FOURNISSEUR_ID, four.get_id());
+            values.put(SERVICE_CHOSE_ID, service.getId());
+
+            int rows = db.update(TABLE_SERVICE_HORAIRE, values, COLUMN_SERVICES_HORAIRES_ID + "= ?", new String[]{String.valueOf(id_dispo)});
+
+            if (rows == 1) {
+
+                String usersSelectQuery = String.format("SELECT %s FROM %s WHERE %s = ?",
+                        COLUMN_FOURNISSEUR_ID, TABLE_SERVICE_HORAIRE, COLUMN_SERVICES_HORAIRES_ID);
+                Cursor cursor = db.rawQuery(usersSelectQuery, new String[]{String.valueOf(id_dispo)});
+                try {
+                    if (cursor.moveToFirst()) {
+                        db.setTransactionSuccessful();
+                    }
+                } finally {
+                    if (cursor != null && !cursor.isClosed()) {
+                        cursor.close();
+                    }
+                }
+            } else {
+                // user with this userName did not already exist, so insert new user
+                db.insertOrThrow(TABLE_SERVICES, null, values);
+                db.setTransactionSuccessful();
+            }
+        } catch (Exception e) {
+            Log.d(TAG, "Error while trying to add or update service");
+        } finally {
+            db.endTransaction();
+        }
+
+    }
 }
 
 

@@ -23,7 +23,7 @@ public class Ajout_disponibilite extends AppCompatActivity {
     ServiceCustomAdapter  myCustomAdapter;
     ArrayAdapter<String> adapter;
     ListView list;
-
+    Fournisseur user;
     EditText search;
 
     DBHelper dbhelper = DBHelper.getInstance(this);
@@ -42,7 +42,7 @@ public class Ajout_disponibilite extends AppCompatActivity {
 
         list = (ListView) findViewById(R.id.liste_service);
 
-
+        user =  (Fournisseur)this.getIntent().getSerializableExtra("info_user");
         ArrayList<Services> ls = dbhelper.listService();
         myCustomAdapter = new ServiceCustomAdapter(Ajout_disponibilite.this, ls);
 
@@ -98,6 +98,8 @@ public class Ajout_disponibilite extends AppCompatActivity {
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,List_dispo );
         myListView = findViewById(R.id.agenda);
 
+        myListView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
+
         search = (EditText) findViewById(R.id.search_id);
         myListView.setTextFilterEnabled(true);
         myListView.setAdapter(adapter);
@@ -143,11 +145,15 @@ public class Ajout_disponibilite extends AppCompatActivity {
             if (checked.valueAt(i))
                   if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
                     nb = Math.floorMod(position,12);
-                    _jour = jours.get(nb-1);
-                    _horaire = heures.get((position - nb*12) - 1);
+                    int _pos_jour = position/12;
+                    _jour = jours.get(_pos_jour);
+                    _horaire = heures.get(nb);
+                    dbhelper.addOrUpdateDisponibilite(_services_selected,_horaire,_jour,user,-1);
 
             }
         }
+
+        finish();
 
     }
 }
