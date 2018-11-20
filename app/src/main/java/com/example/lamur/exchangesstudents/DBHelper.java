@@ -2,6 +2,7 @@ package com.example.lamur.exchangesstudents;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -595,6 +596,33 @@ public class DBHelper extends SQLiteOpenHelper {
         } finally {
             db.endTransaction();
         }
+
+    }
+
+
+    public boolean delete_disponibilite(Integer id_dispo){
+
+        SQLiteDatabase db = getWritableDatabase();
+        boolean result = false;
+
+        String query = "SELECT * FROM "
+                + TABLE_SERVICE_HORAIRE
+                + " WHERE "
+                + COLUMN_SERVICES_HORAIRES_ID
+                + " = \""
+                + id_dispo
+                + "\"";
+
+        Cursor cursor = db.rawQuery(query, null);
+
+        if (cursor.moveToFirst()) {
+            String idStr = cursor.getString(0);
+            db.delete(TABLE_SERVICE_HORAIRE, COLUMN_SERVICES_HORAIRES_ID + " = " + idStr, null);
+            cursor.close();
+            result = true;
+        }
+        db.close();
+        return result;
 
     }
 }
