@@ -4,18 +4,24 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Sign_in extends AppCompatActivity {
 
 
     String nom,role;
-
     TextView name;
     TextView user_role;
-
     Fournisseur four;
     DBHelper dbhelper = DBHelper.getInstance(this);
+    ListView list;
+    ServiceCustomAdapter myCustomAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +41,26 @@ public class Sign_in extends AppCompatActivity {
         name.setText(four.get_username());
         user_role.setText(role);
 
+
+
+
+
+        HashMap<Integer,String>  Listhash = new HashMap<>();
+        Listhash = dbhelper.servicesByUser(four.get_id());
+
+        ArrayList<String> ListArray = new ArrayList<>();
+        for(int i=0;i<=Listhash.size();i++) {
+            ListArray.add(Listhash.get(i));
+        }
+
+
+
+
+        ArrayAdapter arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, ListArray);
+
+
+        list = (ListView) findViewById(R.id.Liste_activite);
+        list.setAdapter(arrayAdapter);
 
 
 
