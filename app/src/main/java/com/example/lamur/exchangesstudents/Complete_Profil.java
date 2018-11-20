@@ -71,12 +71,30 @@ public class Complete_Profil extends AppCompatActivity {
 
         if (TextUtils.isEmpty(adresse.getText()) || TextUtils.isEmpty(phone.getText()) || TextUtils.isEmpty(company_name.getText())) {
 
-            if(TextUtils.isEmpty(adresse.getText()))
+            if(TextUtils.isEmpty(adresse.getText()) && TextUtils.isEmpty(phone.getText()) && TextUtils.isEmpty(company_name.getText())) {
                 adresse.setError("Data is required!");
+                phone.setError("Data is required!");
+                company_name.setError("Data is required!");
+            }
+            else if((TextUtils.isEmpty(phone.getText()) && TextUtils.isEmpty(company_name.getText())) ) {
+                phone.setError("Data is required!");
+                company_name.setError("Data is required!");
+            }
+            else  if((TextUtils.isEmpty(adresse.getText()) && TextUtils.isEmpty(company_name.getText())) ) {
+                adresse.setError("Data is required!");
+                company_name.setError("Data is required!");
+            }
+            else  if((TextUtils.isEmpty(adresse.getText()) && TextUtils.isEmpty(phone.getText())) ) {
+                adresse.setError("Data is required!");
+                phone.setError("Data is required!");
+            }
             else if(TextUtils.isEmpty(phone.getText()))
                 phone.setError("Data is required!");
             else if(TextUtils.isEmpty(company_name.getText()))
                 company_name.setError("Data is required!");
+            else if(TextUtils.isEmpty(adresse.getText()))
+                adresse.setError("Data is required!");
+
             Toast.makeText(this, "Veuillez remplir tout les champs", Toast.LENGTH_LONG).show();
 
 

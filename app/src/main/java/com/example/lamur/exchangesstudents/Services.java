@@ -29,6 +29,8 @@ public class Services  implements Serializable {
     }
 
     public Services() {
+
+        this.id = -1;
     }
 
     public String getNom() {

@@ -507,6 +507,8 @@ public class DBHelper extends SQLiteOpenHelper {
                 + SERVICE_USERNAME +","
                 + COLUMN_JOUR +","
                 + COLUMN_HEURE +","
+                + COLUMN_SERVICES_HORAIRES_ID +","
+                + COLUMN_FOURNISSEUR_ID +","
                 + SERVICE_ID
                 + " FROM "
                 + TABLE_SERVICE_HORAIRE
@@ -536,7 +538,7 @@ public class DBHelper extends SQLiteOpenHelper {
                     _ns.setNom_service(cursor.getString(cursor.getColumnIndex(SERVICE_USERNAME)));
                     _ns.setId_service(Integer.parseInt(cursor.getString(cursor.getColumnIndex(SERVICE_ID))));
                     _ns.set_id(Integer.parseInt(cursor.getString(cursor.getColumnIndex(COLUMN_SERVICES_HORAIRES_ID))));
-
+                    _ns.setId_fournisseur(Integer.parseInt(cursor.getString(cursor.getColumnIndex(COLUMN_FOURNISSEUR_ID))));
 
                     service_horaire.put(cmpt, _ns);
                     cmpt++;

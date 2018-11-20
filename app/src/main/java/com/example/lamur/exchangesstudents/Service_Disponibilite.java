@@ -86,6 +86,6 @@ public class Service_Disponibilite implements Serializable {
     public String toString() {
         return "Nom du service='" + nom_service + '\'' +
                 ", jour='" + jour + '\'' +
-                "heure='" + heure + '\''  ;
+                "heure='" + heure + '\'' ;
     }
 }

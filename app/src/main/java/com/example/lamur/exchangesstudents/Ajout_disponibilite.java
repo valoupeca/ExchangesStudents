@@ -10,6 +10,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -132,26 +133,32 @@ public class Ajout_disponibilite extends AppCompatActivity {
 
     public void Choose_Horaire(View view)
     {
-        int nb;
-        String _jour, _horaire;
         SparseBooleanArray checked = myListView.getCheckedItemPositions();
-        ArrayList<String> selectedItems = new ArrayList<String>();
-        for (int i = 0; i < checked.size(); i++) {
-            // Item position in adapter
-            int position = checked.keyAt(i);
-            // Add sport if it is checked i.e.) == TRUE!
-            if (checked.valueAt(i))
-                  if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
-                    nb = Math.floorMod(position,12);
-                    int _pos_jour = position/12;
-                    _jour = jours.get(_pos_jour);
-                    _horaire = heures.get(nb);
-                    dbhelper.addOrUpdateDisponibilite(_services_selected.getId(),_horaire,_jour,user.get_id(),-1);
+        if(checked.size() == 0 || _services_selected.getId() == -1)
+            {
+                Toast.makeText(this, "Veuillez choisir un horaire / Service", Toast.LENGTH_LONG).show();
 
+            }        else {
+            int nb;
+            String _jour, _horaire;
+           ArrayList<String> selectedItems = new ArrayList<String>();
+            for (int i = 0; i < checked.size(); i++) {
+                // Item position in adapter
+                int position = checked.keyAt(i);
+                // Add sport if it is checked i.e.) == TRUE!
+                if (checked.valueAt(i))
+                    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+                        nb = Math.floorMod(position, 12);
+                        int _pos_jour = position / 12;
+                        _jour = jours.get(_pos_jour);
+                        _horaire = heures.get(nb);
+                        dbhelper.addOrUpdateDisponibilite(_services_selected.getId(), _horaire, _jour, user.get_id(), -1);
+
+                    }
             }
-        }
 
-        finish();
+            finish();
+        }
 
     }
 }

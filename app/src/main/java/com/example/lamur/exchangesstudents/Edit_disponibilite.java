@@ -11,6 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ViewAnimator;
 
 import java.util.ArrayList;
@@ -106,33 +107,43 @@ import java.util.ArrayList;
 
     public void Modifier_Horaire(View view)
     {
-        int nb;
-        String _jour, _horaire;
         SparseBooleanArray checked = myListView.getCheckedItemPositions();
-        ArrayList<String> selectedItems = new ArrayList<String>();
-        for (int i = 0; i < checked.size(); i++) {
-            // Item position in adapter
-            int position = checked.keyAt(i);
-            // Add sport if it is checked i.e.) == TRUE!
-            if (checked.valueAt(i))
-                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
-                    nb = Math.floorMod(position,12);
-                    int _pos_jour = position/12;
-                    _jour = jours.get(_pos_jour);
-                    _horaire = heures.get(nb);
-                    dbhelper.addOrUpdateDisponibilite(_serv_passer.getId_service(),_horaire,_jour,_serv_passer.getId_fournisseur(),_serv_passer.get_id());
-
-                }
+        if(checked.size() == 0) {
+            Toast.makeText(this, "Veuillez choisir un horaire", Toast.LENGTH_LONG).show();
         }
+        else {
+            int nb;
+            String _jour, _horaire;
 
-        finish();
+            ArrayList<String> selectedItems = new ArrayList<String>();
+            for (int i = 0; i < checked.size(); i++) {
+                // Item position in adapter
+                int position = checked.keyAt(i);
+                // Add sport if it is checked i.e.) == TRUE!
+                if (checked.valueAt(i))
+                    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+                        nb = Math.floorMod(position, 12);
+                        int _pos_jour = position / 12;
+                        _jour = jours.get(_pos_jour);
+                        _horaire = heures.get(nb);
+                        dbhelper.addOrUpdateDisponibilite(_serv_passer.getId_service(), _horaire, _jour, _serv_passer.getId_fournisseur(), _serv_passer.get_id());
+
+                    }
+            }
+            Toast.makeText(this, "Update dispo", Toast.LENGTH_LONG).show();
+            finish();
+        }
 
     }
 
 
     public void Delete_Horaire(View view)
     {
+        int id = _serv_passer.get_id();
 
+        dbhelper.delete_disponibilite(id);
+        Toast.makeText(this, "Delete dispo", Toast.LENGTH_LONG).show();
+        finish();
 
     }
 
