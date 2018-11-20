@@ -1,11 +1,9 @@
 package com.example.lamur.exchangesstudents;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.util.SparseBooleanArray;
 import android.view.View;
 import android.widget.AdapterView;
@@ -34,7 +32,7 @@ public class Ajout_disponibilite extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_ajout_modif_services);
+        setContentView(R.layout.activity_ajout_disponibilite);
 
 
 
