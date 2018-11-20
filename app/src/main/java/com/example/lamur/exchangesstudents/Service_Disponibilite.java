@@ -82,10 +82,8 @@ public class Service_Disponibilite {
 
     @Override
     public String toString() {
-        return "Service_Disponibilite{" +
-                "heure='" + heure + '\'' +
+        return "Nom du service='" + nom_service + '\'' +
                 ", jour='" + jour + '\'' +
-                ", nom_service='" + nom_service + '\'' +
-                '}';
+                "heure='" + heure + '\'' ;
     }
 }

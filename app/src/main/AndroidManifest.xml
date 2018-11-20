@@ -28,8 +28,9 @@
             android:label="@string/title_activity_modifier_service"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".Complete_Profil" />
-        <activity android:name=".Select_Service"></activity>
-        <activity android:name=".Ajout_disponibilite"></activity>
+        <activity android:name=".Select_Service" />
+        <activity android:name=".Ajout_disponibilite" />
+        <activity android:name=".Edit_disponibilite"></activity>
     </application>
 
 </manifest>
