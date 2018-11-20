@@ -40,7 +40,6 @@
             android:ems="10"
             android:hint="Company Name"
             android:inputType="textPersonName"
-            android:text="Name"
             tools:layout_editor_absoluteX="109dp"
             tools:layout_editor_absoluteY="177dp" />
 
