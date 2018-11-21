@@ -17,6 +17,14 @@ Peut Modifier/Supprimer un service
 Peut avoir accès à la liste de tous les utilisateurs
 
 
+Fournisseur :
+Peut créer un compte
+Peut compléter son compte
+Peut ajouter un service et des disponibilités
+Peut supprimer un service
+Peut modifier ses disponibilités
+
+
 Lien du Cirlce CI associé au repertoire :
 https://circleci.com/gh/valoupeca/ExchangesStudents
 
