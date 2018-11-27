@@ -46,16 +46,31 @@
         tools:ignore="MissingConstraints" />
 
     <Button
-        android:id="@+id/find_services"
+        android:id="@+id/delete_services"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="35dp"
-        android:text="Trouver un service "
-        android:onClick="ajouter_Service"
+        android:text="Supprimer un service "
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.962"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Liste_activite" />
+        app:layout_constraintTop_toBottomOf="@+id/Liste_activite"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <Button
+        android:id="@+id/find_services2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="35dp"
+        android:onClick="ajouter_Service"
+        android:text="Trouver un service "
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.037"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Liste_activite"
+        app:layout_constraintVertical_bias="1.0" />
 
     <ListView
         android:id="@+id/Liste_activite"

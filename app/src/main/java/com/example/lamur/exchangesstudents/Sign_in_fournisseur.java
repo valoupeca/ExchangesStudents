@@ -50,7 +50,7 @@ public class Sign_in_fournisseur extends AppCompatActivity {
 
 
         HashMap<Integer,Service_Disponibilite>  Listhash = new HashMap<>();
-        Listhash = dbhelper.servicesByUser(four.get_id());
+        Listhash = dbhelper.ServicesByFournisseur(four.get_id());
 
         if(Listhash.isEmpty()) {
 
@@ -124,7 +124,7 @@ public class Sign_in_fournisseur extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         HashMap<Integer,Service_Disponibilite>  Listhash = new HashMap<>();
-        Listhash = dbhelper.servicesByUser(four.get_id());
+        Listhash = dbhelper.ServicesByFournisseur(four.get_id());
 
         if(Listhash.isEmpty()) {
 
