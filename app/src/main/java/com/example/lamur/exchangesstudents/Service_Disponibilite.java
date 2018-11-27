@@ -9,6 +9,8 @@ public class Service_Disponibilite implements Serializable {
     private int id_service;
     private int id_fournisseur;
     private  String nom_service;
+    private double moyenne;
+    private long nb_vote;
 
     public Service_Disponibilite(int _id, String heure, String jour, int id_service, int id_fournisseur, String nom_service) {
         this._id = _id;
@@ -24,6 +26,17 @@ public class Service_Disponibilite implements Serializable {
     }
 
     public Service_Disponibilite() {
+    }
+
+    public Service_Disponibilite(int _id, String heure, String jour, int id_service, int id_fournisseur, String nom_service, double moyenne, long nb_vote) {
+        this._id = _id;
+        this.heure = heure;
+        this.jour = jour;
+        this.id_service = id_service;
+        this.id_fournisseur = id_fournisseur;
+        this.nom_service = nom_service;
+        this.moyenne = moyenne;
+        this.nb_vote = nb_vote;
     }
 
     public String getNom_service() {
@@ -80,6 +93,22 @@ public class Service_Disponibilite implements Serializable {
 
     public void setId_fournisseur(int id_fournisseur) {
         this.id_fournisseur = id_fournisseur;
+    }
+
+    public double getMoyenne() {
+        return moyenne;
+    }
+
+    public void setMoyenne(double moyenne) {
+        this.moyenne = moyenne;
+    }
+
+    public long getNb_vote() {
+        return nb_vote;
+    }
+
+    public void setNb_vote(long nb_vote) {
+        this.nb_vote = nb_vote;
     }
 
     @Override

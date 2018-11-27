@@ -31,7 +31,8 @@
         <activity android:name=".Select_Service" />
         <activity android:name=".Ajout_disponibilite" />
         <activity android:name=".Edit_disponibilite" />
-        <activity android:name=".Sign_in_utilisateur"></activity>
+        <activity android:name=".Sign_in_utilisateur" />
+        <activity android:name=".Search_Disponibilite"></activity>
     </application>
 
 </manifest>
