@@ -5,16 +5,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 
-public class Sign_in extends AppCompatActivity {
+public class Sign_in_fournisseur extends AppCompatActivity {
 
 
     String nom,role;
@@ -31,7 +29,7 @@ public class Sign_in extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_welcome_page);
+        setContentView(R.layout.activity_welcome_page_fournisseur);
         Intent intent = getIntent();
         Bundle extras = intent.getExtras();
 
@@ -59,7 +57,7 @@ public class Sign_in extends AppCompatActivity {
             listOfValues = new ArrayList<>();
 
 
-            myCustomAdapter = new DisponibiliteAdaptater(Sign_in.this, listOfValues);
+            myCustomAdapter = new DisponibiliteAdaptater(Sign_in_fournisseur.this, listOfValues);
 
             list.setAdapter(myCustomAdapter);
 
@@ -91,7 +89,7 @@ public class Sign_in extends AppCompatActivity {
             listOfValues = new ArrayList<>(values);
 
 
-            myCustomAdapter = new DisponibiliteAdaptater(Sign_in.this, listOfValues);
+            myCustomAdapter = new DisponibiliteAdaptater(Sign_in_fournisseur.this, listOfValues);
 
             list.setAdapter(myCustomAdapter);
 
@@ -187,7 +185,7 @@ public class Sign_in extends AppCompatActivity {
     public void modifier_delete(View view)
     {
         if(_serv_selected.getHeure() != null || _serv_selected.getJour() != null|| _serv_selected.getNom_service() != null) {
-            Intent intent = new Intent(Sign_in.this, Edit_disponibilite.class);
+            Intent intent = new Intent(Sign_in_fournisseur.this, Edit_disponibilite.class);
             intent.putExtra("Service", _serv_selected);
             startActivity(intent);
             _serv_selected = new Service_Disponibilite();

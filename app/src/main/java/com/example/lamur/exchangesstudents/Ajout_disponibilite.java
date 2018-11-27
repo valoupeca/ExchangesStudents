@@ -61,14 +61,15 @@ public class Ajout_disponibilite extends AppCompatActivity {
         heures.add("9am-10am");
         heures.add("10am-11am");
         heures.add("11am-12am");
-        heures.add("12am-13am");
-        heures.add("13am-14am");
-        heures.add("14am-15am");
-        heures.add("15am-16am");
-        heures.add("16am-17am");
-        heures.add("17am-18am");
-        heures.add("18am-19am");
-        heures.add("19am-20am");
+        heures.add("12am-1pm");
+        heures.add("1pm-2pm");
+        heures.add("2pm-3pm");
+        heures.add("3pm-4pm");
+        heures.add("4pm-5pm");
+        heures.add("5pm-6pm");
+        heures.add("6pm-7m");
+        heures.add("7pm-8pm");
+
 
 
         for(int i=0; i<7;i++) {

@@ -1,13 +1,10 @@
 package com.example.lamur.exchangesstudents;
 
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
@@ -52,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
                     String role = dbhelper.infoRole(username.getText().toString(), password.getText().toString());
                     if(role.equals("Fournisseur"))
                     {
-                        Intent welcome_page = new Intent(this, Sign_in.class);
+                        Intent welcome_page = new Intent(this, Sign_in_fournisseur.class);
                         Bundle extras = new Bundle();
                         Fournisseur fournis = dbhelper.getFournisseur(username.getText().toString(), password.getText().toString());
                         extras.putSerializable("info_user",fournis );
@@ -62,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                     else
                     {
-                        Intent welcome_page = new Intent(this, Sign_in.class);
+                        Intent welcome_page = new Intent(this, Sign_in_utilisateur.class);
                         Bundle extras = new Bundle();
 
                         extras.putString("name", username.getText().toString());
