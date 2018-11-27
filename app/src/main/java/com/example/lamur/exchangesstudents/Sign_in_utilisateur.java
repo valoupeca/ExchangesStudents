@@ -22,6 +22,7 @@ public class Sign_in_utilisateur extends AppCompatActivity {
     DBHelper dbhelper = DBHelper.getInstance(this);
     ArrayList<Service_Disponibilite> listOfValues = new ArrayList<>();
     DisponibiliteAdaptater myCustomAdapter;
+    Service_Disponibilite _serv_selected = new Service_Disponibilite();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +36,7 @@ public class Sign_in_utilisateur extends AppCompatActivity {
         name.setText(user.get_username());
 
         HashMap<Integer,Service_Disponibilite> Listhash = new HashMap<>();
-        Listhash = dbhelper.servicesByUser(user.get_id());
+        Listhash = dbhelper.ServicesByFournisseur(user.get_id());
 
 
 
@@ -51,6 +52,8 @@ public class Sign_in_utilisateur extends AppCompatActivity {
             myCustomAdapter.updateReceiptsList(listOfValues);
 
             list.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+
+
 
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position,

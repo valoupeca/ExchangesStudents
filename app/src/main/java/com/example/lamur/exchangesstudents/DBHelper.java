@@ -45,6 +45,14 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String COLUMN_SERVICES_HORAIRES_ID = "id";
     public static final String SERVICE_CHOSE_ID = "id_service";
     public static final String COLUMN_FOURNISSEUR_ID = "id_fournisseur";
+    public static final String COLUMN_NOTE= "note";
+
+    public static final String TABLE_SERVICE_RDV = "Rendez_vous";
+    public static final String COLUMN_RDV_ID = "id";
+    public static final String COLUMN_ID_USER = "id_user";
+    public static final String COLUMN_DISPONIBILITE = "id_disponibilite";
+    public static final String COLUMN_COMS = "commentaire";
+
 
 
     public static synchronized DBHelper getInstance(Context context) {
@@ -98,15 +106,28 @@ public class DBHelper extends SQLiteOpenHelper {
                 + COLUMN_SERVICES_HORAIRES_ID + " INTEGER PRIMARY KEY,"
                 + COLUMN_JOUR + " TEXT,"
                 + SERVICE_CHOSE_ID + " INTEGER,"
+                + COLUMN_NOTE + " INTEGER,"
                 + COLUMN_FOURNISSEUR_ID + " INTEGER," +
                 COLUMN_HEURE + " TEXT,"
                 + " FOREIGN KEY (" + SERVICE_CHOSE_ID + ") REFERENCES " + TABLE_SERVICES + "(" + SERVICE_ID + ")," +
                 " FOREIGN KEY (" + COLUMN_FOURNISSEUR_ID + ") REFERENCES " + TABLE_USERS + "(" + COLUMN_ID + ")" +
                 ")";
 
+        String CREATE_RDV_TABLE = "CREATE TABLE " +
+                TABLE_SERVICE_RDV + "("
+                + COLUMN_RDV_ID + " INTEGER PRIMARY KEY,"
+                + COLUMN_ID_USER + "INTEGER,"
+                + COLUMN_DISPONIBILITE + "INTEGER,"
+                + COLUMN_COMS + "TEXT,"
+                + " FOREIGN KEY (" + COLUMN_ID_USER + ") REFERENCES " + TABLE_USERS + "(" + COLUMN_ID + ")," +
+                " FOREIGN KEY (" + COLUMN_DISPONIBILITE + ") REFERENCES " + TABLE_SERVICE_HORAIRE + "(" + COLUMN_SERVICES_HORAIRES_ID + ")" +
+                ")";
+
+
         db.execSQL(CREATE_USERS_TABLE);
         db.execSQL(CREATE_SERVICES_TABLE);
         db.execSQL(CREATE_SERVICE_HORAIRE_TABLE);
+        db.execSQL(CREATE_RDV_TABLE);
 
         ContentValues values = new ContentValues();
 
@@ -497,7 +518,7 @@ public class DBHelper extends SQLiteOpenHelper {
         return result;
     }
 
-    public HashMap<Integer, Service_Disponibilite> servicesByUser(int id_user) {
+    public HashMap<Integer, Service_Disponibilite> ServicesByFournisseur(int id_user) {
 
         HashMap<Integer, Service_Disponibilite> service_horaire = new HashMap<>();
 
@@ -558,6 +579,110 @@ public class DBHelper extends SQLiteOpenHelper {
         }
         db.close();
         return service_horaire;
+
+    }
+
+    public HashMap<Integer, Rendez_Vous> ServicesByUser(int id_user){
+
+        HashMap<Integer, Rendez_Vous> service_horaire = new HashMap<>();
+
+        int id = 0;
+
+        SQLiteDatabase db = getWritableDatabase();
+
+        String query1 = "SELECT"
+                + COLUMN_SERVICES_HORAIRES_ID + ","
+                + " FROM "
+                + TABLE_SERVICE_RDV
+                + " WHERE "
+                + COLUMN_ID_USER
+                + " = \""
+                + id_user
+                + "\"";
+
+        String query2 = "SELECT "
+                + SERVICE_USERNAME +","
+                + COLUMN_JOUR +","
+                + COLUMN_HEURE +","
+                + COLUMN_SERVICES_HORAIRES_ID +","
+                + COLUMN_USERNAME +","
+                + SERVICE_ID
+                + " FROM "
+                + TABLE_SERVICE_HORAIRE
+                + " INNER JOIN "
+                + TABLE_SERVICES
+                + " ON "
+                + SERVICE_ID
+                + " = "
+                + SERVICE_CHOSE_ID
+                + " INNER JOIN "
+                + TABLE_USERS
+                + " ON "
+                + COLUMN_ID
+                + " = \""
+                + id
+                + "\"";
+
+        int cmpt = 0;
+
+        Cursor cursor = db.rawQuery(query1, null);
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+
+                    id = (Integer.parseInt(cursor.getString(cursor.getColumnIndex(COLUMN_SERVICES_HORAIRES_ID))));
+
+
+                    Cursor cursor2 = db.rawQuery(query2, null);
+                    try {
+                        if (cursor2.moveToFirst()) {
+                            do {
+                                Rendez_Vous rdv = new Rendez_Vous();
+
+                                rdv.setHeure(cursor2.getString(cursor2.getColumnIndex(COLUMN_HEURE)));
+                                rdv.setJour(cursor2.getString(cursor2.getColumnIndex(COLUMN_JOUR)));
+                                rdv.setIdDispo(Integer.parseInt(cursor2.getString(cursor2.getColumnIndex(COLUMN_SERVICES_HORAIRES_ID))));
+                                rdv.setIdServic(Integer.parseInt(cursor2.getString(cursor2.getColumnIndex(SERVICE_ID))));
+                                rdv.setNomFourniseur(cursor2.getString(cursor2.getColumnIndex(COLUMN_USERNAME)));
+                                rdv.setNomService(cursor2.getString(cursor2.getColumnIndex(SERVICE_USERNAME)));
+
+
+                                service_horaire.put(cmpt, rdv);
+                                cmpt++;
+
+                            } while (cursor2.moveToNext());
+                            cursor2.close();
+
+                        }
+
+
+                    } catch (Exception e) {
+                        Log.d(TAG, "Error while trying to get posts from database");
+                    } finally {
+                        if (cursor2 != null && !cursor2.isClosed()) {
+                            cursor2.close();
+                        }
+                    }
+
+
+                } while (cursor.moveToNext());
+                cursor.close();
+
+            }
+
+
+        } catch (Exception e) {
+            Log.d(TAG, "Error while trying to get posts from database");
+        } finally {
+            if (cursor != null && !cursor.isClosed()) {
+                cursor.close();
+            }
+        }
+
+
+        db.close();
+        return service_horaire;
+
 
     }
 
@@ -626,6 +751,37 @@ public class DBHelper extends SQLiteOpenHelper {
         db.close();
         return result;
 
+    }
+
+    public boolean delete_Rdv(int id_user, int id_dispo){
+
+        SQLiteDatabase db = getWritableDatabase();
+        boolean result = false;
+
+        String query = "SELECT * FROM "
+                + TABLE_SERVICE_RDV
+                + " WHERE "
+                + COLUMN_ID_USER
+                + " = \""
+                + id_user
+                + "\""
+                + COLUMN_DISPONIBILITE
+                + " = \""
+                + id_dispo
+                + "\""
+                ;
+
+
+        Cursor cursor = db.rawQuery(query, null);
+
+        if (cursor.moveToFirst()) {
+            String idStr = cursor.getString(0);
+            db.delete(TABLE_SERVICE_RDV, COLUMN_RDV_ID + " = " + idStr, null);
+            cursor.close();
+            result = true;
+        }
+        db.close();
+        return result;
     }
 }
 
