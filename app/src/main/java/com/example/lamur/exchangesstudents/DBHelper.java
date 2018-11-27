@@ -752,6 +752,37 @@ public class DBHelper extends SQLiteOpenHelper {
         return result;
 
     }
+
+    public boolean delete_Rdv(int id_user, int id_dispo){
+
+        SQLiteDatabase db = getWritableDatabase();
+        boolean result = false;
+
+        String query = "SELECT * FROM "
+                + TABLE_SERVICE_RDV
+                + " WHERE "
+                + COLUMN_ID_USER
+                + " = \""
+                + id_user
+                + "\""
+                + COLUMN_DISPONIBILITE
+                + " = \""
+                + id_dispo
+                + "\""
+                ;
+
+
+        Cursor cursor = db.rawQuery(query, null);
+
+        if (cursor.moveToFirst()) {
+            String idStr = cursor.getString(0);
+            db.delete(TABLE_SERVICE_RDV, COLUMN_RDV_ID + " = " + idStr, null);
+            cursor.close();
+            result = true;
+        }
+        db.close();
+        return result;
+    }
 }
 
 
