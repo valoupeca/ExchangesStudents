@@ -895,6 +895,47 @@ public class DBHelper extends SQLiteOpenHelper {
         db.close();
         return result;
     }
+
+    public void ajout_RDV(int id_user,int id_dispo, int id_rdv){
+
+
+        SQLiteDatabase db = getWritableDatabase();
+        db.beginTransaction();
+        try {
+            ContentValues values = new ContentValues();
+            values.put(COLUMN_DISPONIBILITE, id_dispo);
+            values.put(COLUMN_ID_USER, id_user);
+
+
+            int rows = db.update(TABLE_SERVICE_RDV, values, COLUMN_RDV_ID + "= ?", new String[]{String.valueOf(id_rdv)});
+
+            if (rows == 1) {
+                // Get the primary key of the user we just updated
+                String usersSelectQuery = String.format("SELECT %s FROM %s WHERE %s = ?",
+                        COLUMN_DISPONIBILITE, TABLE_SERVICE_RDV, TABLE_SERVICE_RDV);
+                Cursor cursor = db.rawQuery(usersSelectQuery, new String[]{String.valueOf(id_rdv)});
+                try {
+                    if (cursor.moveToFirst()) {
+                        db.setTransactionSuccessful();
+                    }
+                } finally {
+                    if (cursor != null && !cursor.isClosed()) {
+                        cursor.close();
+                    }
+                }
+            } else {
+                // user with this userName did not already exist, so insert new user
+                db.insertOrThrow(TABLE_SERVICE_RDV, null, values);
+                db.setTransactionSuccessful();
+            }
+        } catch (Exception e) {
+            Log.d(TAG, "Error while trying to add or update service");
+        } finally {
+            db.endTransaction();
+        }
+
+
+    }
 }
 
 
