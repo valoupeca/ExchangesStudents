@@ -61,8 +61,8 @@ public class MainActivity extends AppCompatActivity {
                     {
                         Intent welcome_page = new Intent(this, Sign_in_utilisateur.class);
                         Bundle extras = new Bundle();
-
-                        extras.putString("name", username.getText().toString());
+                        Proprietaire proprietaire = dbhelper.getProprietaire(username.getText().toString(), password.getText().toString());
+                        extras.putSerializable("info_user",proprietaire );
                         extras.putString("role", role);
                         welcome_page.putExtras(extras);
                         startActivity(welcome_page);

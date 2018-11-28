@@ -49,7 +49,7 @@ public class DisponibiliteAdaptater extends BaseAdapter {
         TextView textViewIdservice = (TextView)
                 convertView.findViewById(R.id.id_service);
         TextView textviewnomservice = (TextView)
-                convertView.findViewById(R.id.nom_service);
+                convertView.findViewById(R.id.date);
 
         TextView textviewtauxhoraire = (TextView)
                 convertView.findViewById(R.id.taux_horaire);

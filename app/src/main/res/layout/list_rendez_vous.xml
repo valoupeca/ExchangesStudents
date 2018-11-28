@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/nom_four"
+        android:layout_width="0dp"
+        android:layout_height="25dp"
+        android:layout_weight="1"
+        android:text="TextView"
+        android:textSize="18sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/nom_serv"
+        app:layout_constraintEnd_toStartOf="@+id/nom_serv"
+        app:layout_constraintStart_toEndOf="@+id/id_rdv" />
+
+    <TextView
+        android:id="@+id/id_rdv"
+        android:layout_width="0dp"
+        android:layout_height="24dp"
+        android:layout_marginEnd="3dp"
+        android:layout_weight="1"
+        android:text="TextView"
+        android:textSize="18sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/nom_four"
+        app:layout_constraintEnd_toStartOf="@+id/nom_four"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/nom_serv"
+        android:layout_width="0dp"
+        android:layout_height="24dp"
+        android:layout_weight="1"
+        android:text="TextView"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@+id/date"
+        app:layout_constraintStart_toEndOf="@+id/nom_four"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="TextView"
+        android:textSize="18sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/nom_serv"
+        app:layout_constraintEnd_toStartOf="@+id/commente"
+        app:layout_constraintStart_toEndOf="@+id/nom_serv" />
+
+    <TextView
+        android:id="@+id/commente"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="1dp"
+        android:layout_weight="1"
+        android:text="TextView"
+        android:textSize="18sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/date"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/date" />
+</android.support.constraint.ConstraintLayout>

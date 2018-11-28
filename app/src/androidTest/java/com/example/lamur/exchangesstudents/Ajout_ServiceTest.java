@@ -29,9 +29,9 @@ public class Ajout_ServiceTest {
     @UiThreadTest
     public void check_NomService_Ajout_Service() throws Exception{
 
-        assertNotNull(ajout_service.findViewById(R.id.nom_service));
+        assertNotNull(ajout_service.findViewById(R.id.date));
 
-        text = ajout_service.findViewById(R.id.nom_service);
+        text = ajout_service.findViewById(R.id.date);
         text.setText("nom_service");
 
         String name = text.getText().toString();

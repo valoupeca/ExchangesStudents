@@ -68,4 +68,12 @@ public class Rendez_Vous {
     public void setIdRendez_vous(Integer idRendez_vous) {
         IdRendez_vous = idRendez_vous;
     }
+
+    @Override
+    public String toString() {
+        return "Nom du fournissuer='" + NomFourniseur + '\'' +
+                "Nom du service='" + NomService + '\'' +
+                ", jour='" + Jour + '\'' +
+                "heure='" + Heure + '\'' ;
+    }
 }

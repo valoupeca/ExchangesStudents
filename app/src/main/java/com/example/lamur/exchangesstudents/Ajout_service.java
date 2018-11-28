@@ -35,7 +35,7 @@ public class Ajout_service extends AppCompatActivity {
     }
 
     public void submit(View view) {
-        nom = (EditText) findViewById(R.id.nom_service);
+        nom = (EditText) findViewById(R.id.date);
         taux_horaire = (EditText) findViewById(R.id.taux_horaire);
         categorie = (Spinner) findViewById(R.id.categorie);
         dbhelper =  dbhelper = DBHelper.getInstance(this);
