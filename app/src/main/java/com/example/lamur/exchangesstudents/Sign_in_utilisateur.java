@@ -74,6 +74,8 @@ public class Sign_in_utilisateur extends AppCompatActivity {
 
             list.setAdapter(myCustomAdapter);
 
+            myCustomAdapter.updateReceiptsList(listOfValues);
+
         }
 
         list.setOnItemClickListener(new AdapterView.OnItemClickListener(){
@@ -95,6 +97,38 @@ public class Sign_in_utilisateur extends AppCompatActivity {
 
 
     }
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        HashMap<Integer,Rendez_Vous>  Listhash = new HashMap<>();
+        Listhash = dbhelper.ServicesByUser(user.get_id());
+
+        if(Listhash.isEmpty()) {
+
+
+            //Creating an ArrayList of values
+
+            ArrayList<Rendez_Vous> _new_list = new ArrayList<Rendez_Vous>();
+
+            myCustomAdapter.updateReceiptsList(_new_list);
+        }
+        else
+        {
+
+
+            Collection<Rendez_Vous> values = Listhash.values();
+
+            //Creating an ArrayList of values
+
+            ArrayList<Rendez_Vous> _new_list = new ArrayList<>(values);
+
+            myCustomAdapter.updateReceiptsList(_new_list);
+
+        }
+    }
+
 
     public void ajouter_Service(View view){
 

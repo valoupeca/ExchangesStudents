@@ -201,7 +201,7 @@ public class Search_Disponibilite extends AppCompatActivity implements OnItemCli
 
     public void Ajout_rdv(View view)
     {
-        dbhelper.ajout_RDV(prop.get_id(),_serv_selected.get_id(),-1,"");
+        dbhelper.ajout_RDV(prop.get_id(),_serv_selected.get_id(),-1,"",-1);
 
     }
 }

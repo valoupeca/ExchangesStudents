@@ -71,4 +71,10 @@ public class RdvCustomAdapter extends BaseAdapter {
         return convertView;
 
     }
+    public void updateReceiptsList(ArrayList<Rendez_Vous> newlist) {
+        rdv.clear();
+        rdv.addAll(newlist);
+        this.notifyDataSetChanged();
+    }
+
 }
