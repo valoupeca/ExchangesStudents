@@ -194,13 +194,14 @@ public class Search_Disponibilite extends AppCompatActivity implements OnItemCli
     public void onClick(View view, int position) {
         _serv_selected = lesDispo.get(position);
 
-        dbhelper.ajout_RDV(prop.get_id(),_serv_selected.get_id(),-1);
+
 
 
     }
 
     public void Ajout_rdv(View view)
     {
+        dbhelper.ajout_RDV(prop.get_id(),_serv_selected.get_id(),-1,"");
 
     }
 }
