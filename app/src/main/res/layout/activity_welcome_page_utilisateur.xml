@@ -26,48 +26,47 @@
         android:id="@+id/nom_user"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
-        android:layout_marginEnd="122dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="119dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/message_bienvenue2"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/message_bienvenue2"
         tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/message_role2"
-        android:layout_width="355dp"
-        android:layout_height="42dp"
-        android:layout_marginStart="16dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="13dp"
+        android:layout_marginEnd="13dp"
         android:layout_marginBottom="24dp"
         android:text="Vous avez une session en tant que : Utilisateur"
         app:layout_constraintBottom_toTopOf="@+id/Liste_activite"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/message_bienvenue2"
         tools:ignore="MissingConstraints" />
 
     <Button
         android:id="@+id/delete_services"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="35dp"
+        android:layout_marginEnd="10dp"
         android:text="Supprimer un service "
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.962"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Liste_activite"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintBaseline_toBaselineOf="@+id/note_service"
+        app:layout_constraintEnd_toStartOf="@+id/note_service"
+        app:layout_constraintStart_toEndOf="@+id/find_services2" />
 
     <Button
         android:id="@+id/find_services2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="35dp"
+        android:layout_width="0dp"
+        android:layout_height="58dp"
+        android:layout_marginEnd="18dp"
+        android:layout_marginBottom="14dp"
         android:onClick="ajouter_Service"
         android:text="Trouver un service "
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.037"
+        app:layout_constraintEnd_toStartOf="@+id/delete_services"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Liste_activite"
         app:layout_constraintVertical_bias="1.0" />
@@ -77,12 +76,26 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="113dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="98dp"
+        android:layout_marginBottom="21dp"
         android:choiceMode="singleChoice"
         android:listSelector="@android:color/darker_gray"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/note_service"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/message_role2" />
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/note_service"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="15dp"
+        android:onClick="Note_Commente"
+        android:text="Noter Service"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/delete_services"
+        app:layout_constraintTop_toBottomOf="@+id/Liste_activite" />
 </android.support.constraint.ConstraintLayout>

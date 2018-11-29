@@ -1,6 +1,8 @@
 package com.example.lamur.exchangesstudents;
 
-public class Rendez_Vous {
+import java.io.Serializable;
+
+public class Rendez_Vous implements Serializable {
 
     String NomFourniseur;
     String Jour;
@@ -9,6 +11,7 @@ public class Rendez_Vous {
     String NomService;
     Integer IdServic;
     Integer IdRendez_vous;
+
 
     public Rendez_Vous() {;
     }

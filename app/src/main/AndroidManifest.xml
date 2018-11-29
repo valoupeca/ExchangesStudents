@@ -32,7 +32,8 @@
         <activity android:name=".Ajout_disponibilite" />
         <activity android:name=".Edit_disponibilite" />
         <activity android:name=".Sign_in_utilisateur" />
-        <activity android:name=".Search_Disponibilite"></activity>
+        <activity android:name=".Search_Disponibilite" />
+        <activity android:name=".NoteRdv"></activity>
     </application>
 
 </manifest>
