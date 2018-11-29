@@ -11,9 +11,11 @@ public class Rendez_Vous implements Serializable {
     String NomService;
     Integer IdServic;
     Integer IdRendez_vous;
+    String Commentaire;
+    Double Note_user;
 
 
-    public Rendez_Vous() {;
+    public Rendez_Vous() {
     }
 
     public String getNomFourniseur() {
@@ -72,11 +74,28 @@ public class Rendez_Vous implements Serializable {
         IdRendez_vous = idRendez_vous;
     }
 
+    public String getCommentaire() {
+        return Commentaire;
+    }
+
+    public void setCommentaire(String commentaire) {
+        Commentaire = commentaire;
+    }
+
+    public Double getNote_user() {
+        return Note_user;
+    }
+
+    public void setNote_user(Double note_user) {
+        Note_user = note_user;
+    }
+
     @Override
     public String toString() {
         return "Nom du fournissuer='" + NomFourniseur + '\'' +
                 "Nom du service='" + NomService + '\'' +
                 ", jour='" + Jour + '\'' +
-                "heure='" + Heure + '\'' ;
+                "heure='" + Heure + '\'' +
+                "Votre Notre ='" + Note_user + '\'';
     }
 }

@@ -53,6 +53,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String COLUMN_ID_USER = "id_user";
     public static final String COLUMN_DISPONIBILITE = "id_disponibilite";
     public static final String COLUMN_COMS = "commentaire";
+    public static final String COLUMN_NOTE_USER= "note_user";
 
 
 
@@ -120,6 +121,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 + COLUMN_RDV_ID + " INTEGER PRIMARY KEY,"
                 + COLUMN_ID_USER + " INTEGER,"
                 + COLUMN_DISPONIBILITE + " INTEGER,"
+                + COLUMN_NOTE_USER + " DOUBLE,"
                 + COLUMN_COMS + " TEXT,"
                 + " FOREIGN KEY (" + COLUMN_ID_USER + ") REFERENCES " + TABLE_USERS + "(" + COLUMN_ID + ")," +
                 " FOREIGN KEY (" + COLUMN_DISPONIBILITE + ") REFERENCES " + TABLE_SERVICE_HORAIRE + "(" + COLUMN_SERVICES_HORAIRES_ID + ")" +
@@ -714,6 +716,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 + SERVICE_USERNAME +","
                 + COLUMN_JOUR +","
                 + COLUMN_HEURE +","
+                + COLUMN_NOTE_USER +","
                 + COLUMN_SERVICES_HORAIRES_ID +","
                 + COLUMN_USERNAME +","
                 + SERVICE_ID
@@ -755,7 +758,8 @@ public class DBHelper extends SQLiteOpenHelper {
                                 rdv.setIdServic(Integer.parseInt(cursor2.getString(cursor2.getColumnIndex(SERVICE_ID))));
                                 rdv.setNomFourniseur(cursor2.getString(cursor2.getColumnIndex(COLUMN_USERNAME)));
                                 rdv.setNomService(cursor2.getString(cursor2.getColumnIndex(SERVICE_USERNAME)));
-
+                                rdv.setCommentaire(cursor2.getString(cursor2.getColumnIndex(COLUMN_COMS)));
+                                rdv.setNote_user(cursor2.getDouble(cursor2.getColumnIndex(COLUMN_NOTE_USER)));
 
                                 service_horaire.put(cmpt, rdv);
                                 cmpt++;
@@ -896,7 +900,7 @@ public class DBHelper extends SQLiteOpenHelper {
         return result;
     }
 
-    public void ajout_RDV(int id_user,int id_dispo, int id_rdv, String commentaire){
+    public void ajout_RDV(int id_user,int id_dispo, int id_rdv, String commentaire,double note){
 
 
         SQLiteDatabase db = getWritableDatabase();
@@ -906,6 +910,7 @@ public class DBHelper extends SQLiteOpenHelper {
             values.put(COLUMN_DISPONIBILITE, id_dispo);
             values.put(COLUMN_ID_USER, id_user);
             values.put(COLUMN_COMS, commentaire);
+            values.put(COLUMN_NOTE_USER,note);
 
 
 

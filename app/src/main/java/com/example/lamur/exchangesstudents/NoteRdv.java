@@ -50,7 +50,7 @@ public class NoteRdv extends AppCompatActivity {
             int nb_vote = dbhelper.nombre_vote_disponibilite(rdv.getIdDispo());
             nb_vote = nb_vote + 1;
             dbhelper.addOrUpdateDisponibilite(rdv.getIdServic(), rdv.getHeure(), rdv.getJour(), user.get_id(), rdv.getIdDispo(),Integer.parseInt(note.getText().toString()),nb_vote);
-            dbhelper.ajout_RDV(user.get_id(),rdv.getIdDispo(),rdv.getIdRendez_vous(),commentaire.getText().toString());
+            dbhelper.ajout_RDV(user.get_id(),rdv.getIdDispo(),rdv.getIdRendez_vous(),commentaire.getText().toString(),Double.parseDouble(note.getText().toString()));
 
         }
     }

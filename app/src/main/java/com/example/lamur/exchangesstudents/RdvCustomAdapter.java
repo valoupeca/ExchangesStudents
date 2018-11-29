@@ -64,7 +64,7 @@ public class RdvCustomAdapter extends BaseAdapter {
         nom_four.setText(currentItem.getNomFourniseur());
         nom_service.setText(currentItem.getNomService());
         date.setText(currentItem.getJour()+ "  " + currentItem.getHeure());
-        commente.setText(currentItem.getIdDispo());
+        commente.setText(currentItem.getCommentaire());
 
 
         // returns the view for the current row
