@@ -15,8 +15,9 @@ public class Sign_up extends AppCompatActivity {
     EditText username;
     EditText password;
     DBHelper dbhelper = DBHelper.getInstance(this);
-    Integer cle =5;
-    String alphabet1 = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWzXYZ";
+    static Integer cle[] = {1,2,3,5,4,7};
+    static String alphabet1 = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWzXYZ1234567890&é'-è_çà)(=/*-+²";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,77 +82,74 @@ public class Sign_up extends AppCompatActivity {
 
     }
 
-    public String cryptage(String mdp){
-
-
-
+    public static String cryptage(String mdp){
         int a = mdp.length();
+        int b = alphabet1.length();
         char[] tab = new char[a];
-        char[] alpha = new char[a];
-
-        for(int i = 0; i < a;i++){
-            alpha[i] = mdp.charAt(i);
+        char[] alpha = new char[b];
+        for(int i = 0; i < b;i++){
+            alpha[i] = alphabet1.charAt(i);
         }
-
         for(int i = 0; i < a;i++){
             tab[i] = mdp.charAt(i);
         }
 
-
+        int k=0;
+        int j=0;
         for(int i=0;i<mdp.length(); i++){
-            int j=0;
+
             while(!(tab[i]==alpha[j])){
                 j++;
             }
-
-            if (j+cle>alphabet1.length()){
-                tab[i]=alpha[j+cle-alphabet1.length()];
+            if ((j+cle[k])>=alphabet1.length()){
+                tab[i]=alpha[j+cle[k]-alphabet1.length()];
             }
             else{
-                tab[i]=alpha[j+cle];
+                tab[i]=alpha[j+cle[k]];
             }
-
+            j=0;
+            k=+1;
+            if(k>cle.length) {
+                k=0;
+            }
         }
-
         String test = new String(tab);
         return test;
-
     }
 
 
-    public String decryptage(String mdp){
-
+    public static String decryptage(String mdp){
         int a = mdp.length();
+        int b = alphabet1.length();
         char[] tab = new char[a];
-        char[] alpha = new char[a];
-
-        for(int i = 0; i < a;i++){
-            alpha[i] = mdp.charAt(i);
+        char[] alpha = new char[b];
+        for(int i = 0; i < b;i++){
+            alpha[i] = alphabet1.charAt(i);
         }
-
         for(int i = 0; i < a;i++){
             tab[i] = mdp.charAt(i);
         }
 
-
+        int k=0;
         for(int i=0;i<mdp.length(); i++){
             int j=0;
             while(!(tab[i]==alpha[j])){
                 j++;
             }
-
-            if (j+cle<0){
-                tab[i]=alpha[j-cle+alphabet1.length()];
+            if (j-cle[k]<0){
+                tab[i]=alpha[j-cle[k]+alphabet1.length()];
             }
             else{
-                tab[i]=alpha[j-cle];
+                tab[i]=alpha[j-cle[k]];
             }
 
+            k=+1;
+            if(k>cle.length) {
+                k=0;
+            }
         }
-
         String test = new String(tab);
         return test;
-
     }
 
 }

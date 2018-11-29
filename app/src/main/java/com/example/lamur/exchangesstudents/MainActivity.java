@@ -15,6 +15,9 @@ public class MainActivity extends AppCompatActivity {
     DBHelper dbhelper;
     EditText username;
     EditText password;
+    static Integer cle[] = {1,2,3,5,4,7};
+    static String alphabet1 = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWzXYZ1234567890&é'-è_çà)(=/*-+²";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +37,76 @@ public class MainActivity extends AppCompatActivity {
         Intent inscription_page = new Intent(this, Sign_up.class);
 
         startActivity(inscription_page);
+    }
+
+    public static String cryptage(String mdp){
+        int a = mdp.length();
+        int b = alphabet1.length();
+        char[] tab = new char[a];
+        char[] alpha = new char[b];
+        for(int i = 0; i < b;i++){
+            alpha[i] = alphabet1.charAt(i);
+        }
+        for(int i = 0; i < a;i++){
+            tab[i] = mdp.charAt(i);
+        }
+
+        int k=0;
+        int j=0;
+        for(int i=0;i<mdp.length(); i++){
+
+            while(!(tab[i]==alpha[j])){
+                j++;
+            }
+            if ((j+cle[k])>=alphabet1.length()){
+                tab[i]=alpha[j+cle[k]-alphabet1.length()];
+            }
+            else{
+                tab[i]=alpha[j+cle[k]];
+            }
+            j=0;
+            k=+1;
+            if(k>cle.length) {
+                k=0;
+            }
+        }
+        String test = new String(tab);
+        return test;
+    }
+
+
+    public static String decryptage(String mdp){
+        int a = mdp.length();
+        int b = alphabet1.length();
+        char[] tab = new char[a];
+        char[] alpha = new char[b];
+        for(int i = 0; i < b;i++){
+            alpha[i] = alphabet1.charAt(i);
+        }
+        for(int i = 0; i < a;i++){
+            tab[i] = mdp.charAt(i);
+        }
+
+        int k=0;
+        for(int i=0;i<mdp.length(); i++){
+            int j=0;
+            while(!(tab[i]==alpha[j])){
+                j++;
+            }
+            if (j-cle[k]<0){
+                tab[i]=alpha[j-cle[k]+alphabet1.length()];
+            }
+            else{
+                tab[i]=alpha[j-cle[k]];
+            }
+
+            k=+1;
+            if(k>cle.length) {
+                k=0;
+            }
+        }
+        String test = new String(tab);
+        return test;
     }
 
 
