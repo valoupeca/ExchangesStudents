@@ -796,7 +796,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     }
 
-    public void addOrUpdateDisponibilite(int service_id, String heure, String jour, int four_id, int id_dispo) {
+    public void addOrUpdateDisponibilite(int service_id, String heure, String jour, int four_id, int id_dispo, int nbr_notes, int note) {
 
         SQLiteDatabase db = getWritableDatabase();
         db.beginTransaction();
@@ -806,8 +806,8 @@ public class DBHelper extends SQLiteOpenHelper {
             values.put(COLUMN_HEURE, heure);
             values.put(COLUMN_FOURNISSEUR_ID, four_id);
             values.put(SERVICE_CHOSE_ID, service_id);
-            values.put(COLUMN_NOTE,-1);
-            values.put(COLUMN_NBVOTE,0);
+            values.put(COLUMN_NOTE,note);
+            values.put(COLUMN_NBVOTE,nbr_notes);
 
             int rows = db.update(TABLE_SERVICE_HORAIRE, values, COLUMN_SERVICES_HORAIRES_ID + "= ?", new String[]{String.valueOf(id_dispo)});
 
@@ -896,7 +896,7 @@ public class DBHelper extends SQLiteOpenHelper {
         return result;
     }
 
-    public void ajout_RDV(int id_user,int id_dispo, int id_rdv){
+    public void ajout_RDV(int id_user,int id_dispo, int id_rdv, String commentaire){
 
 
         SQLiteDatabase db = getWritableDatabase();
@@ -905,6 +905,8 @@ public class DBHelper extends SQLiteOpenHelper {
             ContentValues values = new ContentValues();
             values.put(COLUMN_DISPONIBILITE, id_dispo);
             values.put(COLUMN_ID_USER, id_user);
+            values.put(COLUMN_COMS, commentaire);
+
 
 
             int rows = db.update(TABLE_SERVICE_RDV, values, COLUMN_RDV_ID + "= ?", new String[]{String.valueOf(id_rdv)});
@@ -936,6 +938,41 @@ public class DBHelper extends SQLiteOpenHelper {
 
 
     }
+
+
+    public int nombre_vote_disponibilite(int id_dispo){
+
+
+        SQLiteDatabase db = getWritableDatabase();
+
+        String query = "SELECT "
+                + COLUMN_NBVOTE
+                + "* FROM "
+                + TABLE_SERVICE_HORAIRE
+                + " WHERE "
+                + COLUMN_SERVICES_HORAIRES_ID
+                + " = \""
+                + id_dispo
+                + "\""
+                ;
+
+
+        Cursor cursor = db.rawQuery(query, null);
+        int nbr_vote=0;
+
+        if (cursor.moveToFirst()) {
+
+            nbr_vote = Integer.parseInt(cursor.getString(cursor.getColumnIndex(COLUMN_NBVOTE)));
+            cursor.close();
+        }
+        db.close();
+        return nbr_vote;
+    }
+
+
+
+
+
 }
 
 
