@@ -19,7 +19,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     private static DBHelper sInstance;
 
-    private static final int DATABASE_VERSION = 15;
+    private static final int DATABASE_VERSION = 16;
     private static final String DATABASE_NAME = "Services.db";
     public static final String TABLE_USERS = "user";
     public static final String COLUMN_ID = "_id";
@@ -800,7 +800,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     }
 
-    public void addOrUpdateDisponibilite(int service_id, String heure, String jour, int four_id, int id_dispo, int nbr_notes, int note) {
+    public void addOrUpdateDisponibilite(int service_id, String heure, String jour, int four_id, int id_dispo, int nbr_notes, double note) {
 
         SQLiteDatabase db = getWritableDatabase();
         db.beginTransaction();
@@ -952,7 +952,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
         String query = "SELECT "
                 + COLUMN_NBVOTE
-                + "* FROM "
+                + " FROM "
                 + TABLE_SERVICE_HORAIRE
                 + " WHERE "
                 + COLUMN_SERVICES_HORAIRES_ID

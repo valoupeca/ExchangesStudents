@@ -153,7 +153,7 @@ public class Ajout_disponibilite extends AppCompatActivity {
                         int _pos_jour = position / 12;
                         _jour = jours.get(_pos_jour);
                         _horaire = heures.get(nb);
-                        dbhelper.addOrUpdateDisponibilite(_services_selected.getId(), _horaire, _jour, user.get_id(), -1);
+                        dbhelper.addOrUpdateDisponibilite(_services_selected.getId(), _horaire, _jour, user.get_id(), -1,0,-1);
 
                     }
             }
