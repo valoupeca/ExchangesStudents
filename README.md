@@ -3,6 +3,13 @@ Projet 2505
 
 https://github.com/valoupeca/ExchangesStudents.git
 
+#Starts Here
+Build Status
+[![Build
+Status](https://circleci.com/gh/valoupeca/ExchangesStudents.png?branch=master)](https://circleci.com/gh/valoupeca/ExchangesStudents)
+#Ends Here
+
+
 APPLICATION DE GESTIONS DE SERVICES :
 
 Pour le moment  :
