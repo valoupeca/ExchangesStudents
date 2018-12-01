@@ -13,7 +13,7 @@ public class Proprietaire extends User implements Serializable {
         super(_id, _username, mdp);
     }
 
-    public Proprietaire(String _username, String mdp) {
-        super(_username, mdp);
+    public Proprietaire(String _username) {
+        super(_username);
     }
 }

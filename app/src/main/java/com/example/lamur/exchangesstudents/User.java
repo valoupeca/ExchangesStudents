@@ -13,6 +13,8 @@ public abstract class User implements Serializable {
     private boolean license;
     private String company;
     private String phone;
+    static Integer cle[] = {1,2,3,5,4,7};
+    static String alphabet1 = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWzXYZ1234567890&é'-è_çà)(=/*-+²";
 
 
 
@@ -58,9 +60,8 @@ public abstract class User implements Serializable {
             this.mdp = mdp;
         }
 
-    public User(String _username, String mdp) {
+    public User(String _username) {
         this._username = _username;
-        this.mdp = mdp;
     }
 
     public int get_id() {
@@ -134,4 +135,75 @@ public abstract class User implements Serializable {
     public void setPhone(String phone) {
         this.phone = phone;
     }
+
+    public static String cryptage(String mdp){
+        int a = mdp.length();
+        int b = alphabet1.length();
+        char[] tab = new char[a];
+        char[] alpha = new char[b];
+        for(int i = 0; i < b;i++){
+            alpha[i] = alphabet1.charAt(i);
+        }
+        for(int i = 0; i < a;i++){
+            tab[i] = mdp.charAt(i);
+        }
+
+        int k=0;
+        int j=0;
+        for(int i=0;i<mdp.length(); i++){
+
+            while(!(tab[i]==alpha[j])){
+                j++;
+            }
+            if ((j+cle[k])>=alphabet1.length()){
+                tab[i]=alpha[j+cle[k]-alphabet1.length()];
+            }
+            else{
+                tab[i]=alpha[j+cle[k]];
+            }
+            j=0;
+            k=+1;
+            if(k>cle.length) {
+                k=0;
+            }
+        }
+        String test = new String(tab);
+        return test;
+    }
+
+
+    public static String decryptage(String mdp){
+        int a = mdp.length();
+        int b = alphabet1.length();
+        char[] tab = new char[a];
+        char[] alpha = new char[b];
+        for(int i = 0; i < b;i++){
+            alpha[i] = alphabet1.charAt(i);
+        }
+        for(int i = 0; i < a;i++){
+            tab[i] = mdp.charAt(i);
+        }
+
+        int k=0;
+        for(int i=0;i<mdp.length(); i++){
+            int j=0;
+            while(!(tab[i]==alpha[j])){
+                j++;
+            }
+            if (j-cle[k]<0){
+                tab[i]=alpha[j-cle[k]+alphabet1.length()];
+            }
+            else{
+                tab[i]=alpha[j-cle[k]];
+            }
+
+            k=+1;
+            if(k>cle.length) {
+                k=0;
+            }
+        }
+        String test = new String(tab);
+        return test;
+    }
+
 }

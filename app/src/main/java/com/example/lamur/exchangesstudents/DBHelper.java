@@ -208,14 +208,15 @@ public class DBHelper extends SQLiteOpenHelper {
 
     public boolean isReal(String name, String mdp) {
         SQLiteDatabase db = getReadableDatabase();
-
+        Fournisseur frn = new Fournisseur();
+        String mdp_cryp = frn.cryptage(mdp);
         String IsReel =
                 String.format("SELECT * FROM %s WHERE %s = '%s' AND %s = '%s'",
                         TABLE_USERS,
                         COLUMN_USERNAME,
                         name,
                         COLUMN_MDP,
-                        mdp);
+                        mdp_cryp);
         Cursor cursor = db.rawQuery(IsReel, null);
 
         if (cursor.moveToFirst()) {
@@ -238,6 +239,9 @@ public class DBHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = getReadableDatabase();
 
         String role = "";
+        Fournisseur frn = new Fournisseur();
+
+        String mdp_cryp = frn.cryptage(mdp);
 
 
         String infoUser =
@@ -246,7 +250,7 @@ public class DBHelper extends SQLiteOpenHelper {
                         COLUMN_USERNAME,
                         name,
                         COLUMN_MDP,
-                        mdp);
+                        mdp_cryp);
 
 
         Cursor cursor = db.rawQuery(infoUser, null);
@@ -276,7 +280,7 @@ public class DBHelper extends SQLiteOpenHelper {
         String role = "";
 
         Fournisseur user = new Fournisseur();
-
+        String mdp_cryp = user.cryptage(mdp);
 
         String infoUser =
                 String.format("SELECT * FROM %s WHERE %s = '%s' AND %s = '%s'",
@@ -284,7 +288,7 @@ public class DBHelper extends SQLiteOpenHelper {
                         COLUMN_USERNAME,
                         name,
                         COLUMN_MDP,
-                        mdp);
+                        mdp_cryp);
 
 
         Cursor cursor = db.rawQuery(infoUser, null);
@@ -324,8 +328,9 @@ public class DBHelper extends SQLiteOpenHelper {
 
         String role = "";
 
-        Proprietaire user = new Proprietaire();
 
+        Proprietaire user = new Proprietaire();
+        String mdp_cryp = user.cryptage(mdp);
 
         String infoUser =
                 String.format("SELECT * FROM %s WHERE %s = '%s' AND %s = '%s'",
@@ -333,7 +338,7 @@ public class DBHelper extends SQLiteOpenHelper {
                         COLUMN_USERNAME,
                         name,
                         COLUMN_MDP,
-                        mdp);
+                        mdp_cryp);
 
 
         Cursor cursor = db.rawQuery(infoUser, null);

@@ -16,8 +16,8 @@ public class Fournisseur extends User implements Serializable {
     }
 
 
-    public Fournisseur(String _username, String mdp) {
-        super(_username, mdp);
+    public Fournisseur(String _username) {
+        super(_username);
     }
 
     public Fournisseur(Date disponibilité, ArrayList<Services> _services) {
