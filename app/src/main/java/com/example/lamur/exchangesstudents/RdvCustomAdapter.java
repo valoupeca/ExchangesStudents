@@ -59,12 +59,21 @@ public class RdvCustomAdapter extends BaseAdapter {
         // get the TextView for item name and item description
         TextView commente = (TextView)
                 convertView.findViewById(R.id.commente);
+        TextView note = (TextView)
+                convertView.findViewById(R.id.note);
         //sets the text for item name and item description from the current item object
         textViewIdservice.setText(String.valueOf(currentItem.getIdRendez_vous()));
-        nom_four.setText(currentItem.getNomFourniseur());
-        nom_service.setText(currentItem.getNomService());
-        date.setText(currentItem.getJour()+ "  " + currentItem.getHeure());
-        commente.setText(currentItem.getCommentaire());
+        nom_four.setText(String.valueOf(currentItem.getServ().getName_four()));
+        nom_service.setText(currentItem.getServ().getNom_service());
+        date.setText(currentItem.getServ().getJour()+ "  " + currentItem.getServ().getHeure());
+        commente.setText("Commentaire :" +"\n"+ currentItem.getCommentaire());
+        if(currentItem.getNote_user() == -1)
+        {
+            note.setText("Vous n'avez pas encore mis de note" + "\n" + "Moyenne Globale : "  + currentItem.getServ().getMoyenne());
+        }
+        else {
+            note.setText(String.valueOf("Note : " + "\n" + currentItem.getNote_user()) +  "\n" + "Moyenne Globale : "  + currentItem.getServ().getMoyenne());
+        }
 
 
         // returns the view for the current row

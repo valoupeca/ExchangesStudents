@@ -8,6 +8,7 @@ public class Service_Disponibilite implements Serializable {
     private String jour;
     private int id_service;
     private int id_fournisseur;
+    private  String name_four;
     private  String nom_service;
     private double moyenne;
     private long nb_vote;
@@ -109,6 +110,14 @@ public class Service_Disponibilite implements Serializable {
 
     public void setNb_vote(long nb_vote) {
         this.nb_vote = nb_vote;
+    }
+
+    public String getName_four() {
+        return name_four;
+    }
+
+    public void setName_four(String name_four) {
+        this.name_four = name_four;
     }
 
     @Override

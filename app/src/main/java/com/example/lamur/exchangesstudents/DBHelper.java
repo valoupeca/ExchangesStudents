@@ -1,5 +1,6 @@
 package com.example.lamur.exchangesstudents;
 
+import android.app.Service;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
@@ -19,10 +20,10 @@ public class DBHelper extends SQLiteOpenHelper {
 
     private static DBHelper sInstance;
 
-    private static final int DATABASE_VERSION = 16;
+    private static final int DATABASE_VERSION = 17;
     private static final String DATABASE_NAME = "Services.db";
     public static final String TABLE_USERS = "user";
-    public static final String COLUMN_ID = "_id";
+    public static final String COLUMN_ID = "_id_user";
     public static final String COLUMN_USERNAME = "name";
     public static final String COLUMN_MDP = "mdp";
     public static final String COLUMN_ROLE = "role";
@@ -35,7 +36,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String COLUMN_LICENSE = "license";
 
     public static final String TABLE_SERVICES = "services";
-    public static final String SERVICE_ID = "_id";
+    public static final String SERVICE_ID = "_id_service";
     public static final String SERVICE_USERNAME = "type_service";
     public static final String TAUX_HORAIRE = "taux_horaires";
 
@@ -43,13 +44,13 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String COLUMN_JOUR = "jour";
     public static final String COLUMN_HEURE = "heure";
     public static final String COLUMN_SERVICES_HORAIRES_ID = "id";
-    public static final String SERVICE_CHOSE_ID = "id_service";
+    public static final String SERVICE_CHOSE_ID = "id_service_dispo";
     public static final String COLUMN_FOURNISSEUR_ID = "id_fournisseur";
     public static final String COLUMN_NOTE= "note";
     public static final String COLUMN_NBVOTE= "nbvote";
 
     public static final String TABLE_SERVICE_RDV = "Rendez_vous";
-    public static final String COLUMN_RDV_ID = "id";
+    public static final String COLUMN_RDV_ID = "id_rdv";
     public static final String COLUMN_ID_USER = "id_user";
     public static final String COLUMN_DISPONIBILITE = "id_disponibilite";
     public static final String COLUMN_COMS = "commentaire";
@@ -523,7 +524,7 @@ public class DBHelper extends SQLiteOpenHelper {
             int rows = db.update(TABLE_SERVICES, values, SERVICE_ID + "= ?", new String[]{String.valueOf(service.getId())});
 
             if (rows == 1) {
-                // Get the primary key of the user we just updated
+                // Get the primary key of the service we just updated
                 String usersSelectQuery = String.format("SELECT %s FROM %s WHERE %s = ?",
                         SERVICE_USERNAME, TABLE_SERVICES, SERVICE_ID);
                 Cursor cursor = db.rawQuery(usersSelectQuery, new String[]{String.valueOf(service.getId())});
@@ -638,6 +639,8 @@ public class DBHelper extends SQLiteOpenHelper {
                 + SERVICE_USERNAME +","
                 + COLUMN_JOUR +","
                 + COLUMN_HEURE +","
+                + COLUMN_NOTE + ","
+                + COLUMN_NBVOTE + ","
                 + COLUMN_SERVICES_HORAIRES_ID +","
                 + COLUMN_FOURNISSEUR_ID +","
                 + SERVICE_ID
@@ -670,6 +673,8 @@ public class DBHelper extends SQLiteOpenHelper {
                     _ns.setId_service(Integer.parseInt(cursor.getString(cursor.getColumnIndex(SERVICE_ID))));
                     _ns.set_id(Integer.parseInt(cursor.getString(cursor.getColumnIndex(COLUMN_SERVICES_HORAIRES_ID))));
                     _ns.setId_fournisseur(Integer.parseInt(cursor.getString(cursor.getColumnIndex(COLUMN_FOURNISSEUR_ID))));
+                    _ns.setMoyenne(Double.parseDouble(cursor.getString(cursor.getColumnIndex(COLUMN_NOTE))));
+                    _ns.setNb_vote(Long.parseLong(cursor.getString(cursor.getColumnIndex(COLUMN_NBVOTE))));
 
                     service_horaire.put(cmpt, _ns);
                     cmpt++;
@@ -695,15 +700,18 @@ public class DBHelper extends SQLiteOpenHelper {
     public HashMap<Integer, Rendez_Vous> ServicesByUser(int id_user){
 
         SQLiteDatabase db = getWritableDatabase();
-
+        String comm = "";
         HashMap<Integer, Rendez_Vous> service_horaire = new HashMap<>();
 
         int id = 0;
 
-
+        int id_rdv = 0;
 
         String query1 = "SELECT "
-                + COLUMN_SERVICES_HORAIRES_ID
+                + COLUMN_DISPONIBILITE +","
+                + COLUMN_NOTE_USER +","
+                + COLUMN_COMS +","
+                + COLUMN_RDV_ID
                 + " FROM "
                 + TABLE_SERVICE_RDV
                 + " WHERE "
@@ -712,29 +720,6 @@ public class DBHelper extends SQLiteOpenHelper {
                 + id_user
                 + "\"";
 
-        String query2 = "SELECT "
-                + SERVICE_USERNAME +","
-                + COLUMN_JOUR +","
-                + COLUMN_HEURE +","
-                + COLUMN_NOTE_USER +","
-                + COLUMN_SERVICES_HORAIRES_ID +","
-                + COLUMN_USERNAME +","
-                + SERVICE_ID
-                + " FROM "
-                + TABLE_SERVICE_HORAIRE
-                + " INNER JOIN "
-                + TABLE_SERVICES
-                + " ON "
-                + SERVICE_ID
-                + " = "
-                + SERVICE_CHOSE_ID
-                + " INNER JOIN "
-                + TABLE_USERS
-                + " ON "
-                + COLUMN_ID
-                + " = \""
-                + id
-                + "\"";
 
         int cmpt = 0;
 
@@ -742,24 +727,64 @@ public class DBHelper extends SQLiteOpenHelper {
         try {
             if (cursor.moveToFirst()) {
                 do {
+                    Rendez_Vous rdv = new Rendez_Vous();
 
-                    id = (Integer.parseInt(cursor.getString(cursor.getColumnIndex(COLUMN_SERVICES_HORAIRES_ID))));
+                    id = (Integer.parseInt(cursor.getString(cursor.getColumnIndex(COLUMN_DISPONIBILITE))));
+                    id_rdv = (Integer.parseInt(cursor.getString(cursor.getColumnIndex(COLUMN_RDV_ID))));
+                    comm = cursor.getString(cursor.getColumnIndex(COLUMN_COMS));
 
+                    rdv.setIdDispo(id);
+                    rdv.setNote_user(Double.parseDouble(cursor.getString(cursor.getColumnIndex(COLUMN_NOTE_USER))));
+                    rdv.setIdRendez_vous(id_rdv);
+                    rdv.setCommentaire(comm);
+
+                    String query2 = "SELECT "
+                            + SERVICE_USERNAME +","
+                            + COLUMN_USERNAME  +","
+                            + COLUMN_JOUR +","
+                            + COLUMN_HEURE +","
+                            + COLUMN_NOTE+ ","
+                            + COLUMN_FOURNISSEUR_ID +","
+                            + COLUMN_SERVICES_HORAIRES_ID +","
+                            + "f."+COLUMN_USERNAME +","
+                            + SERVICE_ID
+                            + " FROM "
+                            + TABLE_SERVICE_HORAIRE
+                            + " INNER JOIN "
+                            + TABLE_SERVICES
+                            + " ON "
+                            + SERVICE_ID
+                            + " = "
+                            + SERVICE_CHOSE_ID
+                            + " INNER JOIN "
+                            + TABLE_USERS + " AS " +"f"
+                            + " ON "
+                            + COLUMN_ID
+                            + " = "
+                            + COLUMN_FOURNISSEUR_ID
+                            + " WHERE "
+                            + COLUMN_SERVICES_HORAIRES_ID
+                            + " = \""
+                            + id +"\"";
 
                     Cursor cursor2 = db.rawQuery(query2, null);
                     try {
                         if (cursor2.moveToFirst()) {
                             do {
-                                Rendez_Vous rdv = new Rendez_Vous();
 
-                                rdv.setHeure(cursor2.getString(cursor2.getColumnIndex(COLUMN_HEURE)));
-                                rdv.setJour(cursor2.getString(cursor2.getColumnIndex(COLUMN_JOUR)));
-                                rdv.setIdDispo(Integer.parseInt(cursor2.getString(cursor2.getColumnIndex(COLUMN_SERVICES_HORAIRES_ID))));
-                                rdv.setIdServic(Integer.parseInt(cursor2.getString(cursor2.getColumnIndex(SERVICE_ID))));
-                                rdv.setNomFourniseur(cursor2.getString(cursor2.getColumnIndex(COLUMN_USERNAME)));
-                                rdv.setNomService(cursor2.getString(cursor2.getColumnIndex(SERVICE_USERNAME)));
-                                rdv.setCommentaire(cursor2.getString(cursor2.getColumnIndex(COLUMN_COMS)));
-                                rdv.setNote_user(cursor2.getDouble(cursor2.getColumnIndex(COLUMN_NOTE_USER)));
+                                Service_Disponibilite _serv = new Service_Disponibilite();
+
+                                _serv.setHeure(cursor2.getString(cursor2.getColumnIndex(COLUMN_HEURE)));
+
+                                _serv.setJour(cursor2.getString(cursor2.getColumnIndex(COLUMN_JOUR)));
+
+                                _serv.set_id(Integer.parseInt(cursor2.getString(cursor2.getColumnIndex(SERVICE_ID))));
+                                _serv.setName_four((cursor2.getString(cursor2.getColumnIndex(COLUMN_USERNAME))));
+                                _serv.setNom_service(cursor2.getString(cursor2.getColumnIndex(SERVICE_USERNAME)));
+
+                                _serv.setMoyenne(cursor2.getDouble(cursor2.getColumnIndex(COLUMN_NOTE)));
+
+                                rdv.setServ(_serv);
 
                                 service_horaire.put(cmpt, rdv);
                                 cmpt++;
@@ -881,6 +906,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 + " = \""
                 + id_user
                 + "\""
+                + " AND "
                 + COLUMN_DISPONIBILITE
                 + " = \""
                 + id_dispo
@@ -917,9 +943,9 @@ public class DBHelper extends SQLiteOpenHelper {
             int rows = db.update(TABLE_SERVICE_RDV, values, COLUMN_RDV_ID + "= ?", new String[]{String.valueOf(id_rdv)});
 
             if (rows == 1) {
-                // Get the primary key of the user we just updated
+                // Get the primary key of the  we just updated
                 String usersSelectQuery = String.format("SELECT %s FROM %s WHERE %s = ?",
-                        COLUMN_DISPONIBILITE, TABLE_SERVICE_RDV, TABLE_SERVICE_RDV);
+                        COLUMN_ID_USER, TABLE_SERVICE_RDV, COLUMN_RDV_ID);
                 Cursor cursor = db.rawQuery(usersSelectQuery, new String[]{String.valueOf(id_rdv)});
                 try {
                     if (cursor.moveToFirst()) {
@@ -975,7 +1001,34 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
 
+    public double moyenne_dispo(int id_dispo){
 
+
+        SQLiteDatabase db = getWritableDatabase();
+
+        String query = "SELECT "
+                + COLUMN_NOTE
+                + " FROM "
+                + TABLE_SERVICE_HORAIRE
+                + " WHERE "
+                + COLUMN_SERVICES_HORAIRES_ID
+                + " = \""
+                + id_dispo
+                + "\""
+                ;
+
+
+        Cursor cursor = db.rawQuery(query, null);
+        double moyenne=0.0;
+
+        if (cursor.moveToFirst()) {
+
+            moyenne = cursor.getDouble(0);
+            cursor.close();
+        }
+        db.close();
+        return moyenne;
+    }
 
 
 }

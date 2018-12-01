@@ -4,42 +4,34 @@ import java.io.Serializable;
 
 public class Rendez_Vous implements Serializable {
 
-    String NomFourniseur;
-    String Jour;
-    String Heure;
+
     Integer IdDispo;
-    String NomService;
-    Integer IdServic;
     Integer IdRendez_vous;
     String Commentaire;
     Double Note_user;
+    Service_Disponibilite serv;
+    Integer id_user;
+
+
 
 
     public Rendez_Vous() {
     }
 
-    public String getNomFourniseur() {
-        return NomFourniseur;
+    public Service_Disponibilite getServ() {
+        return serv;
     }
 
-    public void setNomFourniseur(String nomFourniseur) {
-        NomFourniseur = nomFourniseur;
+    public void setServ(Service_Disponibilite serv) {
+        this.serv = serv;
     }
 
-    public String getJour() {
-        return Jour;
+    public Integer getId_user() {
+        return id_user;
     }
 
-    public void setJour(String jour) {
-        Jour = jour;
-    }
-
-    public String getHeure() {
-        return Heure;
-    }
-
-    public void setHeure(String heure) {
-        Heure = heure;
+    public void setId_user(Integer id_user) {
+        this.id_user = id_user;
     }
 
     public Integer getIdDispo() {
@@ -50,25 +42,14 @@ public class Rendez_Vous implements Serializable {
         IdDispo = idDispo;
     }
 
-    public String getNomService() {
-        return NomService;
-    }
 
-    public void setNomService(String nomService) {
-        NomService = nomService;
-    }
 
-    public Integer getIdServic() {
-        return IdServic;
-    }
-
-    public void setIdServic(Integer idServic) {
-        IdServic = idServic;
-    }
 
     public Integer getIdRendez_vous() {
         return IdRendez_vous;
     }
+
+
 
     public void setIdRendez_vous(Integer idRendez_vous) {
         IdRendez_vous = idRendez_vous;
@@ -92,10 +73,10 @@ public class Rendez_Vous implements Serializable {
 
     @Override
     public String toString() {
-        return "Nom du fournissuer='" + NomFourniseur + '\'' +
-                "Nom du service='" + NomService + '\'' +
-                ", jour='" + Jour + '\'' +
-                "heure='" + Heure + '\'' +
+        return "Nom du fournissuer='" + serv.getId_fournisseur() + '\'' +
+                "Nom du service='" + serv.getNom_service() + '\'' +
+                ", jour='" + serv.getJour() + '\'' +
+                "heure='" + serv.getHeure() + '\'' +
                 "Votre Notre ='" + Note_user + '\'';
     }
 }

@@ -10,6 +10,8 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -201,7 +203,17 @@ public class Search_Disponibilite extends AppCompatActivity implements OnItemCli
 
     public void Ajout_rdv(View view)
     {
-        dbhelper.ajout_RDV(prop.get_id(),_serv_selected.get_id(),-1,"",-1);
+        if(_serv_selected.equals(null))
+        {
+
+        }
+        else
+        {
+            dbhelper.ajout_RDV(prop.get_id(),_serv_selected.get_id(),-1,"",-1);
+            Toast toast = Toast.makeText(getApplicationContext(), "Rendez-vous pris", Toast.LENGTH_SHORT);
+            finish();
+
+        }
 
     }
 }

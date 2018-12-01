@@ -11,6 +11,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -68,7 +69,6 @@ public class Sign_in_utilisateur extends AppCompatActivity {
 
             listOfValues = new ArrayList<>(values);
 
-            list = (ListView) findViewById(R.id.liste_service);
 
                        myCustomAdapter = new RdvCustomAdapter(Sign_in_utilisateur.this, listOfValues);
 
@@ -144,10 +144,60 @@ public class Sign_in_utilisateur extends AppCompatActivity {
 
     public void Note_Commente(View view)
     {
-        Intent add_service = new Intent(this, NoteRdv.class);
-        Bundle extras = new Bundle();
-        extras.putSerializable("info_user",user);
-        extras.putSerializable("info_rdv",rdv);
-        add_service.putExtras(extras);
+        if(rdv == (null)) {
+            Toast toast = Toast.makeText(getApplicationContext(), "Choisissez un rdv", Toast.LENGTH_SHORT);
+            toast.show();
+        }
+        else
+        {
+            Intent note_rdv = new Intent(this, NoteRdv.class);
+            Bundle extras = new Bundle();
+            extras.putSerializable("info_user", user);
+            extras.putSerializable("info_rdv", rdv);
+            note_rdv.putExtras(extras);
+            startActivity(note_rdv);
+        }
+    }
+
+    public void Delete_rdv(View view)
+    {
+        if(rdv == (null))
+        {
+            Toast toast = Toast.makeText(getApplicationContext(), "Choisissez un rdv", Toast.LENGTH_SHORT);
+            toast.show();
+        }
+        else
+        {
+            dbhelper.delete_Rdv(user.get_id(),rdv.getIdDispo());
+            Toast toast = Toast.makeText(getApplicationContext(), "Rdv Delete", Toast.LENGTH_SHORT);
+            toast.show();
+            HashMap<Integer,Rendez_Vous>  Listhash = new HashMap<>();
+            Listhash = dbhelper.ServicesByUser(user.get_id());
+
+            if(Listhash.isEmpty()) {
+
+
+                //Creating an ArrayList of values
+
+                ArrayList<Rendez_Vous> _new_list = new ArrayList<Rendez_Vous>();
+
+                myCustomAdapter.updateReceiptsList(_new_list);
+            }
+            else
+            {
+
+
+                Collection<Rendez_Vous> values = Listhash.values();
+
+                //Creating an ArrayList of values
+
+                ArrayList<Rendez_Vous> _new_list = new ArrayList<>(values);
+
+                myCustomAdapter.updateReceiptsList(_new_list);
+
+            }
+
+        }
+
     }
 }

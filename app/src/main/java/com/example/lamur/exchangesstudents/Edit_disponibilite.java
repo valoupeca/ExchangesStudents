@@ -126,7 +126,7 @@ import java.util.ArrayList;
                         int _pos_jour = position / 12;
                         _jour = jours.get(_pos_jour);
                         _horaire = heures.get(nb);
-                        dbhelper.addOrUpdateDisponibilite(_serv_passer.getId_service(), _horaire, _jour, _serv_passer.getId_fournisseur(), _serv_passer.get_id(), dbhelper.nombre_vote_disponibilite(_serv_passer.get_id()),_serv_passer.getMoyenne());
+                        dbhelper.addOrUpdateDisponibilite(_serv_passer.getId_service(), _horaire, _jour, _serv_passer.getId_fournisseur(), _serv_passer.get_id(),(int)_serv_passer.getNb_vote(),(int)_serv_passer.getMoyenne());
 
                     }
             }
