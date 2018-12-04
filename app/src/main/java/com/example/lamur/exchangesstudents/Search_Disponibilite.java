@@ -107,7 +107,7 @@ public class Search_Disponibilite extends AppCompatActivity implements OnItemCli
 
                 for(Service_Disponibilite service : lesDispo)
                 {
-                    if(service.getNom_service().contains(s))
+                    if(service.getNom_service().toUpperCase().contains(s.toString().toUpperCase()))
                     {
                         newList.add(service);
                     }
@@ -203,14 +203,16 @@ public class Search_Disponibilite extends AppCompatActivity implements OnItemCli
 
     public void Ajout_rdv(View view)
     {
-        if(_serv_selected.equals(null))
+        if(_serv_selected == (null))
         {
-
+            Toast toast = Toast.makeText(getApplicationContext(), "Choisissez un rdv", Toast.LENGTH_SHORT);
+            toast.show();
         }
         else
         {
             dbhelper.ajout_RDV(prop.get_id(),_serv_selected.get_id(),-1,"",-1);
             Toast toast = Toast.makeText(getApplicationContext(), "Rendez-vous pris", Toast.LENGTH_SHORT);
+            toast.show();
             finish();
 
         }

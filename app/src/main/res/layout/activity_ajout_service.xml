@@ -40,7 +40,6 @@
         android:ems="10"
         android:hint="Service"
         android:inputType="textPersonName"
-        android:text="Name"
         app:layout_constraintStart_toEndOf="@+id/message_nom"
         app:layout_constraintTop_toTopOf="@+id/message_nom" />
 

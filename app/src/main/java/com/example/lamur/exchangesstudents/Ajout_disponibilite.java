@@ -98,7 +98,7 @@ public class Ajout_disponibilite extends AppCompatActivity {
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,List_dispo );
         myListView = findViewById(R.id.agenda);
 
-        myListView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
+        myListView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
 
         search = (EditText) findViewById(R.id.search_id);
         myListView.setTextFilterEnabled(true);

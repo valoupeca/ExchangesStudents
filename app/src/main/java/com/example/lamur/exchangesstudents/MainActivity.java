@@ -56,7 +56,10 @@ public class MainActivity extends AppCompatActivity {
                     {
                         Intent welcome_page = new Intent(this, Sign_in_fournisseur.class);
                         Bundle extras = new Bundle();
-                        Fournisseur fournis = dbhelper.getFournisseur(username.getText().toString(), password.getText().toString());
+                        Fournisseur fournis = new Fournisseur();
+                        String mdp_crypt = fournis.cryptage(password.getText().toString());
+                        fournis = dbhelper.getFournisseur(username.getText().toString(),mdp_crypt);
+
                         extras.putSerializable("info_user",fournis );
                         extras.putString("role", role);
                         welcome_page.putExtras(extras);
@@ -66,7 +69,9 @@ public class MainActivity extends AppCompatActivity {
                     {
                         Intent welcome_page = new Intent(this, Sign_in_utilisateur.class);
                         Bundle extras = new Bundle();
-                        Proprietaire proprietaire = dbhelper.getProprietaire(username.getText().toString(), password.getText().toString());
+                        Proprietaire proprietaire = new Proprietaire();
+                        String mdp = proprietaire.cryptage(password.getText().toString());
+                        proprietaire = dbhelper.getProprietaire(username.getText().toString(), mdp);
                         extras.putSerializable("info_user",proprietaire );
                         extras.putString("role", role);
                         welcome_page.putExtras(extras);

@@ -1,6 +1,7 @@
 package com.example.lamur.exchangesstudents;
 
 import java.io.Serializable;
+import java.io.StringReader;
 
 public class Rendez_Vous implements Serializable {
 
@@ -77,6 +78,6 @@ public class Rendez_Vous implements Serializable {
                 "Nom du service='" + serv.getNom_service() + '\'' +
                 ", jour='" + serv.getJour() + '\'' +
                 "heure='" + serv.getHeure() + '\'' +
-                "Votre Notre ='" + Note_user + '\'';
+                "Votre Note ='" + String.valueOf(this.getNote_user()) + '\'';
     }
 }

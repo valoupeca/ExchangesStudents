@@ -67,12 +67,17 @@ public class RdvCustomAdapter extends BaseAdapter {
         nom_service.setText(currentItem.getServ().getNom_service());
         date.setText(currentItem.getServ().getJour()+ "  " + currentItem.getServ().getHeure());
         commente.setText("Commentaire :" +"\n"+ currentItem.getCommentaire());
-        if(currentItem.getNote_user() == -1)
+        if(currentItem.getNote_user() == -1 && currentItem.getServ().getMoyenne() == -1)
         {
-            note.setText("Vous n'avez pas encore mis de note" + "\n" + "Moyenne Globale : "  + currentItem.getServ().getMoyenne());
+            note.setText("Vous n'avez pas encore mis de note" + "\n" + "Moyenne Globale : "  + "Pas de note globale");
         }
-        else {
+        else if(currentItem.getNote_user() == -1) {
+            note.setText(String.valueOf("Vous n'avez pas encore mis de note"+ "\n" + "Moyenne Globale : "  + currentItem.getServ().getMoyenne()));
+        }
+        else
+        {
             note.setText(String.valueOf("Note : " + "\n" + currentItem.getNote_user()) +  "\n" + "Moyenne Globale : "  + currentItem.getServ().getMoyenne());
+
         }
 
 

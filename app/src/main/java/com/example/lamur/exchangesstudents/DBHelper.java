@@ -20,7 +20,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     private static DBHelper sInstance;
 
-    private static final int DATABASE_VERSION = 17;
+    private static final int DATABASE_VERSION = 21;
     private static final String DATABASE_NAME = "Services.db";
     public static final String TABLE_USERS = "user";
     public static final String COLUMN_ID = "_id_user";
@@ -137,7 +137,9 @@ public class DBHelper extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
 
         values.put(COLUMN_USERNAME, "admin");
-        values.put(COLUMN_MDP, "admin");
+        Fournisseur frn = new Fournisseur();
+        String mdp = frn.cryptage("admin");
+        values.put(COLUMN_MDP, mdp);
         values.put(COLUMN_ROLE, "admin");
         db.insertOrThrow(TABLE_USERS, null, values);
 
@@ -280,7 +282,6 @@ public class DBHelper extends SQLiteOpenHelper {
         String role = "";
 
         Fournisseur user = new Fournisseur();
-        String mdp_cryp = user.cryptage(mdp);
 
         String infoUser =
                 String.format("SELECT * FROM %s WHERE %s = '%s' AND %s = '%s'",
@@ -288,7 +289,7 @@ public class DBHelper extends SQLiteOpenHelper {
                         COLUMN_USERNAME,
                         name,
                         COLUMN_MDP,
-                        mdp_cryp);
+                        mdp);
 
 
         Cursor cursor = db.rawQuery(infoUser, null);
@@ -330,7 +331,6 @@ public class DBHelper extends SQLiteOpenHelper {
 
 
         Proprietaire user = new Proprietaire();
-        String mdp_cryp = user.cryptage(mdp);
 
         String infoUser =
                 String.format("SELECT * FROM %s WHERE %s = '%s' AND %s = '%s'",
@@ -338,7 +338,7 @@ public class DBHelper extends SQLiteOpenHelper {
                         COLUMN_USERNAME,
                         name,
                         COLUMN_MDP,
-                        mdp_cryp);
+                        mdp);
 
 
         Cursor cursor = db.rawQuery(infoUser, null);
@@ -396,6 +396,7 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     public boolean isAdmin(String name, String mdp) {
+
 
         if (name.equals("admin") && mdp.equals("admin")) {
             return true;
