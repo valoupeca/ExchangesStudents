@@ -55,6 +55,7 @@ public class ServiceCustomAdapter extends BaseAdapter {
         TextView textviewtauxhoraire = (TextView)
                 convertView.findViewById(R.id.taux_horaire);
 
+
         //sets the text for item name and item description from the current item object
         textViewIdservice.setText(String.valueOf(currentItem.getId()));
         textviewtauxhoraire.setText(String.valueOf(currentItem.getTaux_horraire()));

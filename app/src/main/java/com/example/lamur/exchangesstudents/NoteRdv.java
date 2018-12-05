@@ -67,7 +67,7 @@ public class NoteRdv extends AppCompatActivity {
             moyenne = moyenne + Double.parseDouble(note.getText().toString());
             nb_vote = nb_vote + 1;
             moyenne = (moyenne/nb_vote);
-            dbhelper.addOrUpdateDisponibilite(rdv.getServ().get_id(), rdv.getServ().getHeure(), rdv.getServ().getJour(), user.get_id(), rdv.getIdDispo(),nb_vote, moyenne);
+            dbhelper.addOrUpdateDisponibilite(rdv.getServ().get_id(), rdv.getServ().getHeure(), rdv.getServ().getJour(), rdv.getServ().getId_fournisseur(), rdv.getIdDispo(),nb_vote, moyenne);
             dbhelper.ajout_RDV(user.get_id(),rdv.getIdDispo(),rdv.getIdRendez_vous(),commentaire.getText().toString(),Double.parseDouble(note.getText().toString()));
             finish();
 

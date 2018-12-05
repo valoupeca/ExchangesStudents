@@ -20,7 +20,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     private static DBHelper sInstance;
 
-    private static final int DATABASE_VERSION = 21;
+    private static final int DATABASE_VERSION = 24;
     private static final String DATABASE_NAME = "Services.db";
     public static final String TABLE_USERS = "user";
     public static final String COLUMN_ID = "_id_user";
@@ -43,7 +43,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String TABLE_SERVICE_HORAIRE = "service_horaire";
     public static final String COLUMN_JOUR = "jour";
     public static final String COLUMN_HEURE = "heure";
-    public static final String COLUMN_SERVICES_HORAIRES_ID = "id";
+    public static final String COLUMN_SERVICES_HORAIRES_ID = "id_dispo";
     public static final String SERVICE_CHOSE_ID = "id_service_dispo";
     public static final String COLUMN_FOURNISSEUR_ID = "id_fournisseur";
     public static final String COLUMN_NOTE= "note";
@@ -142,6 +142,62 @@ public class DBHelper extends SQLiteOpenHelper {
         values.put(COLUMN_MDP, mdp);
         values.put(COLUMN_ROLE, "admin");
         db.insertOrThrow(TABLE_USERS, null, values);
+
+        ContentValues ct1 = new ContentValues();
+        ct1.put(SERVICE_USERNAME, "Coiffeur");
+        ct1.put(TAUX_HORAIRE, 15.0);
+        db.insertOrThrow(TABLE_SERVICES, null, ct1);
+
+        ContentValues ct12 = new ContentValues();
+        ct12.put(SERVICE_USERNAME, "Serrurier");
+        ct12.put(TAUX_HORAIRE, 18.0);
+        db.insertOrThrow(TABLE_SERVICES, null, ct12);
+
+        ContentValues ct13 = new ContentValues();
+        ct13.put(SERVICE_USERNAME, "Nettoyage");
+        ct13.put(TAUX_HORAIRE, 13.0);
+        db.insertOrThrow(TABLE_SERVICES, null, ct13);
+
+        ContentValues ct14 = new ContentValues();
+        ct14.put(SERVICE_USERNAME, "Cour Anglais");
+        ct14.put(TAUX_HORAIRE, 25.0);
+        db.insertOrThrow(TABLE_SERVICES, null, ct14);
+
+
+        ContentValues ct15 = new ContentValues();
+        ct15.put(SERVICE_USERNAME, "Cour Guitare");
+        ct15.put(TAUX_HORAIRE, 22.0);
+        db.insertOrThrow(TABLE_SERVICES, null, ct15);
+
+        ContentValues ct16 = new ContentValues();
+        ct16.put(SERVICE_USERNAME, "Plomberie");
+        ct16.put(TAUX_HORAIRE, 25.0);
+        db.insertOrThrow(TABLE_SERVICES, null, ct16);
+
+
+        ContentValues ct17 = new ContentValues();
+        ct17.put(SERVICE_USERNAME, "Electricien");
+        ct17.put(TAUX_HORAIRE, 30.0);
+        db.insertOrThrow(TABLE_SERVICES, null, ct17);
+
+
+        ContentValues ct18 = new ContentValues();
+        ct18.put(SERVICE_USERNAME, "Cour Cuisine");
+        ct18.put(TAUX_HORAIRE, 50.0);
+        db.insertOrThrow(TABLE_SERVICES, null, ct18);
+
+        ContentValues ct19 = new ContentValues();
+        ct19.put(SERVICE_USERNAME, "BabySitting");
+        ct19.put(TAUX_HORAIRE, 23.0);
+        db.insertOrThrow(TABLE_SERVICES, null, ct19);
+
+        ContentValues ct2 = new ContentValues();
+        ct2.put(SERVICE_USERNAME, "Jardinier");
+        ct2.put(TAUX_HORAIRE, 29.0);
+        db.insertOrThrow(TABLE_SERVICES, null, ct2);
+
+
+
 
 
     }
@@ -717,6 +773,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 + COLUMN_DISPONIBILITE +","
                 + COLUMN_NOTE_USER +","
                 + COLUMN_COMS +","
+                + COLUMN_ID_USER + ","
                 + COLUMN_RDV_ID
                 + " FROM "
                 + TABLE_SERVICE_RDV
@@ -739,6 +796,8 @@ public class DBHelper extends SQLiteOpenHelper {
                     id_rdv = (Integer.parseInt(cursor.getString(cursor.getColumnIndex(COLUMN_RDV_ID))));
                     comm = cursor.getString(cursor.getColumnIndex(COLUMN_COMS));
 
+                      rdv.setId_user((Integer.parseInt(cursor.getString(cursor.getColumnIndex(COLUMN_ID_USER)))));
+
                     rdv.setIdDispo(id);
                     rdv.setNote_user(Double.parseDouble(cursor.getString(cursor.getColumnIndex(COLUMN_NOTE_USER))));
                     rdv.setIdRendez_vous(id_rdv);
@@ -752,7 +811,7 @@ public class DBHelper extends SQLiteOpenHelper {
                             + COLUMN_NOTE+ ","
                             + COLUMN_FOURNISSEUR_ID +","
                             + COLUMN_SERVICES_HORAIRES_ID +","
-                            + "f."+COLUMN_USERNAME +","
+                            + COLUMN_USERNAME +","
                             + SERVICE_ID
                             + " FROM "
                             + TABLE_SERVICE_HORAIRE
@@ -763,7 +822,7 @@ public class DBHelper extends SQLiteOpenHelper {
                             + " = "
                             + SERVICE_CHOSE_ID
                             + " INNER JOIN "
-                            + TABLE_USERS + " AS " +"f"
+                            + TABLE_USERS
                             + " ON "
                             + COLUMN_ID
                             + " = "
@@ -787,7 +846,7 @@ public class DBHelper extends SQLiteOpenHelper {
                                 _serv.set_id(Integer.parseInt(cursor2.getString(cursor2.getColumnIndex(SERVICE_ID))));
                                 _serv.setName_four((cursor2.getString(cursor2.getColumnIndex(COLUMN_USERNAME))));
                                 _serv.setNom_service(cursor2.getString(cursor2.getColumnIndex(SERVICE_USERNAME)));
-
+                                _serv.setId_fournisseur(cursor2.getInt(cursor2.getColumnIndex(COLUMN_FOURNISSEUR_ID)));
                                 _serv.setMoyenne(cursor2.getDouble(cursor2.getColumnIndex(COLUMN_NOTE)));
 
                                 rdv.setServ(_serv);

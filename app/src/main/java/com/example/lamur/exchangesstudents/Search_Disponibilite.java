@@ -111,8 +111,19 @@ public class Search_Disponibilite extends AppCompatActivity implements OnItemCli
                     {
                         newList.add(service);
                     }
-                }
+                    else
+                    {
 
+                    }
+                }
+                if(s.length()==0) {
+                    HashMap<Integer,Service_Disponibilite> Listhash = new HashMap<>();
+                    Listhash = dbhelper.getAllDispo();
+                    Collection<Service_Disponibilite> values = Listhash.values();
+
+                    newList = new ArrayList<>(values);
+                }
+                lesDispo = newList;
                 lAdapter.updateList(newList);
 
 
@@ -142,8 +153,19 @@ public class Search_Disponibilite extends AppCompatActivity implements OnItemCli
                     {
                         newList.add(service);
                     }
-                }
+                    else
+                    {
 
+                    }
+                }
+                if(s.length()==0) {
+                    HashMap<Integer,Service_Disponibilite> Listhash = new HashMap<>();
+                    Listhash = dbhelper.getAllDispo();
+                    Collection<Service_Disponibilite> values = Listhash.values();
+
+                    newList = new ArrayList<>(values);
+                }
+                lesDispo = newList;
                 lAdapter.updateList(newList);
 
             }
@@ -169,7 +191,11 @@ public class Search_Disponibilite extends AppCompatActivity implements OnItemCli
                 for(Service_Disponibilite service : lesDispo)
                 {
                     if(s.length()==0) {
+                        HashMap<Integer,Service_Disponibilite> Listhash = new HashMap<>();
+                        Listhash = dbhelper.getAllDispo();
+                        Collection<Service_Disponibilite> values = Listhash.values();
 
+                        newList = new ArrayList<>(values);
                     }
                     else
                     {
@@ -178,7 +204,7 @@ public class Search_Disponibilite extends AppCompatActivity implements OnItemCli
                         }
                     }
                 }
-
+                lesDispo = newList;
                 lAdapter.updateList(newList);
 
             }
@@ -203,7 +229,7 @@ public class Search_Disponibilite extends AppCompatActivity implements OnItemCli
 
     public void Ajout_rdv(View view)
     {
-        if(_serv_selected == (null))
+       if(_serv_selected == (null))
         {
             Toast toast = Toast.makeText(getApplicationContext(), "Choisissez un rdv", Toast.LENGTH_SHORT);
             toast.show();
