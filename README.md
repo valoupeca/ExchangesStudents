@@ -32,6 +32,19 @@ Peut supprimer un service
 Peut modifier ses disponibilités
 
 
+User :
+Peut se créer un compte
+Peut choisir une disponibilité et prendre un rdv
+Peut noter un rdv et laisser un commentaire
+Peut supprimer un rdv
+
+
+Si un fournisseur supprime sa disponibilité, les rendez-vous associées à la disponibilité sont supprimés.
+
+
+Base de données (cryptage):
+
+
 Lien du Cirlce CI associé au repertoire :
 https://circleci.com/gh/valoupeca/ExchangesStudents
 
