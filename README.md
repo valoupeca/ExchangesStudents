@@ -1,18 +1,18 @@
 # ExchangesStudents
-Projet 2505
+# Projet 2505
+
+
+* LAMURE Valentin 300097957
+* MURRUNI Rémi  300094191
+* EVEN Tanguy  300096344
+* CIOARA Crina 300096341
+* Gil Cerryle Fonkwo 8887001
 
 https://github.com/valoupeca/ExchangesStudents.git
 
 
-Build Status
-[![Build
-Status](https://circleci.com/gh/valoupeca/ExchangesStudents.png?branch=master)](https://circleci.com/gh/valoupeca/ExchangesStudents)
+## APPLICATION DE GESTIONS DE SERVICES :
 
-
-
-APPLICATION DE GESTIONS DE SERVICES :
-
-Pour le moment  :
 
 -----------------
 
@@ -52,10 +52,8 @@ Si un fournisseur supprime sa disponibilité, les rendez-vous associées à la d
 ## Lien du Cirlce CI associé au repertoire :
 https://circleci.com/gh/valoupeca/ExchangesStudents
 
+Build Status
+[![Build
+Status](https://circleci.com/gh/valoupeca/ExchangesStudents.png?branch=master)](https://circleci.com/gh/valoupeca/ExchangesStudents)
 
-* LAMURE Valentin 300097957
-* MURRUNI Rémi  300094191
-* EVEN Tanguy  300096344
-* CIOARA Crina 300096341
-* Gil Cerryle Fonkwo 8887001
 
