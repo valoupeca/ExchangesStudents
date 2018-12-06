@@ -951,6 +951,7 @@ public class DBHelper extends SQLiteOpenHelper {
         if (cursor.moveToFirst()) {
             String idStr = cursor.getString(0);
             db.delete(TABLE_SERVICE_HORAIRE, COLUMN_SERVICES_HORAIRES_ID + " = " + idStr, null);
+            db.delete(TABLE_SERVICE_RDV, COLUMN_DISPONIBILITE + " = " + idStr, null);
             cursor.close();
             result = true;
         }
