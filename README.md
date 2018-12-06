@@ -46,7 +46,7 @@ Si un fournisseur supprime sa disponibilité, les rendez-vous associées à la d
 
 ## Base de données (cryptage):
 
-
+![Base de données cryptée](https://github.com/valoupeca/ExchangesStudents/blob/master/bdcyptage.PNG)
 -----------------------
 
 ## Lien du Cirlce CI associé au repertoire :
